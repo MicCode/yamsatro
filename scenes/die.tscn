@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://dpknk013ekr63"]
+[gd_scene load_steps=7 format=3 uid="uid://dpknk013ekr63"]
 
 [ext_resource type="Texture2D" uid="uid://dn6677idswug6" path="res://assets/die/die-body.png" id="1_hvcds"]
 [ext_resource type="Script" uid="uid://dvp8bxx7vf4dd" path="res://scenes/die.gd" id="1_kw4wr"]
 [ext_resource type="Texture2D" uid="uid://cfgrlxbg8f63f" path="res://assets/die/die-6.png" id="2_kw4wr"]
 [ext_resource type="Texture2D" uid="uid://b77h70o5chh0c" path="res://assets/Locked.png" id="4_e5bsa"]
+[ext_resource type="AudioStream" uid="uid://diqcin5ypcri1" path="res://assets/hit.wav" id="5_ya8ws"]
+[ext_resource type="AudioStream" uid="uid://cxxugr807tfo" path="res://assets/click.wav" id="6_irgc1"]
 
 [node name="Die" type="TextureButton"]
 anchors_preset = -1
@@ -28,6 +30,17 @@ texture = ExtResource("2_kw4wr")
 unique_name_in_owner = true
 position = Vector2(16, 16)
 texture = ExtResource("4_e5bsa")
+
+[node name="hit" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("5_ya8ws")
+volume_db = -12.18
+pitch_scale = 1.86
+
+[node name="click" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_irgc1")
+volume_db = -6.0
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

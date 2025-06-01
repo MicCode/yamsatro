@@ -11,6 +11,8 @@ func _ready() -> void:
 
 func roll_all():
 	if remaining_rolls > 0:
+		%RollButton.disabled = true
+		%StopButton.disabled = true
 		var some_rolled = false
 		for die in get_all_dice():
 			if !die.locked:
@@ -35,10 +37,15 @@ func change_roll_count(count: int):
 	remaining_rolls = count
 	if remaining_rolls <= 0:
 		%RollButton.disabled = true
-	else:
-		%RollButton.disabled = false
 	%RollButton.text = str("ROLL (%s)" % remaining_rolls)
 
 
 func _on_roll_button_pressed() -> void:
 	roll_all()
+	
+func _on_dice_roll_finished():
+	var all_finished = get_all_dice().all(func (die): return !die.rolling)
+	if all_finished:
+		if remaining_rolls > 0:
+			%RollButton.disabled = false
+		%StopButton.disabled = false

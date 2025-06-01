@@ -90,6 +90,8 @@ theme_override_font_sizes/font_size = 10
 text = "ROLL"
 
 [node name="StopButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
 offset_left = 94.0
 offset_top = 43.0
 offset_right = 172.0
@@ -98,4 +100,9 @@ scale = Vector2(0.75, 0.75)
 theme_override_font_sizes/font_size = 10
 text = "SAVE"
 
+[connection signal="finished_rolling" from="Die1" to="." method="_on_dice_roll_finished"]
+[connection signal="finished_rolling" from="Die2" to="." method="_on_dice_roll_finished"]
+[connection signal="finished_rolling" from="Die3" to="." method="_on_dice_roll_finished"]
+[connection signal="finished_rolling" from="Die4" to="." method="_on_dice_roll_finished"]
+[connection signal="finished_rolling" from="Die5" to="." method="_on_dice_roll_finished"]
 [connection signal="pressed" from="RollButton" to="." method="_on_roll_button_pressed"]
