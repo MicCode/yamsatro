@@ -24,6 +24,10 @@ func lock():
 	change_visual_state()
 		
 func change_visual_state():
+	if locked:
+		%lock.show()
+	else:
+		%lock.hide()
 	if hovered:
 		modulate = Color(0.7, 0.7, 1.0)
 	else:

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dpknk013ekr63"]
+[gd_scene load_steps=5 format=3 uid="uid://dpknk013ekr63"]
 
 [ext_resource type="Texture2D" uid="uid://dn6677idswug6" path="res://assets/die/die-body.png" id="1_hvcds"]
 [ext_resource type="Script" uid="uid://dvp8bxx7vf4dd" path="res://scenes/die.gd" id="1_kw4wr"]
 [ext_resource type="Texture2D" uid="uid://cfgrlxbg8f63f" path="res://assets/die/die-6.png" id="2_kw4wr"]
+[ext_resource type="Texture2D" uid="uid://b77h70o5chh0c" path="res://assets/Locked.png" id="4_e5bsa"]
 
 [node name="Die" type="TextureButton"]
 anchors_preset = -1
@@ -22,6 +23,11 @@ script = ExtResource("1_kw4wr")
 unique_name_in_owner = true
 position = Vector2(16, 16)
 texture = ExtResource("2_kw4wr")
+
+[node name="lock" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(16, 16)
+texture = ExtResource("4_e5bsa")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
