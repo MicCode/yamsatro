@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpknk013ekr63"]
+
+[ext_resource type="Texture2D" uid="uid://dn6677idswug6" path="res://assets/die/die-body.png" id="1_hvcds"]
+[ext_resource type="Script" uid="uid://dvp8bxx7vf4dd" path="res://scenes/die.gd" id="1_kw4wr"]
+[ext_resource type="Texture2D" uid="uid://cfgrlxbg8f63f" path="res://assets/die/die-6.png" id="2_kw4wr"]
+
+[node name="Die" type="TextureButton"]
+anchors_preset = -1
+anchor_left = -0.013
+anchor_top = -0.02
+anchor_right = 0.012
+anchor_bottom = 0.02
+offset_left = 0.639996
+offset_right = 0.639996
+pivot_offset = Vector2(16, 16)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("1_hvcds")
+script = ExtResource("1_kw4wr")
+
+[node name="value" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(16, 16)
+texture = ExtResource("2_kw4wr")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

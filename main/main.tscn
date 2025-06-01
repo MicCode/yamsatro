@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://fkvol62t77hi"]
+
+[ext_resource type="Script" uid="uid://c0kgxj8osawap" path="res://main/main.gd" id="1_53q0u"]
+[ext_resource type="PackedScene" uid="uid://bjejhuy3nuap6" path="res://scenes/DiceTray.tscn" id="2_pjrb6"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_53q0u")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(642, 400)
+
+[node name="DiceTray" parent="." instance=ExtResource("2_pjrb6")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 548.0
+offset_top = 377.0
+offset_right = 734.0
+offset_bottom = 419.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+size_flags_horizontal = 4
+size_flags_vertical = 4
