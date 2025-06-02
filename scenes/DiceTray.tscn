@@ -106,3 +106,4 @@ text = "SAVE"
 [connection signal="finished_rolling" from="Die4" to="." method="_on_dice_roll_finished"]
 [connection signal="finished_rolling" from="Die5" to="." method="_on_dice_roll_finished"]
 [connection signal="pressed" from="RollButton" to="." method="_on_roll_button_pressed"]
+[connection signal="pressed" from="StopButton" to="." method="_on_stop_button_pressed"]

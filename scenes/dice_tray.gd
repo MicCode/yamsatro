@@ -1,5 +1,7 @@
 extends TextureRect
 
+@export var max_rolls = 3
+
 var possible_faces = DieFace.load_from_json()
 var remaining_rolls = 3
 
@@ -20,6 +22,11 @@ func roll_all():
 				some_rolled = true
 		if some_rolled:
 			change_roll_count(remaining_rolls - 1)
+			
+func unlock_all():
+	for die in get_all_dice():
+		if die.locked:
+			die.lock()
 	
 
 func get_all_dice() -> Array[Die]:
@@ -41,6 +48,11 @@ func change_roll_count(count: int):
 
 
 func _on_roll_button_pressed() -> void:
+	roll_all()
+	
+func _on_stop_button_pressed() -> void:
+	unlock_all()
+	remaining_rolls = max_rolls
 	roll_all()
 	
 func _on_dice_roll_finished():

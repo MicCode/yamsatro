@@ -13,7 +13,7 @@ config_version=5
 config/name="Yams X Balatro"
 run/main_scene="uid://fkvol62t77hi"
 config/features=PackedStringArray("4.4", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://bgeaoosxonyn0"
 
 [display]
 
