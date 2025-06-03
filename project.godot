@@ -15,6 +15,11 @@ run/main_scene="uid://fkvol62t77hi"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="uid://bgeaoosxonyn0"
 
+[autoload]
+
+Enums="*res://types/enums.gd"
+Game="*res://globals/Game.gd"
+
 [display]
 
 window/size/viewport_width=1280

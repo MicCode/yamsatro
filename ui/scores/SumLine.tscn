@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://b6jtlsv3r0mb3"]
+[gd_scene load_steps=2 format=3 uid="uid://bdq6taskmt5de"]
 
-[ext_resource type="Script" uid="uid://c5kgk35tbimm5" path="res://ui/scores/score_line.gd" id="1_qat7w"]
+[ext_resource type="Script" uid="uid://dh3m1f6fe5ks3" path="res://ui/scores/sum_line.gd" id="1_4xoke"]
 
-[node name="Panel" type="Panel"]
+[node name="SumLine" type="Panel"]
 anchors_preset = -1
 anchor_right = 0.523
 anchor_bottom = 0.034
@@ -10,7 +10,7 @@ offset_right = 0.559998
 offset_bottom = -0.200001
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource("1_qat7w")
+script = ExtResource("1_4xoke")
 
 [node name="ScoreLine" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -20,17 +20,16 @@ anchor_bottom = 0.963
 offset_left = 15.0
 offset_right = -13.0
 offset_bottom = 0.998999
-mouse_default_cursor_shape = 2
 
 [node name="Label" type="Label" parent="ScoreLine"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-text = "Label"
+text = "TOTAL"
 vertical_alignment = 1
 
-[node name="ScoreA" type="Label" parent="ScoreLine"]
+[node name="ValueA" type="Label" parent="ScoreLine"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
@@ -40,7 +39,7 @@ horizontal_alignment = 2
 vertical_alignment = 1
 clip_text = true
 
-[node name="ScoreB" type="Label" parent="ScoreLine"]
+[node name="ValueB" type="Label" parent="ScoreLine"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
@@ -50,7 +49,7 @@ horizontal_alignment = 2
 vertical_alignment = 1
 clip_text = true
 
-[node name="ScoreC" type="Label" parent="ScoreLine"]
+[node name="ValueC" type="Label" parent="ScoreLine"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
@@ -60,8 +59,5 @@ horizontal_alignment = 2
 vertical_alignment = 1
 clip_text = true
 
-[connection signal="gui_input" from="." to="." method="_on_gui_input"]
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="mouse_entered" from="ScoreLine" to="ScoreLine" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ScoreLine" to="ScoreLine" method="_on_mouse_exited"]

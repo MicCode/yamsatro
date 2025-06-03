@@ -7,16 +7,19 @@ signal finished_rolling
 @export var hovered = false
 @export var rolling = false
 
+var face: DieFace
+
 func _ready() -> void:
 	change_visual_state()
 
 
-func set_face(face: DieFace):
-	var face_sprite = load("res://assets/die/die-" + face.name + ".png");
+func set_face(new_face: DieFace):
+	var face_sprite = load("res://assets/die/die-" + new_face.name + ".png");
 	if face_sprite:
 		%value.texture = face_sprite
+		face = new_face
 	else:
-		push_error("Die face " + face.name + " has no defined sprite")
+		push_error("Die face " + new_face.name + " has no defined sprite")
 		
 func roll(possible_faces: Array[DieFace]):
 	rolling = true

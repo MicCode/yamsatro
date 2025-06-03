@@ -58,6 +58,7 @@ func _on_stop_button_pressed() -> void:
 func _on_dice_roll_finished():
 	var all_finished = get_all_dice().all(func (die): return !die.rolling)
 	if all_finished:
+		Game.update_active_figures(get_all_dice()) # TODO ne remonter que les dés "lockés" ?
 		if remaining_rolls > 0:
 			%RollButton.disabled = false
 		%StopButton.disabled = false
