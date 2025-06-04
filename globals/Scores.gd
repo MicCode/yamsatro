@@ -39,14 +39,18 @@ class SColumn:
 			return 0
 	
 	func updateTotals():
-		var f = Enums.Figures
-		totals["numbers"] = getScore(f.SUM_1) + getScore(f.SUM_2) + getScore(f.SUM_3) + getScore(f.SUM_4) + getScore(f.SUM_5) + getScore(f.SUM_6)
-		if totals["numbers"] >= GameRules.NUMBERS_BONUS_THRESHOLD:
-			has_numbers_bonus = true
-			totals["numbers"] += GameRules.NUMBERS_BONUS
-		else:
-			has_numbers_bonus = false
-		
-		totals["figures"] = getScore(f.THREE_SAME) + getScore(f.FOUR_SAME) + getScore(f.FULL) + getScore(f.SMALL_STRAIGHT) + getScore(f.BIG_STRAIGHT) + getScore(f.YAHTZEE) + getScore(f.LUCK)
+               var f = Enums.Figures
+               totals["numbers"] = 0
+               for figure in [f.SUM_1, f.SUM_2, f.SUM_3, f.SUM_4, f.SUM_5, f.SUM_6]:
+                       totals["numbers"] += getScore(figure)
+               if totals["numbers"] >= GameRules.NUMBERS_BONUS_THRESHOLD:
+                       has_numbers_bonus = true
+                       totals["numbers"] += GameRules.NUMBERS_BONUS
+               else:
+                       has_numbers_bonus = false
+
+               totals["figures"] = 0
+               for figure in [f.THREE_SAME, f.FOUR_SAME, f.FULL, f.SMALL_STRAIGHT, f.BIG_STRAIGHT, f.YAHTZEE, f.LUCK]:
+                       totals["figures"] += getScore(figure)
 		
 		totals["total"] = totals["numbers"] + totals["figures"]

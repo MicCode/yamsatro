@@ -16,6 +16,11 @@ var border_width: int = 1
 var stylebox := StyleBoxFlat.new()
 var game_variant: Enums.GameVariants = Enums.GameVariants.FULL
 var is_active = false
+@onready var score_cells := {
+       Enums.ScoreColumns.A: %ScoreCellA,
+       Enums.ScoreColumns.B: %ScoreCellB,
+       Enums.ScoreColumns.C: %ScoreCellC,
+}
 
 func _ready() -> void:
 	mouse_filter = MOUSE_FILTER_PASS
@@ -25,9 +30,8 @@ func _ready() -> void:
 	Game.active_figures_changed.connect(_on_active_figures_changed)
 	
 	%Label.text = Enums.figure_display_name(figure)
-	%ScoreCellA.set_score(-1)
-	%ScoreCellB.set_score(-1)
-	%ScoreCellC.set_score(-1)
+       for cell in [%ScoreCellA, %ScoreCellB, %ScoreCellC]:
+               cell.set_score(-1)
 	
 func set_border(border_color: Color = Color(0, 0, 0, 0), border_size: int = 0):
 	stylebox.border_color = border_color
@@ -39,20 +43,14 @@ func set_border(border_color: Color = Color(0, 0, 0, 0), border_size: int = 0):
 	stylebox.bg_color = bg_color
 
 func set_value(column: Enums.ScoreColumns, new_value: int):
-	match column:
-		Enums.ScoreColumns.A:
-			%ScoreCellA.set_score(new_value)
-		Enums.ScoreColumns.B:
-			%ScoreCellB.set_score(new_value)
-		Enums.ScoreColumns.C:
-			%ScoreCellC.set_score(new_value)
+       if score_cells.has(column):
+               score_cells[column].set_score(new_value)
 			
 func change_is_active(new_value: bool):
 	is_active = new_value
 	# TODO déterminer quelles cellules sont valides/sélectionnables en fonction du mode de jeu et des scores déjà marqués
-	%ScoreCellA.set_selectable(is_active)
-	%ScoreCellB.set_selectable(is_active)
-	%ScoreCellC.set_selectable(is_active)
+       for cell in [%ScoreCellA, %ScoreCellB, %ScoreCellC]:
+               cell.set_selectable(is_active)
 
 func _on_mouse_entered() -> void:
 	set_border(hover_border_color, border_width)
@@ -61,13 +59,13 @@ func _on_mouse_exited() -> void:
 	set_border(hover_border_color, 0)
 
 func _on_game_variant_changed(new_game_variant: Enums.GameVariants):
-	game_variant = new_game_variant
-	if game_variant == Enums.GameVariants.FULL:
-		%ScoreCellB.show()
-		%ScoreCellC.show()
-	else:
-		%ScoreCellB.hide()
-		%ScoreCellC.hide()
+       game_variant = new_game_variant
+       var show_extra := game_variant == Enums.GameVariants.FULL
+       for cell in [%ScoreCellB, %ScoreCellC]:
+               if show_extra:
+                       cell.show()
+               else:
+                       cell.hide()
 
 func _on_active_figures_changed():
 	change_is_active(Game.active_figures.has(figure))

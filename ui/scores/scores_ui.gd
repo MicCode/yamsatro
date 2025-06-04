@@ -12,9 +12,9 @@ func _on_active_figures_changed():
 	pass
 
 func _on_game_variant_changed(new_game_variant: Enums.GameVariants):
-	if new_game_variant == Enums.GameVariants.FULL:
-		%HeaderB.show()
-		%HeaderC.show()
-	else:
-		%HeaderB.hide()
-		%HeaderC.hide()
+       var show_extra := new_game_variant == Enums.GameVariants.FULL
+       for node in [%HeaderB, %HeaderC]:
+               if show_extra:
+                       node.show()
+               else:
+                       node.hide()

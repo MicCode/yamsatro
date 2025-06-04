@@ -13,30 +13,21 @@ func init_game(new_game_variant: Enums.GameVariants):
 func update_active_figures(dice: Array[Die]):
 		active_figures = []
 
-		var values: Array[int] = []
-		var counts: Dictionary = {}
-		for die in dice:
-				var val := die.face.value
-				values.append(val)
-				counts[val] = counts.get(val, 0) + 1
+               var values: Array[int] = []
+               var counts: Dictionary = {}
+               for die in dice:
+                               var val := die.face.value
+                               values.append(val)
+                               counts[val] = counts.get(val, 0) + 1
 
-		if counts.get(1, 0) > 0:
-				active_figures.append(Enums.Figures.SUM_1)
-		if counts.get(2, 0) > 0:
-				active_figures.append(Enums.Figures.SUM_2)
-		if counts.get(3, 0) > 0:
-				active_figures.append(Enums.Figures.SUM_3)
-		if counts.get(4, 0) > 0:
-				active_figures.append(Enums.Figures.SUM_4)
-		if counts.get(5, 0) > 0:
-				active_figures.append(Enums.Figures.SUM_5)
-		if counts.get(6, 0) > 0:
-				active_figures.append(Enums.Figures.SUM_6)
+               var sums = [Enums.Figures.SUM_1, Enums.Figures.SUM_2, Enums.Figures.SUM_3, Enums.Figures.SUM_4, Enums.Figures.SUM_5, Enums.Figures.SUM_6]
+               for i in range(6):
+                               if counts.get(i + 1, 0) > 0:
+                                               active_figures.append(sums[i])
 
-		var max_same := 0
-		for c in counts.values():
-				if c > max_same:
-						max_same = c
+               var max_same := 0
+               for c in counts.values():
+                               max_same = max(c, max_same)
 		if max_same >= 3:
 				active_figures.append(Enums.Figures.THREE_SAME)
 		if max_same >= 4:
@@ -44,13 +35,8 @@ func update_active_figures(dice: Array[Die]):
 		if max_same == 5:
 				active_figures.append(Enums.Figures.YAHTZEE)
 
-		var has_three := false
-		var has_two := false
-		for c in counts.values():
-				if c == 3:
-						has_three = true
-				elif c == 2:
-						has_two = true
+               var has_three := counts.values().has(3)
+               var has_two := counts.values().has(2)
 		if has_three and has_two:
 				active_figures.append(Enums.Figures.FULL)
 
