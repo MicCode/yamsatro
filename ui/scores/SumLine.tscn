@@ -35,7 +35,7 @@ custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_vertical = 1
 text = "123"
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
 
@@ -45,7 +45,7 @@ custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_vertical = 1
 text = "123"
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
 
@@ -55,7 +55,7 @@ custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_vertical = 1
 text = "123"
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
 

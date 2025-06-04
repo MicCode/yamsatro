@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b6jtlsv3r0mb3"]
+[gd_scene load_steps=3 format=3 uid="uid://b6jtlsv3r0mb3"]
 
 [ext_resource type="Script" uid="uid://c5kgk35tbimm5" path="res://ui/scores/score_line.gd" id="1_qat7w"]
+[ext_resource type="PackedScene" uid="uid://4otxpady34bs" path="res://ScoreCell.tscn" id="2_cc7dw"]
 
 [node name="Panel" type="Panel"]
 anchors_preset = -1
@@ -18,9 +19,9 @@ anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.963
 offset_left = 15.0
+offset_top = 1.0
 offset_right = -13.0
-offset_bottom = 0.998999
-mouse_default_cursor_shape = 2
+offset_bottom = -2.001
 
 [node name="Label" type="Label" parent="ScoreLine"]
 unique_name_in_owner = true
@@ -30,37 +31,18 @@ size_flags_vertical = 1
 text = "Label"
 vertical_alignment = 1
 
-[node name="ScoreA" type="Label" parent="ScoreLine"]
+[node name="ScoreCellA" parent="ScoreLine" instance=ExtResource("2_cc7dw")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-size_flags_vertical = 1
-text = "123"
-horizontal_alignment = 2
-vertical_alignment = 1
-clip_text = true
 
-[node name="ScoreB" type="Label" parent="ScoreLine"]
+[node name="ScoreCellB" parent="ScoreLine" instance=ExtResource("2_cc7dw")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-size_flags_vertical = 1
-text = "123"
-horizontal_alignment = 2
-vertical_alignment = 1
-clip_text = true
 
-[node name="ScoreC" type="Label" parent="ScoreLine"]
+[node name="ScoreCellC" parent="ScoreLine" instance=ExtResource("2_cc7dw")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-size_flags_vertical = 1
-text = "123"
-horizontal_alignment = 2
-vertical_alignment = 1
-clip_text = true
 
-[connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="mouse_entered" from="ScoreLine" to="ScoreLine" method="_on_mouse_entered"]

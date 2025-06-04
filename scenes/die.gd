@@ -31,7 +31,7 @@ func roll(possible_faces: Array[DieFace]):
 		%hit.pitch_scale = randf_range(1.5, 1.7)
 		%hit.play()
 		rotation = randf_range(-0.1, 0.1)
-		await get_tree().create_timer(randf() / (10 / (i + 1))).timeout
+		await get_tree().create_timer(randf() / (10.0 / (i + 1.0))).timeout
 	
 	rotation = 0
 	disabled = false

@@ -19,6 +19,8 @@ config/icon="uid://bgeaoosxonyn0"
 
 Enums="*res://types/enums.gd"
 Game="*res://globals/Game.gd"
+Scores="*res://globals/Scores.gd"
+GameRules="*res://globals/GameRules.gd"
 
 [display]
 

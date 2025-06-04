@@ -1,0 +1,4 @@
+extends Node
+
+var NUMBERS_BONUS_THRESHOLD = 63
+var NUMBERS_BONUS = 35
