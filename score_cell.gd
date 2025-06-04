@@ -39,17 +39,17 @@ func set_selectable(b: bool):
 	update_state()
 	
 func update_state():
-	if is_hovered:
-		if is_selectable:
-			state = States.SELECTABLE_HOVERED
-		else:
-			state = States.SELECTABLE
-	else:
-		if is_selectable:
-			state = States.NEUTRAL_HOVERED
-		else:
-			state = States.NEUTRAL
-	change_visual_state()
+        if is_selectable:
+                if is_hovered:
+                        state = States.SELECTABLE_HOVERED
+                else:
+                        state = States.SELECTABLE
+        else:
+                if is_hovered:
+                        state = States.NEUTRAL_HOVERED
+                else:
+                        state = States.NEUTRAL
+        change_visual_state()
 			
 func change_visual_state():
 	match state:
