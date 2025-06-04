@@ -7,8 +7,8 @@ var game_variant: Enums.GameVariants
 var active_figures: Array[Enums.Figures] = []
 
 func init_game(game_variant: Enums.GameVariants):
-	game_variant = game_variant
-	game_variant_changed.emit(game_variant)
+        self.game_variant = game_variant
+        game_variant_changed.emit(self.game_variant)
 
 func update_active_figures(dice: Array[Die]):
 	active_figures = []
