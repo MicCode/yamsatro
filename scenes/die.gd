@@ -21,13 +21,13 @@ func set_face(new_face: DieFace):
 	else:
 		push_error("Die face " + new_face.name + " has no defined sprite")
 		
-func roll(possible_faces: Array[DieFace]):
+func roll():
 	rolling = true
 	disabled = true
 	scale = Vector2(0.9, 0.9)
-	var roll_count = (randi() % 5) + 5 
+	var roll_count = (randi() % 5) + 5
 	for i in roll_count:
-		set_face(possible_faces[randi() % possible_faces.size()])
+		set_face(Game.all_dice_faces[randi() % Game.all_dice_faces.size()])
 		%hit.pitch_scale = randf_range(1.5, 1.7)
 		%hit.play()
 		rotation = randf_range(-0.1, 0.1)

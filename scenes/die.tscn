@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dpknk013ekr63"]
 
 [ext_resource type="Texture2D" uid="uid://dn6677idswug6" path="res://assets/die/die-body.png" id="1_hvcds"]
-[ext_resource type="Script" uid="uid://dvp8bxx7vf4dd" path="res://scenes/die.gd" id="1_kw4wr"]
+[ext_resource type="Script" uid="uid://dvp8bxx7vf4dd" path="res://scenes/Die.gd" id="1_kw4wr"]
 [ext_resource type="Texture2D" uid="uid://cfgrlxbg8f63f" path="res://assets/die/die-6.png" id="2_kw4wr"]
 [ext_resource type="Texture2D" uid="uid://b77h70o5chh0c" path="res://assets/Locked.png" id="4_e5bsa"]
 [ext_resource type="AudioStream" uid="uid://diqcin5ypcri1" path="res://assets/hit.wav" id="5_ya8ws"]
@@ -11,13 +11,16 @@
 anchors_preset = -1
 anchor_left = -0.013
 anchor_top = -0.02
-anchor_right = 0.012
-anchor_bottom = 0.02
-offset_left = 0.639996
-offset_right = 0.639996
+anchor_right = 0.027
+anchor_bottom = 0.005
+offset_left = 0.400001
+offset_top = -0.400002
+offset_right = 0.4
+offset_bottom = -0.400001
 pivot_offset = Vector2(16, 16)
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("1_hvcds")
 script = ExtResource("1_kw4wr")
 

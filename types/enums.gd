@@ -22,9 +22,9 @@ enum GameVariants {
 }
 
 enum ScoreColumns {
-	A,
-	B,
-	C
+	DOWN,
+	FREE,
+	UP
 }
 
 func figure_display_name(figure: Figures) -> String:

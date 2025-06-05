@@ -17,13 +17,13 @@ func _ready() -> void:
 
 func set_value(column: Enums.ScoreColumns, new_value: int):
 	match column:
-		Enums.ScoreColumns.A:
+		Enums.ScoreColumns.DOWN:
 			values["A"] = new_value
 			%ValueA.text = str(new_value)
-		Enums.ScoreColumns.B:
+		Enums.ScoreColumns.FREE:
 			values["B"] = new_value
 			%ValueB.text = str(new_value)
-		Enums.ScoreColumns.C:
+		Enums.ScoreColumns.UP:
 			values["C"] = new_value
 			%ValueC.text = str(new_value)
 			

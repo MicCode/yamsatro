@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b6jtlsv3r0mb3"]
 
-[ext_resource type="Script" uid="uid://c5kgk35tbimm5" path="res://ui/scores/score_line.gd" id="1_qat7w"]
-[ext_resource type="PackedScene" uid="uid://4otxpady34bs" path="res://ScoreCell.tscn" id="2_cc7dw"]
+[ext_resource type="Script" uid="uid://c5kgk35tbimm5" path="res://ui/scores/ScoreLine.gd" id="1_qat7w"]
+[ext_resource type="PackedScene" uid="uid://4otxpady34bs" path="res://ui/scores/ScoreCell.tscn" id="2_cc7dw"]
 
 [node name="Panel" type="Panel"]
 anchors_preset = -1
@@ -28,6 +28,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+theme_override_font_sizes/font_size = 20
 text = "Label"
 vertical_alignment = 1
 
@@ -38,10 +39,12 @@ layout_mode = 2
 [node name="ScoreCellB" parent="ScoreLine" instance=ExtResource("2_cc7dw")]
 unique_name_in_owner = true
 layout_mode = 2
+column = 1
 
 [node name="ScoreCellC" parent="ScoreLine" instance=ExtResource("2_cc7dw")]
 unique_name_in_owner = true
 layout_mode = 2
+column = 2
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

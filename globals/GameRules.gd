@@ -2,3 +2,4 @@ extends Node
 
 var NUMBERS_BONUS_THRESHOLD = 63
 var NUMBERS_BONUS = 35
+var MAX_REROLL_NUMBER = 2

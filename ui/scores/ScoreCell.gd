@@ -2,6 +2,7 @@ extends Panel
 class_name ScoreCell
 
 signal clicked
+signal score_changed
 
 enum States {
 	NEUTRAL,
@@ -10,6 +11,7 @@ enum States {
 	SELECTABLE_HOVERED,
 }
 
+@export var column: Enums.ScoreColumns
 @export var score = -1
 @export var neutral_bg_color: Color = Color(0.2, 0.2, 0.2)
 @export var neutral_hovered_bg_color: Color = Color(0.3, 0.3, 0.3)
@@ -31,26 +33,29 @@ func set_score(new_score: int):
 	score = new_score
 	if score >= 0:
 		%ScoreLabel.text = str(score)
+		score_changed.emit()
 	else:
 		%ScoreLabel.text = "-"
 		
 func set_selectable(b: bool):
-	is_selectable = b
+	is_selectable = b && score < 0
 	update_state()
 	
 func update_state():
-        if is_selectable:
-                if is_hovered:
-                        state = States.SELECTABLE_HOVERED
-                else:
-                        state = States.SELECTABLE
-        else:
-                if is_hovered:
-                        state = States.NEUTRAL_HOVERED
-                else:
-                        state = States.NEUTRAL
-        change_visual_state()
-			
+	if is_selectable:
+		mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		if is_hovered:
+			state = States.SELECTABLE_HOVERED
+		else:
+			state = States.SELECTABLE
+	else:
+		mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
+		if is_hovered:
+			state = States.NEUTRAL_HOVERED
+		else:
+			state = States.NEUTRAL
+	change_visual_state()
+
 func change_visual_state():
 	match state:
 		States.NEUTRAL:
@@ -72,6 +77,6 @@ func _on_mouse_exited() -> void:
 
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		clicked.emit()
-		pass
+		if is_selectable:
+			clicked.emit()
 	# TODO ajouter le clic gauche pour sacrifier une cellule

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://4qurwmwm1hfv"]
 
-[ext_resource type="Script" uid="uid://f24uw2ypexxv" path="res://ui/scores/scores_ui.gd" id="1_13si5"]
+[ext_resource type="Script" uid="uid://f24uw2ypexxv" path="res://ui/scores/ScoresUI.gd" id="1_13si5"]
 [ext_resource type="PackedScene" uid="uid://b6jtlsv3r0mb3" path="res://ui/scores/ScoreLine.tscn" id="2_5whno"]
 [ext_resource type="PackedScene" uid="uid://bdq6taskmt5de" path="res://ui/scores/SumLine.tscn" id="3_rvl16"]
 
@@ -31,10 +31,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_13si5")
 [node name="Container" type="VBoxContainer" parent="Panel"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 2.0
+offset_left = -17.0
 offset_top = 3.0
-offset_right = 1202.0
-offset_bottom = 520.0
+offset_right = 755.0
+offset_bottom = 996.0
 
 [node name="Headers" type="Panel" parent="Panel/Container"]
 layout_mode = 2

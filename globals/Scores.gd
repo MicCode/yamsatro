@@ -1,5 +1,11 @@
 extends Node
 
+var columns: Dictionary = {
+	Enums.ScoreColumns.DOWN: SColumn.createEmpty(),
+	Enums.ScoreColumns.FREE: SColumn.createEmpty(),
+	Enums.ScoreColumns.UP: SColumn.createEmpty(),
+}
+
 class SLine:
 	var figure: Enums.Figures
 	var score: int = -1
@@ -21,18 +27,18 @@ class SColumn:
 	
 	static func createEmpty() -> SColumn:
 		var column = SColumn.new()
-		for figure in Enums.Figures.keys():
+		for figure in Enums.Figures.values():
 			column.lines.append(SLine.withFigure(figure))
 		return column
 	
 	func setScore(figure: Enums.Figures, new_score: int):
-		var line = lines.find(func (l: SLine): return l.figure == figure)
+		var line = lines[lines.find(func(l: SLine): return l.figure == figure)]
 		if line:
 			line.score = new_score
 			updateTotals()
 	
 	func getScore(figure: Enums.Figures) -> int:
-		var line = lines.find(func (l: SLine): return l.figure == figure)
+		var line = lines[lines.find(func(l: SLine): return l.figure == figure)]
 		if line && line.score > 0:
 			return line.score
 		else:
@@ -50,3 +56,6 @@ class SColumn:
 		totals["figures"] = getScore(f.THREE_SAME) + getScore(f.FOUR_SAME) + getScore(f.FULL) + getScore(f.SMALL_STRAIGHT) + getScore(f.BIG_STRAIGHT) + getScore(f.YAHTZEE) + getScore(f.LUCK)
 		
 		totals["total"] = totals["numbers"] + totals["figures"]
+
+	func is_complete() -> bool:
+		return lines.all(func(line: SLine): return line.score >= 0)

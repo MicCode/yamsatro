@@ -24,8 +24,8 @@ GameRules="*res://globals/GameRules.gd"
 
 [display]
 
-window/size/viewport_width=1280
-window/size/viewport_height=800
+window/size/viewport_width=800
+window/size/viewport_height=1280
 window/size/resizable=false
 
 [file_customization]

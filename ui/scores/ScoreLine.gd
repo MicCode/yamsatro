@@ -26,8 +26,11 @@ func _ready() -> void:
 	
 	%Label.text = Enums.figure_display_name(figure)
 	%ScoreCellA.set_score(-1)
+	%ScoreCellA.clicked.connect(func(): _on_score_cell_clicked(%ScoreCellA))
 	%ScoreCellB.set_score(-1)
+	%ScoreCellB.clicked.connect(func(): _on_score_cell_clicked(%ScoreCellB))
 	%ScoreCellC.set_score(-1)
+	%ScoreCellC.clicked.connect(func(): _on_score_cell_clicked(%ScoreCellC))
 	
 func set_border(border_color: Color = Color(0, 0, 0, 0), border_size: int = 0):
 	stylebox.border_color = border_color
@@ -40,11 +43,11 @@ func set_border(border_color: Color = Color(0, 0, 0, 0), border_size: int = 0):
 
 func set_value(column: Enums.ScoreColumns, new_value: int):
 	match column:
-		Enums.ScoreColumns.A:
+		Enums.ScoreColumns.DOWN:
 			%ScoreCellA.set_score(new_value)
-		Enums.ScoreColumns.B:
+		Enums.ScoreColumns.FREE:
 			%ScoreCellB.set_score(new_value)
-		Enums.ScoreColumns.C:
+		Enums.ScoreColumns.UP:
 			%ScoreCellC.set_score(new_value)
 			
 func change_is_active(new_value: bool):
@@ -71,3 +74,8 @@ func _on_game_variant_changed(new_game_variant: Enums.GameVariants):
 
 func _on_active_figures_changed():
 	change_is_active(Game.active_figures.has(figure))
+
+func _on_score_cell_clicked(cell: ScoreCell):
+	var score = Game.compute_score(figure);
+	cell.set_score(score)
+	Game.registerScore(cell.column, figure, score)
