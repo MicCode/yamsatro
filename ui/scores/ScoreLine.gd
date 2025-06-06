@@ -16,15 +16,19 @@ func _ready() -> void:
 	self.add_theme_stylebox_override("panel", stylebox)
 	set_border(Color(0, 0, 0, 0), 0)
 	Game.game_variant_changed.connect(_on_game_variant_changed)
-	Game.active_figures_changed.connect(_on_active_figures_changed)
 	
 	%Label.text = Enums.figure_display_name(figure)
 	%ScoreCellA.set_score(-1)
 	%ScoreCellA.clicked.connect(func(): _on_score_cell_clicked(%ScoreCellA))
+	%ScoreCellA.figure = figure
+
 	%ScoreCellB.set_score(-1)
 	%ScoreCellB.clicked.connect(func(): _on_score_cell_clicked(%ScoreCellB))
+	%ScoreCellB.figure = figure
+
 	%ScoreCellC.set_score(-1)
 	%ScoreCellC.clicked.connect(func(): _on_score_cell_clicked(%ScoreCellC))
+	%ScoreCellC.figure = figure
 	
 func set_border(border_color: Color = Color(0, 0, 0, 0), border_size: int = 0):
 	stylebox.border_color = border_color
@@ -43,13 +47,6 @@ func set_value(column: Enums.ScoreColumns, new_value: int):
 			%ScoreCellB.set_score(new_value)
 		Enums.ScoreColumns.UP:
 			%ScoreCellC.set_score(new_value)
-			
-func change_is_active(new_value: bool):
-	is_active = new_value
-	# TODO déterminer quelles cellules sont valides/sélectionnables en fonction du mode de jeu et des scores déjà marqués
-	%ScoreCellA.set_selectable(is_active)
-	%ScoreCellB.set_selectable(is_active)
-	%ScoreCellC.set_selectable(is_active)
 
 func _on_mouse_entered() -> void:
 	set_border(hover_border_color, border_width)
@@ -65,9 +62,6 @@ func _on_game_variant_changed(new_game_variant: Enums.GameVariants):
 	else:
 		%ScoreCellB.hide()
 		%ScoreCellC.hide()
-
-func _on_active_figures_changed():
-	change_is_active(Game.active_figures.has(figure))
 
 func _on_score_cell_clicked(cell: ScoreCell):
 	var score = Game.compute_score(figure);

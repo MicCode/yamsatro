@@ -30,9 +30,9 @@ func update_active_figures():
 	var values: Array[int] = []
 	var counts: Dictionary = {}
 	for die in Game.all_dice:
-			var val := die.face.value
-			values.append(val)
-			counts[val] = counts.get(val, 0) + 1
+		var val := die.face.value
+		values.append(val)
+		counts[val] = counts.get(val, 0) + 1
 
 	if counts.get(1, 0) > 0:
 			active_figures.append(Enums.Figures.SUM_1)
@@ -49,35 +49,35 @@ func update_active_figures():
 
 	var max_same := 0
 	for c in counts.values():
-			if c > max_same:
-					max_same = c
+		if c > max_same:
+			max_same = c
 	if max_same >= 3:
-			active_figures.append(Enums.Figures.THREE_SAME)
+		active_figures.append(Enums.Figures.THREE_SAME)
 	if max_same >= 4:
-			active_figures.append(Enums.Figures.FOUR_SAME)
+		active_figures.append(Enums.Figures.FOUR_SAME)
 	if max_same == 5:
-			active_figures.append(Enums.Figures.YAHTZEE)
+		active_figures.append(Enums.Figures.YAHTZEE)
 
 	var has_three := false
 	var has_two := false
 	for c in counts.values():
-			if c == 3:
-					has_three = true
-			elif c == 2:
-					has_two = true
+		if c == 3:
+			has_three = true
+		elif c == 2:
+			has_two = true
 	if has_three and has_two:
-			active_figures.append(Enums.Figures.FULL)
+		active_figures.append(Enums.Figures.FULL)
 
 	var uniques: Array[int] = []
 	for v in values:
-			if !uniques.has(v):
-					uniques.append(v)
+		if !uniques.has(v):
+			uniques.append(v)
 	uniques.sort()
 
-	if _has_straight(uniques, 4):
-			active_figures.append(Enums.Figures.SMALL_STRAIGHT)
-	if _has_straight(uniques, 5):
-			active_figures.append(Enums.Figures.BIG_STRAIGHT)
+	if has_straight(uniques, 4):
+		active_figures.append(Enums.Figures.SMALL_STRAIGHT)
+	if has_straight(uniques, 5):
+		active_figures.append(Enums.Figures.BIG_STRAIGHT)
 
 	active_figures.append(Enums.Figures.LUCK)
 	active_figures_changed.emit()
@@ -128,7 +128,7 @@ func sum(accum, number):
 	return accum + number
 
 func registerScore(column: Enums.ScoreColumns, figure: Enums.Figures, score: int):
-	var c = Scores.columns[column] as Scores.SColumn
+	var c: SColumn = Scores.columns[column]
 	if c:
 		c.setScore(figure, score)
 		active_figures = []
@@ -143,7 +143,7 @@ func change_dice_rolling(rolling: bool):
 	dice_rolling = rolling
 	dice_rolling_changed.emit()
 
-func _has_straight(values: Array[int], length: int) -> bool:
+func has_straight(values: Array[int], length: int) -> bool:
 	for start in range(1, 8 - length):
 		var ok := true
 		for i in range(length):
@@ -153,3 +153,36 @@ func _has_straight(values: Array[int], length: int) -> bool:
 		if ok:
 			return true
 	return false
+
+func is_scorable(figure: Enums.Figures, column: Enums.ScoreColumns):
+	if !active_figures.has(figure):
+		return false
+
+	var f = Enums.Figures
+	var c = Enums.ScoreColumns
+
+	var line: SLine = get_line(figure, column)
+	if line:
+		if line.score < 0:
+			var fkeys = f.values()
+			var i = fkeys.find(figure)
+			match column:
+				c.DOWN:
+					if i == 0: return true
+					else:
+						var previous_line: SLine = get_line(fkeys[i - 1], column)
+						if previous_line && previous_line.score > -1:
+							return true
+				c.FREE:
+					return true
+				c.UP:
+					if i >= fkeys.size() - 1: return true
+					else:
+						var next_line: SLine = get_line(fkeys[i + 1], column)
+						if next_line && next_line.score > -1:
+							return true
+	
+	return false
+
+func get_line(figure: Enums.Figures, column: Enums.ScoreColumns):
+	return Scores.columns[column].lines.filter(func(l: SLine): return l.figure == figure).front()

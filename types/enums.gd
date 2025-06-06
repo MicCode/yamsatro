@@ -27,6 +27,13 @@ enum ScoreColumns {
 	UP
 }
 
+func score_columns_display_name(column: ScoreColumns) -> String:
+	match column:
+		ScoreColumns.DOWN: return "descendante"
+		ScoreColumns.FREE: return "libre"
+		ScoreColumns.UP: return "montante"
+		_: return "????"
+
 enum SumCategories {
 	BONUS,
 	NUMBERS,

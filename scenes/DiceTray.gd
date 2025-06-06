@@ -1,7 +1,5 @@
 extends Node2D
 
-@export var max_rolls = 3
-
 func _ready() -> void:
 	await Game.game_ready
 	Game.set_dice_reference(get_all_dice());

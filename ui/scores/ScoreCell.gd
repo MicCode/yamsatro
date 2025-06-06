@@ -12,6 +12,7 @@ enum States {
 }
 
 @export var column: Enums.ScoreColumns
+@export var figure: Enums.Figures
 @export var score = -1
 @export var neutral_bg_color: Color = Color(0.2, 0.2, 0.2)
 @export var neutral_hovered_bg_color: Color = Color(0.3, 0.3, 0.3)
@@ -25,6 +26,7 @@ var state: States = States.NEUTRAL
 var stylebox := StyleBoxFlat.new()
 
 func _ready() -> void:
+	Game.dice_rolling_changed.connect(_on_dice_rolling_changed)
 	mouse_filter = MOUSE_FILTER_PASS
 	self.add_theme_stylebox_override("panel", stylebox)
 	change_visual_state()
@@ -37,9 +39,13 @@ func set_score(new_score: int):
 	else:
 		%ScoreLabel.text = "-"
 		
-func set_selectable(b: bool):
-	is_selectable = b && score < 0
+func _on_dice_rolling_changed():
+	if Game.dice_rolling == false:
+		is_selectable = Game.is_scorable(figure, column)
+	else:
+		is_selectable = false
 	update_state()
+		
 	
 func update_state():
 	if is_selectable:

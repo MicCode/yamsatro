@@ -2,15 +2,10 @@
 
 ## Base game
 
-- roll animation
-- figures list
-- figures check (from locked dice)
-- figure selection (to save a score)
-- score sheet
-- better UI
-- roll sounds
-- total score calculation
-- background music
+- possibilité de sacrifier une cellule
+- meilleure UI
+  - remplacer les dés pixel art par des vrais composants graphiques ? (vectorisés)
+- musique de fond
 
 ## Ideas
 
