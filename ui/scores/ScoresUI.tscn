@@ -120,6 +120,7 @@ label = "BONUS"
 [node name="NumbersSum" parent="Panel/Container" instance=ExtResource("3_rvl16")]
 layout_mode = 2
 label = "TOTAL (chiffres)"
+category = 1
 
 [node name="Brelan" parent="Panel/Container" instance=ExtResource("2_5whno")]
 layout_mode = 2
@@ -152,9 +153,11 @@ figure = 12
 [node name="FiguresSum" parent="Panel/Container" instance=ExtResource("3_rvl16")]
 layout_mode = 2
 label = "TOTAL (figures)"
+category = 2
 
 [node name="TotalSum" parent="Panel/Container" instance=ExtResource("3_rvl16")]
 layout_mode = 2
+category = 3
 
 [connection signal="mouse_entered" from="Panel/Container/Headers/HeadersLine" to="Panel/Container/Headers/HeadersLine" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Panel/Container/Headers/HeadersLine" to="Panel/Container/Headers/HeadersLine" method="_on_mouse_exited"]

@@ -1,36 +1,53 @@
 extends Panel
 
 @export var label: String = "TOTAL"
+@export var category: Enums.SumCategories
 
-var values: Dictionary = {
-	"A" = 0,
-	"B" = 0,
-	"C" = 0,
+var cells: Dictionary = {
+	Enums.ScoreColumns.DOWN: {
+		value = 0,
+		label = null
+	},
+	Enums.ScoreColumns.FREE: {
+		value = 0,
+		label = null
+	},
+	Enums.ScoreColumns.UP: {
+		value = 0,
+		label = null
+	},
 }
 
 func _ready() -> void:
 	Game.game_variant_changed.connect(_on_game_variant_changed)
+	Game.score_changed.connect(_on_score_changed)
+
 	%Label.text = label
-	%ValueA.text = str(values["A"])
-	%ValueB.text = str(values["B"])
-	%ValueC.text = str(values["C"])
+	cells[Enums.ScoreColumns.DOWN].label = %ValueA
+	cells[Enums.ScoreColumns.FREE].label = %ValueB
+	cells[Enums.ScoreColumns.UP].label = %ValueC
+	refresh_display()
 
 func set_value(column: Enums.ScoreColumns, new_value: int):
-	match column:
-		Enums.ScoreColumns.DOWN:
-			values["A"] = new_value
-			%ValueA.text = str(new_value)
-		Enums.ScoreColumns.FREE:
-			values["B"] = new_value
-			%ValueB.text = str(new_value)
-		Enums.ScoreColumns.UP:
-			values["C"] = new_value
-			%ValueC.text = str(new_value)
+	cells[column].value = new_value
+	refresh_display()
+
+func refresh_display():
+	cells[Enums.ScoreColumns.DOWN].label.text = str(cells[Enums.ScoreColumns.DOWN].value)
+	cells[Enums.ScoreColumns.FREE].label.text = str(cells[Enums.ScoreColumns.FREE].value)
+	cells[Enums.ScoreColumns.UP].label.text = str(cells[Enums.ScoreColumns.UP].value)
+
 			
 func _on_game_variant_changed(new_game_variant: Enums.GameVariants):
 	if new_game_variant == Enums.GameVariants.FULL:
-		%ValueB.show()
-		%ValueC.show()
+		cells[Enums.ScoreColumns.FREE].label.show()
+		cells[Enums.ScoreColumns.UP].label.show()
 	else:
-		%ValueB.hide()
-		%ValueC.hide()
+		cells[Enums.ScoreColumns.FREE].label.hide()
+		cells[Enums.ScoreColumns.UP].label.hide()
+
+func _on_score_changed():
+	cells[Enums.ScoreColumns.DOWN].value = Scores.columns[Enums.ScoreColumns.DOWN].totals[category]
+	cells[Enums.ScoreColumns.FREE].value = Scores.columns[Enums.ScoreColumns.FREE].totals[category]
+	cells[Enums.ScoreColumns.UP].value = Scores.columns[Enums.ScoreColumns.UP].totals[category]
+	refresh_display()

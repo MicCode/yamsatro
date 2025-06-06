@@ -4,12 +4,6 @@ class_name ScoreLine
 @export var figure: Enums.Figures
 @export var bg_color = Color(0.2, 0.2, 0.2)
 
-var scores: Dictionary = {
-	"A" = -1,
-	"B" = -1,
-	"C" = -1,
-}
-
 var hover_border_color: Color = Color.SKY_BLUE
 var border_width: int = 1
 

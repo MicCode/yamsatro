@@ -27,6 +27,13 @@ enum ScoreColumns {
 	UP
 }
 
+enum SumCategories {
+	BONUS,
+	NUMBERS,
+	FIGURES,
+	TOTAL,
+}
+
 func figure_display_name(figure: Figures) -> String:
 	match figure:
 		Figures.SUM_1: return "Somme des 1"

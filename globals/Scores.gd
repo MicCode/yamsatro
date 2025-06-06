@@ -19,9 +19,10 @@ class SLine:
 class SColumn:
 	var lines: Array[SLine] = []
 	var totals: Dictionary = {
-		"numbers": 0,
-		"figures": 0,
-		"total": 0
+		Enums.SumCategories.BONUS: 0,
+		Enums.SumCategories.NUMBERS: 0,
+		Enums.SumCategories.FIGURES: 0,
+		Enums.SumCategories.TOTAL: 0
 	}
 	var has_numbers_bonus = false
 	
@@ -46,16 +47,18 @@ class SColumn:
 	
 	func updateTotals():
 		var f = Enums.Figures
-		totals["numbers"] = getScore(f.SUM_1) + getScore(f.SUM_2) + getScore(f.SUM_3) + getScore(f.SUM_4) + getScore(f.SUM_5) + getScore(f.SUM_6)
-		if totals["numbers"] >= GameRules.NUMBERS_BONUS_THRESHOLD:
+		totals[Enums.SumCategories.NUMBERS] = getScore(f.SUM_1) + getScore(f.SUM_2) + getScore(f.SUM_3) + getScore(f.SUM_4) + getScore(f.SUM_5) + getScore(f.SUM_6)
+		if totals[Enums.SumCategories.NUMBERS] >= GameRules.NUMBERS_BONUS_THRESHOLD:
 			has_numbers_bonus = true
-			totals["numbers"] += GameRules.NUMBERS_BONUS
+			totals[Enums.SumCategories.NUMBERS] += GameRules.NUMBERS_BONUS
+			totals[Enums.SumCategories.BONUS] = GameRules.NUMBERS_BONUS
 		else:
 			has_numbers_bonus = false
+			totals[Enums.SumCategories.BONUS] = 0
 		
-		totals["figures"] = getScore(f.THREE_SAME) + getScore(f.FOUR_SAME) + getScore(f.FULL) + getScore(f.SMALL_STRAIGHT) + getScore(f.BIG_STRAIGHT) + getScore(f.YAHTZEE) + getScore(f.LUCK)
+		totals[Enums.SumCategories.FIGURES] = getScore(f.THREE_SAME) + getScore(f.FOUR_SAME) + getScore(f.FULL) + getScore(f.SMALL_STRAIGHT) + getScore(f.BIG_STRAIGHT) + getScore(f.YAHTZEE) + getScore(f.LUCK)
 		
-		totals["total"] = totals["numbers"] + totals["figures"]
+		totals[Enums.SumCategories.TOTAL] = totals[Enums.SumCategories.NUMBERS] + totals[Enums.SumCategories.FIGURES]
 
 	func is_complete() -> bool:
 		return lines.all(func(line: SLine): return line.score >= 0)

@@ -11,15 +11,14 @@ func _ready() -> void:
 	Game.remaining_rolls_changed.connect(_on_remaining_rolls_changed)
 
 func roll_all():
-	if Game.remaining_rolls > 0:
-		Game.change_dice_rolling(true)
-		var some_rolled = false
-		for die in Game.all_dice:
-			if !die.locked:
-				die.roll()
-				some_rolled = true
-		if some_rolled:
-			Game.change_remaining_rolls(Game.remaining_rolls - 1)
+	Game.change_dice_rolling(true)
+	var some_rolled = false
+	for die in Game.all_dice:
+		if !die.locked:
+			die.roll()
+			some_rolled = true
+	if some_rolled:
+		Game.change_remaining_rolls(Game.remaining_rolls - 1)
 			
 func unlock_all():
 	for die in Game.all_dice:

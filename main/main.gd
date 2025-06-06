@@ -19,7 +19,7 @@ func _on_roll_button_pressed():
 	%DiceTray.roll_all()
 
 func _on_score_changed():
-	Game.change_remaining_rolls(GameRules.MAX_REROLL_NUMBER)
 	%DiceTray.unlock_all()
 	%DiceTray.roll_all()
+	Game.change_remaining_rolls(GameRules.MAX_REROLL_NUMBER)
 	update_state()
