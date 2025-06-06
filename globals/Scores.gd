@@ -32,13 +32,13 @@ class SColumn:
 		return column
 	
 	func setScore(figure: Enums.Figures, new_score: int):
-		var line = lines[lines.find(func(l: SLine): return l.figure == figure)]
+		var line = lines.filter(func(l: SLine): return l.figure == figure).front()
 		if line:
 			line.score = new_score
 			updateTotals()
 	
 	func getScore(figure: Enums.Figures) -> int:
-		var line = lines[lines.find(func(l: SLine): return l.figure == figure)]
+		var line = lines.filter(func(l: SLine): return l.figure == figure).front()
 		if line && line.score > 0:
 			return line.score
 		else:

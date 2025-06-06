@@ -98,9 +98,9 @@ func compute_score(figure: Enums.Figures) -> int:
 		f.SUM_6:
 			return all_dice.filter(func(d: Die): return d.face.value == 6).map(func(d: Die): return d.face.value).reduce(sum, 0)
 		f.THREE_SAME:
-			return 0 # TODO calculate the sum of the value of the same three all_dice
+			return n_same_sum(3, all_dice.map(func(d: Die): return d.face.value))
 		f.FOUR_SAME:
-			return 0 # TODO calculate the sum of the value of the same four all_dice
+			return n_same_sum(4, all_dice.map(func(d: Die): return d.face.value))
 		f.FULL:
 			return 25
 		f.SMALL_STRAIGHT:
@@ -111,6 +111,17 @@ func compute_score(figure: Enums.Figures) -> int:
 			return 50
 		f.LUCK:
 			return all_dice.map(func(d: Die): return d.face.value).reduce(sum, 0)
+	return 0
+
+func n_same_sum(n: int, values: Array) -> int:
+	var counts: Dictionary = {}
+	for value in values:
+		if !counts.has(value):
+			counts[value] = 0
+		counts[value] += 1
+	for key in counts.keys():
+		if counts[key] >= n:
+			return key * n
 	return 0
 
 func sum(accum, number):
