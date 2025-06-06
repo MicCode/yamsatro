@@ -12,13 +12,19 @@ var active_figures: Array[Enums.Figures] = []
 var all_dice: Array[Die] = []
 var remaining_rolls: int = 10000
 var dice_rolling = false
-var all_dice_faces: Array[DieFace] = []
+var all_dice_faces: Array[DieFace] = [
+	DieFace.build("1", 1),
+	DieFace.build("2", 2),
+	DieFace.build("3", 3),
+	DieFace.build("4", 4),
+	DieFace.build("5", 5),
+	DieFace.build("6", 6)
+]
 
 func init_game(new_game_variant: Enums.GameVariants):
 	self.game_variant = new_game_variant
 	game_variant_changed.emit(self.game_variant)
 	change_remaining_rolls(GameRules.MAX_REROLL_NUMBER)
-	all_dice_faces = DieFace.load_from_json()
 	game_ready.emit()
 
 func set_dice_reference(d: Array[Die]):
