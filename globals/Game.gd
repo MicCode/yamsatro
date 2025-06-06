@@ -1,6 +1,7 @@
 extends Node
 
 signal game_variant_changed
+signal game_finished_changed
 signal active_figures_changed
 signal remaining_rolls_changed
 signal dice_rolling_changed
@@ -8,6 +9,7 @@ signal game_ready
 signal score_changed
 
 var game_variant: Enums.GameVariants
+var game_finished = false
 var active_figures: Array[Enums.Figures] = []
 var all_dice: Array[Die] = []
 var remaining_rolls: int = 10000
@@ -140,6 +142,8 @@ func registerScore(column: Enums.ScoreColumns, figure: Enums.Figures, score: int
 		active_figures = []
 		active_figures_changed.emit()
 		score_changed.emit()
+		if is_finished():
+			change_game_changed(true)
 
 func change_remaining_rolls(count: int):
 	remaining_rolls = count
@@ -148,6 +152,10 @@ func change_remaining_rolls(count: int):
 func change_dice_rolling(rolling: bool):
 	dice_rolling = rolling
 	dice_rolling_changed.emit()
+
+func change_game_changed(finished: bool):
+	game_finished = finished
+	game_finished_changed.emit()
 
 func has_straight(values: Array[int], length: int) -> bool:
 	for start in range(1, 8 - length):
@@ -192,3 +200,16 @@ func is_scorable(figure: Enums.Figures, column: Enums.ScoreColumns):
 
 func get_line(figure: Enums.Figures, column: Enums.ScoreColumns):
 	return Scores.columns[column].lines.filter(func(l: SLine): return l.figure == figure).front()
+
+func is_finished() -> bool:
+	var down_column: SColumn = Scores.columns[Enums.ScoreColumns.DOWN]
+	if down_column.is_complete():
+		match game_variant:
+			Enums.GameVariants.SIMPLE:
+				return true
+			Enums.GameVariants.FULL:
+				var free_column: SColumn = Scores.columns[Enums.ScoreColumns.FREE]
+				var up_column: SColumn = Scores.columns[Enums.ScoreColumns.UP]
+				return free_column.is_complete() && up_column.is_complete()
+	
+	return false

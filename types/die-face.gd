@@ -4,9 +4,9 @@ class_name DieFace
 @export var value: int;
 @export var special: bool;
 
-static func build(name: String, value: int, special: bool = false):
+static func build(_name: String, _value: int, _special: bool = false):
 	var die = DieFace.new()
-	die.name = name
-	die.value = value
-	die.special = special
+	die.name = _name
+	die.value = _value
+	die.special = _special
 	return die
