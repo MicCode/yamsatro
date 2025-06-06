@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://c0kgxj8osawap" path="res://main/main.gd" id="1_53q0u"]
 [ext_resource type="PackedScene" uid="uid://bjejhuy3nuap6" path="res://scenes/DiceTray.tscn" id="2_pjrb6"]
-[ext_resource type="Texture2D" uid="uid://b4lh5y670dyha" path="res://assets/background.png" id="2_xwkvk"]
 [ext_resource type="PackedScene" uid="uid://4qurwmwm1hfv" path="res://ui/scores/ScoresUI.tscn" id="4_c651c"]
 
 [node name="Main" type="Node2D"]
@@ -16,15 +15,13 @@ offset_right = 1602.0
 offset_bottom = 928.0
 rotation = 3.14159
 scale = Vector2(4, 4)
-texture = ExtResource("2_xwkvk")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(401, 640)
 
 [node name="DiceTray" parent="." instance=ExtResource("2_pjrb6")]
 unique_name_in_owner = true
-position = Vector2(29, 1007)
-scale = Vector2(4, 4)
+position = Vector2(30, 1014)
 
 [node name="RollButton" type="Button" parent="."]
 unique_name_in_owner = true

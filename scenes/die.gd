@@ -6,25 +6,26 @@ signal finished_rolling
 @export var locked = false
 @export var hovered = false
 @export var rolling = false
-
 var face: DieFace
+var dots: Array[Panel] = []
 
 func _ready() -> void:
+	dots = [%P0, %P1, %P2, %P3, %P4, %P5, %P6]
 	change_visual_state()
 
-
 func set_face(new_face: DieFace):
-	var face_sprite = load("res://assets/die/die-" + new_face.name + ".png");
-	if face_sprite:
-		%value.texture = face_sprite
-		face = new_face
-	else:
-		push_error("Die face " + new_face.name + " has no defined sprite")
+	face = new_face
+	var dots_to_activate = get_pattern_dots(face.pattern)
+	for i in dots.size():
+		if dots_to_activate.find(i) >= 0:
+			dots[i].show()
+		else:
+			dots[i].hide()
 		
 func roll():
 	rolling = true
 	disabled = true
-	scale = Vector2(0.9, 0.9)
+	scale = Vector2(0.75, 0.75)
 	var roll_count = (randi() % 5) + 5
 	for i in roll_count:
 		set_face(Game.all_dice_faces[randi() % Game.all_dice_faces.size()])
@@ -40,7 +41,7 @@ func roll():
 	finished_rolling.emit()
 	%hit.pitch_scale = 1.8
 	%hit.play()
-	scale = Vector2(1, 1)
+	scale = Vector2(0.9, 0.9)
 	
 func lock():
 	locked = !locked
@@ -69,3 +70,9 @@ func _on_mouse_entered() -> void:
 func _on_mouse_exited() -> void:
 	hovered = false
 	change_visual_state()
+
+func get_pattern_dots(pattern: String) -> Array[int]:
+	var result: Array[int] = []
+	for i in pattern.length():
+		if pattern[i] == "1": result.append(i)
+	return result

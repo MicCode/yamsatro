@@ -1,49 +1,150 @@
-[gd_scene load_steps=7 format=3 uid="uid://dpknk013ekr63"]
+[gd_scene load_steps=7 format=3 uid="uid://buvhajfabvs81"]
 
-[ext_resource type="Texture2D" uid="uid://dn6677idswug6" path="res://assets/die/die-body.png" id="1_hvcds"]
-[ext_resource type="Script" uid="uid://dvp8bxx7vf4dd" path="res://scenes/Die.gd" id="1_kw4wr"]
-[ext_resource type="Texture2D" uid="uid://cfgrlxbg8f63f" path="res://assets/die/die-6.png" id="2_kw4wr"]
+[ext_resource type="Script" uid="uid://cw0i1yb5cx57s" path="res://scenes/Die.gd" id="1_kw4wr"]
 [ext_resource type="Texture2D" uid="uid://b77h70o5chh0c" path="res://assets/Locked.png" id="4_e5bsa"]
 [ext_resource type="AudioStream" uid="uid://diqcin5ypcri1" path="res://assets/hit.wav" id="5_ya8ws"]
 [ext_resource type="AudioStream" uid="uid://cxxugr807tfo" path="res://assets/click.wav" id="6_irgc1"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_77e4n"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y5ao1"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
 [node name="Die" type="TextureButton"]
 anchors_preset = -1
-anchor_left = -0.013
-anchor_top = -0.02
-anchor_right = 0.027
-anchor_bottom = 0.005
-offset_left = 0.400001
-offset_top = -0.400002
-offset_right = 0.4
-offset_bottom = -0.400001
-pivot_offset = Vector2(16, 16)
-size_flags_horizontal = 4
-size_flags_vertical = 4
-mouse_default_cursor_shape = 2
-texture_normal = ExtResource("1_hvcds")
+anchor_right = 0.184
+anchor_bottom = 0.115
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(74, 74)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
 script = ExtResource("1_kw4wr")
 
-[node name="value" type="Sprite2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(16, 16)
-texture = ExtResource("2_kw4wr")
+[node name="AdvancedDie" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 147.0
+offset_bottom = 147.0
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_77e4n")
 
-[node name="lock" type="Sprite2D" parent="."]
+[node name="P0" type="Panel" parent="AdvancedDie"]
 unique_name_in_owner = true
-position = Vector2(16, 16)
+layout_mode = 0
+offset_left = 21.0
+offset_top = 21.0
+offset_right = 42.0
+offset_bottom = 42.0
+scale = Vector2(1.75, 1.75)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_y5ao1")
+
+[node name="P1" type="Panel" parent="AdvancedDie"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 21.0
+offset_top = 63.0
+offset_right = 42.0
+offset_bottom = 84.0
+scale = Vector2(1.75, 1.75)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_y5ao1")
+
+[node name="P2" type="Panel" parent="AdvancedDie"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 21.0
+offset_top = 105.0
+offset_right = 42.0
+offset_bottom = 126.0
+scale = Vector2(1.75, 1.75)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_y5ao1")
+
+[node name="P3" type="Panel" parent="AdvancedDie"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 105.0
+offset_top = 21.0
+offset_right = 126.0
+offset_bottom = 42.0
+scale = Vector2(1.75, 1.75)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_y5ao1")
+
+[node name="P4" type="Panel" parent="AdvancedDie"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 105.0
+offset_top = 63.0
+offset_right = 126.0
+offset_bottom = 84.0
+scale = Vector2(1.75, 1.75)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_y5ao1")
+
+[node name="P5" type="Panel" parent="AdvancedDie"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 105.0
+offset_top = 105.0
+offset_right = 126.0
+offset_bottom = 126.0
+scale = Vector2(1.75, 1.75)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_y5ao1")
+
+[node name="P6" type="Panel" parent="AdvancedDie"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 63.0
+offset_top = 63.0
+offset_right = 84.0
+offset_bottom = 84.0
+scale = Vector2(1.75, 1.75)
+pivot_offset = Vector2(10, 10)
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_y5ao1")
+
+[node name="lock" type="Sprite2D" parent="AdvancedDie"]
+unique_name_in_owner = true
+visible = false
+position = Vector2(73.5, 73.5)
+scale = Vector2(4.59375, 4.59375)
 texture = ExtResource("4_e5bsa")
 
-[node name="hit" type="AudioStreamPlayer" parent="."]
+[node name="hit" type="AudioStreamPlayer" parent="AdvancedDie"]
 unique_name_in_owner = true
 stream = ExtResource("5_ya8ws")
 volume_db = -12.18
 pitch_scale = 1.86
 
-[node name="click" type="AudioStreamPlayer" parent="."]
+[node name="click" type="AudioStreamPlayer" parent="AdvancedDie"]
 unique_name_in_owner = true
 stream = ExtResource("6_irgc1")
 volume_db = -6.0
 
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="AdvancedDie" to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="AdvancedDie" to="." method="_on_mouse_exited"]

@@ -15,12 +15,12 @@ var all_dice: Array[Die] = []
 var remaining_rolls: int = 10000
 var dice_rolling = false
 var all_dice_faces: Array[DieFace] = [
-	DieFace.build("1", 1),
-	DieFace.build("2", 2),
-	DieFace.build("3", 3),
-	DieFace.build("4", 4),
-	DieFace.build("5", 5),
-	DieFace.build("6", 6)
+	DieFace.build("1", 1, "0000001"),
+	DieFace.build("2", 2, "0011000"),
+	DieFace.build("3", 3, "0011001"),
+	DieFace.build("4", 4, "1011010"),
+	DieFace.build("5", 5, "1011011"),
+	DieFace.build("6", 6, "1111110")
 ]
 
 func init_game(new_game_variant: Enums.GameVariants):

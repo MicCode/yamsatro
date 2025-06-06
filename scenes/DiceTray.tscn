@@ -1,83 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://bjejhuy3nuap6"]
+[gd_scene load_steps=3 format=3 uid="uid://bjejhuy3nuap6"]
 
-[ext_resource type="Texture2D" uid="uid://b02qobo4mq5gb" path="res://assets/dice-tray.png" id="1_2c6pq"]
 [ext_resource type="Script" uid="uid://bhu7d6pbys4ne" path="res://scenes/DiceTray.gd" id="1_qqici"]
-[ext_resource type="PackedScene" uid="uid://dpknk013ekr63" path="res://scenes/Die.tscn" id="2_ds6xh"]
+[ext_resource type="PackedScene" uid="uid://buvhajfabvs81" path="res://scenes/Die.tscn" id="2_ds6xh"]
 
 [node name="DiceTray" type="Node2D"]
 script = ExtResource("1_qqici")
 
-[node name="Background" type="TextureRect" parent="."]
-unique_name_in_owner = true
-anchors_preset = -1
-anchor_left = -0.073
-anchor_top = -0.026
-anchor_right = 0.16
-anchor_bottom = 0.007
-offset_left = 0.399998
-offset_top = 0.279999
-offset_right = -1.52588e-05
-offset_bottom = 0.04
-pivot_offset = Vector2(93, 21)
-texture = ExtResource("1_2c6pq")
-
-[node name="Die1" parent="." instance=ExtResource("2_ds6xh")]
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 5.4
-offset_top = 5.28
-offset_right = 37.4
-offset_bottom = 37.28
+[node name="Die" parent="." instance=ExtResource("2_ds6xh")]
+scale = Vector2(0.9, 0.9)
 
 [node name="Die2" parent="." instance=ExtResource("2_ds6xh")]
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 41.4
-offset_top = 5.28
-offset_right = 73.4
-offset_bottom = 37.28
+offset_left = 150.0
+offset_right = 150.0
+scale = Vector2(0.9, 0.9)
 
 [node name="Die3" parent="." instance=ExtResource("2_ds6xh")]
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 77.4
-offset_top = 5.28
-offset_right = 109.4
-offset_bottom = 37.28
+offset_left = 300.0
+offset_right = 300.0
+scale = Vector2(0.9, 0.9)
 
 [node name="Die4" parent="." instance=ExtResource("2_ds6xh")]
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 113.4
-offset_top = 5.28
-offset_right = 145.4
-offset_bottom = 37.28
+offset_left = 450.0
+offset_right = 450.0
+scale = Vector2(0.9, 0.9)
 
 [node name="Die5" parent="." instance=ExtResource("2_ds6xh")]
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 149.4
-offset_top = 5.28
-offset_right = 181.4
-offset_bottom = 37.28
-
-[connection signal="finished_rolling" from="Die1" to="." method="_on_dice_roll_finished"]
-[connection signal="finished_rolling" from="Die2" to="." method="_on_dice_roll_finished"]
-[connection signal="finished_rolling" from="Die3" to="." method="_on_dice_roll_finished"]
-[connection signal="finished_rolling" from="Die4" to="." method="_on_dice_roll_finished"]
-[connection signal="finished_rolling" from="Die5" to="." method="_on_dice_roll_finished"]
+offset_left = 600.0
+offset_right = 600.0
+scale = Vector2(0.9, 0.9)

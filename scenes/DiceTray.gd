@@ -6,7 +6,7 @@ func _ready() -> void:
 	roll_all()
 	for die in Game.all_dice:
 		die.pressed.connect(on_die_pressed.bind(die))
-	Game.remaining_rolls_changed.connect(_on_remaining_rolls_changed)
+		die.finished_rolling.connect(_on_dice_roll_finished)
 
 func roll_all():
 	Game.change_dice_rolling(true)
@@ -40,9 +40,3 @@ func _on_dice_roll_finished():
 	if all_finished:
 		Game.update_active_figures()
 		Game.change_dice_rolling(false)
-
-func _on_remaining_rolls_changed():
-	if Game.remaining_rolls <= 0:
-		%Background.modulate = Color(0.7, 0.7, 1, 1)
-	else:
-		%Background.modulate = Color(1, 1, 1, 1)
