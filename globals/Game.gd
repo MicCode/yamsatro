@@ -91,24 +91,14 @@ func update_active_figures():
 	active_figures_changed.emit()
 
 func compute_score(figure: Enums.Figures) -> int:
-	var f = Enums.Figures
-	match figure:
-		f.SUM_1:
-			return all_dice.filter(func(d: Die): return d.face.value == 1).map(func(d: Die): return d.face.value).reduce(sum, 0)
-		f.SUM_2:
-			return all_dice.filter(func(d: Die): return d.face.value == 2).map(func(d: Die): return d.face.value).reduce(sum, 0)
-		f.SUM_3:
-			return all_dice.filter(func(d: Die): return d.face.value == 3).map(func(d: Die): return d.face.value).reduce(sum, 0)
-		f.SUM_4:
-			return all_dice.filter(func(d: Die): return d.face.value == 4).map(func(d: Die): return d.face.value).reduce(sum, 0)
-		f.SUM_5:
-			return all_dice.filter(func(d: Die): return d.face.value == 5).map(func(d: Die): return d.face.value).reduce(sum, 0)
-		f.SUM_6:
-			return all_dice.filter(func(d: Die): return d.face.value == 6).map(func(d: Die): return d.face.value).reduce(sum, 0)
-		f.THREE_SAME:
-			return n_same_sum(3, all_dice.map(func(d: Die): return d.face.value))
-		f.FOUR_SAME:
-			return n_same_sum(4, all_dice.map(func(d: Die): return d.face.value))
+        var f = Enums.Figures
+        if figure >= f.SUM_1 && figure <= f.SUM_6:
+                return sum_value(int(figure) + 1)
+        match figure:
+                f.THREE_SAME:
+                        return n_same_sum(3, all_dice.map(func(d: Die): return d.face.value))
+                f.FOUR_SAME:
+                        return n_same_sum(4, all_dice.map(func(d: Die): return d.face.value))
 		f.FULL:
 			return 25
 		f.SMALL_STRAIGHT:
@@ -117,9 +107,12 @@ func compute_score(figure: Enums.Figures) -> int:
 			return 40
 		f.YAHTZEE:
 			return 50
-		f.LUCK:
-			return all_dice.map(func(d: Die): return d.face.value).reduce(sum, 0)
-	return 0
+                f.LUCK:
+                        return all_dice.map(func(d: Die): return d.face.value).reduce(sum, 0)
+        return 0
+
+func sum_value(v: int) -> int:
+        return all_dice.filter(func(d: Die): return d.face.value == v).map(func(d: Die): return d.face.value).reduce(sum, 0)
 
 func n_same_sum(n: int, values: Array) -> int:
 	var counts: Dictionary = {}
