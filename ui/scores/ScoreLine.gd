@@ -11,6 +11,12 @@ var stylebox := StyleBoxFlat.new()
 var game_variant: Enums.GameVariants = Enums.GameVariants.FULL
 var is_active = false
 
+var cells: Dictionary = {
+	Enums.ScoreColumns.DOWN: null,
+	Enums.ScoreColumns.FREE: null,
+	Enums.ScoreColumns.UP: null,
+}
+
 func _ready() -> void:
 	mouse_filter = MOUSE_FILTER_PASS
 	self.add_theme_stylebox_override("panel", stylebox)
@@ -18,17 +24,15 @@ func _ready() -> void:
 	Game.game_variant_changed.connect(_on_game_variant_changed)
 	
 	%Label.text = Enums.figure_display_name(figure)
-	%ScoreCellA.set_score(-1)
-	%ScoreCellA.clicked.connect(func(): _on_score_cell_clicked(%ScoreCellA))
-	%ScoreCellA.figure = figure
-
-	%ScoreCellB.set_score(-1)
-	%ScoreCellB.clicked.connect(func(): _on_score_cell_clicked(%ScoreCellB))
-	%ScoreCellB.figure = figure
-
-	%ScoreCellC.set_score(-1)
-	%ScoreCellC.clicked.connect(func(): _on_score_cell_clicked(%ScoreCellC))
-	%ScoreCellC.figure = figure
+	cells[Enums.ScoreColumns.DOWN] = %ScoreCellA
+	cells[Enums.ScoreColumns.FREE] = %ScoreCellB
+	cells[Enums.ScoreColumns.UP] = %ScoreCellC
+	
+	for cell: ScoreCell in cells.values():
+		cell.set_score(-1)
+		cell.clicked.connect(func(): _on_score_cell_clicked(cell))
+		cell.delete_clicked.connect(func(): _on_score_cell_delete_clicked(cell))
+		cell.figure = figure
 	
 func set_border(border_color: Color = Color(0, 0, 0, 0), border_size: int = 0):
 	stylebox.border_color = border_color
@@ -40,13 +44,7 @@ func set_border(border_color: Color = Color(0, 0, 0, 0), border_size: int = 0):
 	stylebox.bg_color = bg_color
 
 func set_value(column: Enums.ScoreColumns, new_value: int):
-	match column:
-		Enums.ScoreColumns.DOWN:
-			%ScoreCellA.set_score(new_value)
-		Enums.ScoreColumns.FREE:
-			%ScoreCellB.set_score(new_value)
-		Enums.ScoreColumns.UP:
-			%ScoreCellC.set_score(new_value)
+	(cells[column] as ScoreCell).set_score(new_value)
 
 func _on_mouse_entered() -> void:
 	set_border(hover_border_color, border_width)
@@ -57,13 +55,17 @@ func _on_mouse_exited() -> void:
 func _on_game_variant_changed(new_game_variant: Enums.GameVariants):
 	game_variant = new_game_variant
 	if game_variant == Enums.GameVariants.FULL:
-		%ScoreCellB.show()
-		%ScoreCellC.show()
+		cells[Enums.ScoreColumns.FREE].show()
+		cells[Enums.ScoreColumns.UP].show()
 	else:
-		%ScoreCellB.hide()
-		%ScoreCellC.hide()
+		cells[Enums.ScoreColumns.FREE].hide()
+		cells[Enums.ScoreColumns.UP].hide()
 
 func _on_score_cell_clicked(cell: ScoreCell):
 	var score = Game.compute_score(figure);
 	cell.set_score(score)
 	Game.registerScore(cell.column, figure, score)
+
+func _on_score_cell_delete_clicked(cell: ScoreCell):
+	cell.set_score(0)
+	Game.registerScore(cell.column, figure, 0)

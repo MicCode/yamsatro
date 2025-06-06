@@ -2,6 +2,7 @@ extends Panel
 class_name ScoreCell
 
 signal clicked
+signal delete_clicked
 signal score_changed
 
 enum States {
@@ -48,14 +49,17 @@ func _on_dice_rolling_changed():
 		
 	
 func update_state():
-	if is_selectable:
+	if score == -1:
 		mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	else:
+		mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
+	
+	if is_selectable:
 		if is_hovered:
 			state = States.SELECTABLE_HOVERED
 		else:
 			state = States.SELECTABLE
 	else:
-		mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
 		if is_hovered:
 			state = States.NEUTRAL_HOVERED
 		else:
@@ -85,4 +89,12 @@ func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if is_selectable:
 			clicked.emit()
-	# TODO ajouter le clic gauche pour sacrifier une cellule
+		elif !Game.dice_rolling && score == -1:
+			%DeleteButton.show()
+
+func _on_delete_button_mouse_exited() -> void:
+	%DeleteButton.hide()
+
+func _on_delete_button_pressed() -> void:
+	delete_clicked.emit()
+	%DeleteButton.hide()
