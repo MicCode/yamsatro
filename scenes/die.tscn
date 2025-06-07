@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://buvhajfabvs81"]
+[gd_scene load_steps=14 format=3 uid="uid://buvhajfabvs81"]
 
 [ext_resource type="Script" uid="uid://cw0i1yb5cx57s" path="res://scenes/Die.gd" id="1_kw4wr"]
-[ext_resource type="Texture2D" uid="uid://b77h70o5chh0c" path="res://assets/Locked.png" id="4_e5bsa"]
+[ext_resource type="Texture2D" uid="uid://dndgsvqtiibxr" path="res://assets/locked.png" id="2_cew8t"]
 [ext_resource type="AudioStream" uid="uid://diqcin5ypcri1" path="res://assets/hit.wav" id="5_ya8ws"]
 [ext_resource type="AudioStream" uid="uid://cxxugr807tfo" path="res://assets/click.wav" id="6_irgc1"]
 
@@ -17,7 +17,49 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y5ao1"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cew8t"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nt3qx"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hpn7c"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lsqf5"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1spab"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ksvka"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rurc0"]
 bg_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
@@ -25,7 +67,8 @@ corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cew8t"]
-texture = ExtResource("4_e5bsa")
+texture = ExtResource("2_cew8t")
+modulate_color = Color(0.588378, 0.954463, 3.85046e-07, 1)
 
 [node name="Die" type="TextureButton"]
 grow_horizontal = 2
@@ -35,6 +78,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 1
 script = ExtResource("1_kw4wr")
+lock_color = Color(0.219608, 0.670588, 0.0705882, 1)
 
 [node name="Background" type="Panel" parent="."]
 unique_name_in_owner = true
@@ -54,7 +98,7 @@ offset_right = 41.0
 offset_bottom = 41.0
 pivot_offset = Vector2(10, 10)
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_y5ao1")
+theme_override_styles/panel = SubResource("StyleBoxFlat_cew8t")
 
 [node name="P1" type="Panel" parent="."]
 unique_name_in_owner = true
@@ -65,7 +109,7 @@ offset_right = 41.0
 offset_bottom = 83.0
 pivot_offset = Vector2(10, 10)
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_y5ao1")
+theme_override_styles/panel = SubResource("StyleBoxFlat_nt3qx")
 
 [node name="P2" type="Panel" parent="."]
 unique_name_in_owner = true
@@ -76,7 +120,7 @@ offset_right = 41.0
 offset_bottom = 125.0
 pivot_offset = Vector2(10, 10)
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_y5ao1")
+theme_override_styles/panel = SubResource("StyleBoxFlat_hpn7c")
 
 [node name="P3" type="Panel" parent="."]
 unique_name_in_owner = true
@@ -87,7 +131,7 @@ offset_right = 125.0
 offset_bottom = 41.0
 pivot_offset = Vector2(10, 10)
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_y5ao1")
+theme_override_styles/panel = SubResource("StyleBoxFlat_lsqf5")
 
 [node name="P4" type="Panel" parent="."]
 unique_name_in_owner = true
@@ -98,7 +142,7 @@ offset_right = 125.0
 offset_bottom = 83.0
 pivot_offset = Vector2(10, 10)
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_y5ao1")
+theme_override_styles/panel = SubResource("StyleBoxFlat_1spab")
 
 [node name="P5" type="Panel" parent="."]
 unique_name_in_owner = true
@@ -109,7 +153,7 @@ offset_right = 125.0
 offset_bottom = 125.0
 pivot_offset = Vector2(10, 10)
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_y5ao1")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ksvka")
 
 [node name="P6" type="Panel" parent="."]
 unique_name_in_owner = true
@@ -120,13 +164,15 @@ offset_right = 83.0
 offset_bottom = 83.0
 pivot_offset = Vector2(10, 10)
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_y5ao1")
+theme_override_styles/panel = SubResource("StyleBoxFlat_rurc0")
 
 [node name="lock" type="Panel" parent="."]
 unique_name_in_owner = true
 layout_mode = 0
-offset_right = 147.0
-offset_bottom = 147.0
+offset_left = 51.0
+offset_top = 93.0
+offset_right = 95.0
+offset_bottom = 137.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_cew8t")
 

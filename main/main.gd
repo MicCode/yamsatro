@@ -1,11 +1,21 @@
 extends Node2D
 
+var game_variant = Enums.GameVariants.FULL
+
 func _ready() -> void:
 	randomize()
-	Game.init_game(Enums.GameVariants.FULL)
-	Game.remaining_rolls_changed.connect(update_state)
-	Game.change_remaining_rolls(GameRules.MAX_REROLL_NUMBER)
 	Game.dice_rolling_changed.connect(update_state)
+	Game.remaining_rolls_changed.connect(update_state)
+
+	if FileAccess.file_exists("user://game.json"):
+		Game.load_game_state_from_file()
+		Scores.load_from_file()
+		Game.score_changed.emit()
+		Game.update_active_figures()
+	else:
+		Game.init_game(game_variant)
+		Game.change_remaining_rolls(GameRules.MAX_REROLL_NUMBER)
+
 	Game.score_changed.connect(_on_score_changed)
 	
 func update_state():
@@ -23,3 +33,8 @@ func _on_score_changed():
 	%DiceTray.roll_all()
 	Game.change_remaining_rolls(GameRules.MAX_REROLL_NUMBER)
 	update_state()
+	Scores.write_to_file()
+
+func _on_start_new_pressed() -> void:
+	Game.reset_game()
+	print("start again !")

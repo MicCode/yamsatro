@@ -23,10 +23,21 @@ var all_dice_faces: Array[DieFace] = [
 	DieFace.build("6", 6, "1111110")
 ]
 
+var lock_file_write = false
+var initial_dice_values: Array = []
+
 func init_game(new_game_variant: Enums.GameVariants):
-	self.game_variant = new_game_variant
-	game_variant_changed.emit(self.game_variant)
+	change_game_variant(new_game_variant)
 	change_remaining_rolls(GameRules.MAX_REROLL_NUMBER)
+	game_ready.emit()
+	save_game_state_in_file()
+
+func reset_game():
+	init_game(game_variant)
+	change_remaining_rolls(GameRules.MAX_REROLL_NUMBER)
+	Scores.reset()
+	score_changed.emit()
+	game_finished_changed.emit()
 	game_ready.emit()
 
 func set_dice_reference(d: Array[Die]):
@@ -38,7 +49,7 @@ func update_active_figures():
 	var values: Array[int] = []
 	var counts: Dictionary = {}
 	for die in Game.all_dice:
-		var val := die.face.value
+		var val = die.face.value
 		values.append(val)
 		counts[val] = counts.get(val, 0) + 1
 
@@ -143,19 +154,27 @@ func registerScore(column: Enums.ScoreColumns, figure: Enums.Figures, score: int
 		active_figures_changed.emit()
 		score_changed.emit()
 		if is_finished():
-			change_game_changed(true)
+			change_game_finished(true)
 
 func change_remaining_rolls(count: int):
 	remaining_rolls = count
 	remaining_rolls_changed.emit()
+	save_game_state_in_file()
 	
 func change_dice_rolling(rolling: bool):
 	dice_rolling = rolling
 	dice_rolling_changed.emit()
+	if all_dice.all(func(die: Die): return !die.rolling):
+		save_game_state_in_file()
 
-func change_game_changed(finished: bool):
+func change_game_variant(variant: Enums.GameVariants):
+	game_variant = variant
+	game_variant_changed.emit(game_variant)
+
+func change_game_finished(finished: bool):
 	game_finished = finished
 	game_finished_changed.emit()
+	save_game_state_in_file()
 
 func has_straight(values: Array[int], length: int) -> bool:
 	for start in range(1, 8 - length):
@@ -213,3 +232,52 @@ func is_finished() -> bool:
 				return free_column.is_complete() && up_column.is_complete()
 	
 	return false
+
+func save_game_state_in_file():
+	if !lock_file_write:
+		var file = FileAccess.open("user://game.json", FileAccess.WRITE)
+		if file:
+			var dice_dict: Array = []
+			if all_dice:
+				dice_dict = all_dice.map(func(die: Die):
+					if die.face:
+						return {"value": die.face.value, "locked": die.locked}
+					else:
+						return {}
+				)
+			var game_dict: Dictionary = {
+				"game_variant": game_variant,
+				"game_finished": game_finished,
+				"remaining_rolls": remaining_rolls,
+				"dice": dice_dict
+			}
+			var json_content = JSON.stringify(game_dict, "\t")
+			file.store_string(json_content)
+			file.close()
+		else:
+			push_error("Impossible de sauvegarder la partie")
+
+func load_game_state_from_file():
+	lock_file_write = true
+	var file = FileAccess.open("user://game.json", FileAccess.READ)
+	if file:
+		var json_content = file.get_as_text()
+		file.close()
+
+		var json := JSON.new()
+		var error := json.parse(json_content)
+
+		if error != OK:
+			push_error("Erreur lors du parsing JSON : %s" % json_content)
+			return {}
+		
+		change_game_variant(Enums.GameVariants.values()[int(json.data.get("game_variant", 0))])
+		change_game_finished(bool(json.data.get("game_finished", false)))
+		change_remaining_rolls(int(json.data.get("remaining_rolls", GameRules.MAX_REROLL_NUMBER)))
+		initial_dice_values = json.data.get("dice", [])
+
+		game_ready.emit()
+	else:
+		push_error("Fichier d'état de partie non trouvé")
+
+	lock_file_write = false

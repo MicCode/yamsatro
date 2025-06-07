@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b77h70o5chh0c"
-path="res://.godot/imported/Locked.png-028ff58fe74e7475fe74237022547cf1.ctex"
+uid="uid://dndgsvqtiibxr"
+path="res://.godot/imported/locked.png-3ea24680eee32c236b375a381edfe311.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Locked.png"
-dest_files=["res://.godot/imported/Locked.png-028ff58fe74e7475fe74237022547cf1.ctex"]
+source_file="res://assets/locked.png"
+dest_files=["res://.godot/imported/locked.png-3ea24680eee32c236b375a381edfe311.ctex"]
 
 [params]
 

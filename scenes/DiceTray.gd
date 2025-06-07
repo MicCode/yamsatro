@@ -4,10 +4,19 @@ func _ready() -> void:
 	await Game.game_ready
 	Game.set_dice_reference(get_all_dice());
 	position_dice()
-	roll_all()
 	for die in Game.all_dice:
 		die.pressed.connect(on_die_pressed.bind(die))
 		die.finished_rolling.connect(_on_dice_roll_finished)
+
+	if Game.initial_dice_values && Game.initial_dice_values.size() > 0:
+		var data: Array = Game.initial_dice_values
+		for i in data.size():
+			Game.all_dice[i].set_face(Game.all_dice_faces[int(data[i].get("value", 0)) - 1])
+			Game.all_dice[i].set_lock(bool(data[i].get("locked", false)))
+
+	else:
+		roll_all()
+	
 
 func roll_all():
 	Game.change_dice_rolling(true)
@@ -22,7 +31,7 @@ func roll_all():
 func unlock_all():
 	for die in Game.all_dice:
 		if die.locked:
-			die.lock()
+			die.toggle_lock()
 	
 
 func get_all_dice() -> Array[Die]:
@@ -33,7 +42,7 @@ func get_all_dice() -> Array[Die]:
 	return dice
 
 func on_die_pressed(die: Die):
-	die.lock()
+	die.toggle_lock()
 	pass
 	
 func _on_dice_roll_finished():

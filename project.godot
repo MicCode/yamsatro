@@ -32,8 +32,7 @@ window/size/resizable=false
 [file_customization]
 
 folder_colors={
-"res://assets/": "gray",
-"res://data/": "yellow"
+"res://assets/": "gray"
 }
 
 [rendering]

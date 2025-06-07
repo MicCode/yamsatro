@@ -27,10 +27,12 @@ var state: States = States.NEUTRAL
 var stylebox := StyleBoxFlat.new()
 
 func _ready() -> void:
-	Game.dice_rolling_changed.connect(_on_dice_rolling_changed)
+	Game.dice_rolling_changed.connect(update_state)
+	Game.score_changed.connect(_on_score_changed)
+	Game.active_figures_changed.connect(update_state)
 	mouse_filter = MOUSE_FILTER_PASS
 	self.add_theme_stylebox_override("panel", stylebox)
-	change_visual_state()
+	update_state()
 
 func set_score(new_score: int):
 	score = new_score
@@ -39,16 +41,13 @@ func set_score(new_score: int):
 		score_changed.emit()
 	else:
 		%ScoreLabel.text = "-"
-		
-func _on_dice_rolling_changed():
+	
+func update_state():
 	if Game.dice_rolling == false:
 		is_selectable = Game.is_scorable(figure, column)
 	else:
 		is_selectable = false
-	update_state()
-		
 	
-func update_state():
 	if score == -1:
 		mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	else:
@@ -98,3 +97,8 @@ func _on_delete_button_mouse_exited() -> void:
 func _on_delete_button_pressed() -> void:
 	delete_clicked.emit()
 	%DeleteButton.hide()
+
+func _on_score_changed():
+	var value_in_scores = Scores.get_cell_score(column, figure)
+	if value_in_scores != score:
+		set_score(value_in_scores)

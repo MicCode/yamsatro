@@ -46,3 +46,18 @@ func updateTotals():
 
 func is_complete() -> bool:
 	return lines.all(func(line: SLine): return line.score >= 0)
+
+func to_dict() -> Dictionary:
+	return {
+		"lines": lines.map(func(line: SLine) -> Dictionary: return line.to_dict()),
+		"totals": totals,
+		"has_numbers_bonus": has_numbers_bonus
+	}
+
+static func from_dict(data: Dictionary) -> SColumn:
+	var column := new()
+	var raw_lines: Array = data.get("lines", [])
+	for raw_line in raw_lines:
+		column.lines.append(SLine.from_dict(raw_line))
+	column.updateTotals()
+	return column
