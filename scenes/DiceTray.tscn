@@ -7,24 +7,46 @@
 script = ExtResource("1_qqici")
 
 [node name="Die" parent="." instance=ExtResource("2_ds6xh")]
-scale = Vector2(0.9, 0.9)
+unique_name_in_owner = true
+offset_left = -7.4
+offset_top = -6.4
+offset_right = -7.4
+offset_bottom = -6.4
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="Die2" parent="." instance=ExtResource("2_ds6xh")]
-offset_left = 150.0
-offset_right = 150.0
-scale = Vector2(0.9, 0.9)
+unique_name_in_owner = true
+offset_left = 142.6
+offset_top = -6.4
+offset_right = 142.6
+offset_bottom = -6.4
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="Die3" parent="." instance=ExtResource("2_ds6xh")]
-offset_left = 300.0
-offset_right = 300.0
-scale = Vector2(0.9, 0.9)
+unique_name_in_owner = true
+offset_left = 292.6
+offset_top = -6.4
+offset_right = 292.6
+offset_bottom = -6.4
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="Die4" parent="." instance=ExtResource("2_ds6xh")]
-offset_left = 450.0
-offset_right = 450.0
-scale = Vector2(0.9, 0.9)
+unique_name_in_owner = true
+offset_left = 442.6
+offset_top = -6.4
+offset_right = 442.6
+offset_bottom = -6.4
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="Die5" parent="." instance=ExtResource("2_ds6xh")]
-offset_left = 600.0
-offset_right = 600.0
-scale = Vector2(0.9, 0.9)
+unique_name_in_owner = true
+offset_left = 592.6
+offset_top = -6.4
+offset_right = 592.6
+offset_bottom = -6.4
+grow_horizontal = 1
+grow_vertical = 1

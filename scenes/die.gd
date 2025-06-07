@@ -11,6 +11,7 @@ var dots: Array[Panel] = []
 
 func _ready() -> void:
 	dots = [%P0, %P1, %P2, %P3, %P4, %P5, %P6]
+	change_dimensions()
 	change_visual_state()
 
 func set_face(new_face: DieFace):
@@ -76,3 +77,33 @@ func get_pattern_dots(pattern: String) -> Array[int]:
 	for i in pattern.length():
 		if pattern[i] == "1": result.append(i)
 	return result
+
+func change_dimensions():
+	var width = GUITheme.die_width
+	var dot_diameter = GUITheme.die_dot_diameter
+
+	var grid_width = width / 14
+	var grid_step_1 = (grid_width * 3) - (dot_diameter / 2) # first row or colum center
+	var grid_step_2 = (grid_width * 7) - (dot_diameter / 2) # middle
+	var grid_step_3 = (grid_width * 11) - (dot_diameter / 2) # last
+
+	%Background.size = Vector2(width, width)
+	%lock.size = Vector2(width, width)
+	
+	for i in dots.size():
+		var x: float
+		var y: float
+
+		match i:
+			0, 1, 2: x = grid_step_1
+			3, 4, 5: x = grid_step_3
+			6: x = grid_step_2
+		match i:
+			0, 3: y = grid_step_1
+			1, 4: y = grid_step_2
+			2, 5: y = grid_step_3
+			6: y = grid_step_2
+		
+		dots[i].pivot_offset = Vector2(dot_diameter / 2, dot_diameter / 2)
+		dots[i].position = Vector2(x, y)
+		dots[i].size = Vector2(dot_diameter, dot_diameter)

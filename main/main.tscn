@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://fkvol62t77hi"]
+[gd_scene load_steps=4 format=3 uid="uid://fkvol62t77hi"]
 
 [ext_resource type="Script" uid="uid://c0kgxj8osawap" path="res://main/main.gd" id="1_53q0u"]
 [ext_resource type="PackedScene" uid="uid://bjejhuy3nuap6" path="res://scenes/DiceTray.tscn" id="2_pjrb6"]

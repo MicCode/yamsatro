@@ -3,6 +3,7 @@ extends Node2D
 func _ready() -> void:
 	await Game.game_ready
 	Game.set_dice_reference(get_all_dice());
+	position_dice()
 	roll_all()
 	for die in Game.all_dice:
 		die.pressed.connect(on_die_pressed.bind(die))
@@ -40,3 +41,9 @@ func _on_dice_roll_finished():
 	if all_finished:
 		Game.update_active_figures()
 		Game.change_dice_rolling(false)
+
+func position_dice():
+	var x = 0.0
+	for i in Game.all_dice.size():
+		Game.all_dice[i].position = Vector2(x, 0.0)
+		x += GUITheme.die_width + GUITheme.tray_space_between_dice
