@@ -41,7 +41,7 @@ func from_dict(data: Dictionary):
 			columns[col] = SColumn.createEmpty()
 
 func write_to_file():
-	var file = FileAccess.open("user://scores.json", FileAccess.WRITE)
+	var file = FileAccess.open(Game.SCORES_JSON_FILE, FileAccess.WRITE)
 	if file:
 		var json_content = JSON.stringify(to_dict(), "\t")
 		file.store_string(json_content)
@@ -50,7 +50,7 @@ func write_to_file():
 		push_error("Impossible de sauvegarder les scores")
 
 func load_from_file():
-	var file = FileAccess.open("user://scores.json", FileAccess.READ)
+	var file = FileAccess.open(Game.SCORES_JSON_FILE, FileAccess.READ)
 	if file:
 		var json_content = file.get_as_text()
 		file.close()

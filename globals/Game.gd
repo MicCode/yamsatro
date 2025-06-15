@@ -8,6 +8,9 @@ signal dice_rolling_changed
 signal game_ready
 signal score_changed
 
+const GAME_JSON_FILE = "user://game.json"
+const SCORES_JSON_FILE = "user://scores.json"
+
 var game_variant: Enums.GameVariants
 var game_finished = false
 var active_figures: Array[Enums.Figures] = []
@@ -235,7 +238,7 @@ func is_finished() -> bool:
 
 func save_game_state_in_file():
 	if !lock_file_write:
-		var file = FileAccess.open("user://game.json", FileAccess.WRITE)
+		var file = FileAccess.open(GAME_JSON_FILE, FileAccess.WRITE)
 		if file:
 			var dice_dict: Array = []
 			if all_dice:
@@ -259,7 +262,7 @@ func save_game_state_in_file():
 
 func load_game_state_from_file():
 	lock_file_write = true
-	var file = FileAccess.open("user://game.json", FileAccess.READ)
+	var file = FileAccess.open(GAME_JSON_FILE, FileAccess.READ)
 	if file:
 		var json_content = file.get_as_text()
 		file.close()
