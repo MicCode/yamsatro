@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://fkvol62t77hi"]
+[gd_scene load_steps=5 format=3 uid="uid://fkvol62t77hi"]
 
 [ext_resource type="Script" uid="uid://c0kgxj8osawap" path="res://main/main.gd" id="1_53q0u"]
 [ext_resource type="PackedScene" uid="uid://bjejhuy3nuap6" path="res://scenes/DiceTray.tscn" id="2_pjrb6"]
+[ext_resource type="PackedScene" uid="uid://c1pyhqepqvc3p" path="res://ui/game_over/GameOverOverlay.tscn" id="4_3wy1v"]
 [ext_resource type="PackedScene" uid="uid://4qurwmwm1hfv" path="res://ui/scores/ScoresUI.tscn" id="4_c651c"]
 
 [node name="Main" type="Node2D"]
@@ -9,12 +10,6 @@ script = ExtResource("1_53q0u")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 visible = false
-offset_left = 1282.0
-offset_top = 728.0
-offset_right = 1602.0
-offset_bottom = 928.0
-rotation = 3.14159
-scale = Vector2(4, 4)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(450, 1050)
@@ -22,38 +17,47 @@ position = Vector2(450, 1050)
 [node name="DiceTray" parent="." instance=ExtResource("2_pjrb6")]
 unique_name_in_owner = true
 offset_left = 10.0
-offset_top = 1640.0
-offset_right = 910.0
-offset_bottom = 1810.0
+offset_top = 1680.0
+offset_right = 890.0
+offset_bottom = 1850.0
 
 [node name="RollButton" type="Button" parent="."]
 unique_name_in_owner = true
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
 offset_left = 10.0
-offset_top = 1820.0
+offset_top = 1920.0
 offset_right = 890.0
 offset_bottom = 2090.0
-grow_horizontal = 2
-grow_vertical = 0
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 50
 text = "ROLL"
 
 [node name="ScoresUi" parent="." instance=ExtResource("4_c651c")]
-offset_bottom = 0.0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 880.0
+offset_bottom = 170.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="StartNew" type="Button" parent="."]
-offset_left = 17.0
-offset_top = 16.0
-offset_right = 381.0
-offset_bottom = 83.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 388.0
+offset_bottom = 88.0
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 35
 text = "Recommencer"
 
+[node name="GameOverOverlay" parent="." instance=ExtResource("4_3wy1v")]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 900.0
+offset_bottom = 2100.0
+
 [connection signal="pressed" from="RollButton" to="." method="_on_roll_button_pressed"]
 [connection signal="pressed" from="StartNew" to="." method="_on_start_new_pressed"]
+[connection signal="new_game_pressed" from="GameOverOverlay" to="." method="_on_game_over_overlay_new_game_pressed"]

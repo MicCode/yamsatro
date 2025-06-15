@@ -10,6 +10,7 @@ signal score_changed
 
 const GAME_JSON_FILE = "user://game.json"
 const SCORES_JSON_FILE = "user://scores.json"
+const PAST_SCORES_JSON_FILE = "user://past-scores.json"
 
 var game_variant: Enums.GameVariants
 var game_finished = false
@@ -38,9 +39,9 @@ func init_game(new_game_variant: Enums.GameVariants):
 func reset_game():
 	init_game(game_variant)
 	change_remaining_rolls(GameRules.MAX_REROLL_NUMBER)
+	change_game_finished(false)
 	Scores.reset()
 	score_changed.emit()
-	game_finished_changed.emit()
 	game_ready.emit()
 
 func set_dice_reference(d: Array[Die]):

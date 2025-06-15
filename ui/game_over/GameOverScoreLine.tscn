@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://cray3v3t8m613"]
+
+[ext_resource type="Script" uid="uid://dmput3g2lwe8w" path="res://ui/game_over/GameOverScoreLine.gd" id="1_kspm4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kx4mh"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="ScoreLine" type="HBoxContainer"]
+alignment = 1
+script = ExtResource("1_kspm4")
+
+[node name="Date" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "01/02/2025 - 01:02"
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_kx4mh")
+
+[node name="Score" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "567"

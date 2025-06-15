@@ -12,6 +12,8 @@ func _ready() -> void:
 		Scores.load_from_file()
 		Game.score_changed.emit()
 		Game.update_active_figures()
+		if Game.game_finished:
+			show_game_over()
 	else:
 		Game.init_game(game_variant)
 		Game.change_remaining_rolls(GameRules.MAX_REROLL_NUMBER)
@@ -34,7 +36,19 @@ func _on_score_changed():
 	Game.change_remaining_rolls(GameRules.MAX_REROLL_NUMBER)
 	update_state()
 	Scores.write_to_file()
+	
+	if Game.is_finished():
+		%GameOverOverlay.register_new_score(Scores.get_total())
+		show_game_over()
 
 func _on_start_new_pressed() -> void:
 	Game.reset_game()
 	print("start again !")
+	
+func show_game_over():
+	%GameOverOverlay.update()
+	%GameOverOverlay.show()
+
+func _on_game_over_overlay_new_game_pressed() -> void:
+	%GameOverOverlay.hide()
+	Game.reset_game()
