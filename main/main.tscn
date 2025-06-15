@@ -17,34 +17,42 @@ rotation = 3.14159
 scale = Vector2(4, 4)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(401, 640)
+position = Vector2(450, 1050)
 
 [node name="DiceTray" parent="." instance=ExtResource("2_pjrb6")]
 unique_name_in_owner = true
-position = Vector2(30, 1014)
+offset_left = 10.0
+offset_top = 1640.0
+offset_right = 910.0
+offset_bottom = 1810.0
 
 [node name="RollButton" type="Button" parent="."]
 unique_name_in_owner = true
-offset_top = 1179.0
-offset_right = 801.0
-offset_bottom = 1281.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 1820.0
+offset_right = 890.0
+offset_bottom = 2090.0
+grow_horizontal = 2
+grow_vertical = 0
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 50
 text = "ROLL"
 
 [node name="ScoresUi" parent="." instance=ExtResource("4_c651c")]
-offset_left = -1.0
-offset_top = 4.0
-offset_right = -1.0
-offset_bottom = 4.0
+offset_bottom = 0.0
 
 [node name="StartNew" type="Button" parent="."]
-offset_left = 26.0
-offset_top = 17.0
-offset_right = 252.0
-offset_bottom = 53.0
+offset_left = 17.0
+offset_top = 16.0
+offset_right = 381.0
+offset_bottom = 83.0
 mouse_default_cursor_shape = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 35
 text = "Recommencer"
 
 [connection signal="pressed" from="RollButton" to="." method="_on_roll_button_pressed"]

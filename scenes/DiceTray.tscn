@@ -3,50 +3,38 @@
 [ext_resource type="Script" uid="uid://bhu7d6pbys4ne" path="res://scenes/DiceTray.gd" id="1_qqici"]
 [ext_resource type="PackedScene" uid="uid://buvhajfabvs81" path="res://scenes/Die.tscn" id="2_ds6xh"]
 
-[node name="DiceTray" type="Node2D"]
+[node name="DiceTray" type="HBoxContainer"]
+custom_minimum_size = Vector2(880, 170)
+offset_right = 880.0
+offset_bottom = 170.0
 script = ExtResource("1_qqici")
 
 [node name="Die" parent="." instance=ExtResource("2_ds6xh")]
 unique_name_in_owner = true
-offset_left = -7.4
-offset_top = -6.4
-offset_right = -7.4
-offset_bottom = -6.4
-grow_horizontal = 1
-grow_vertical = 1
+clip_contents = true
+custom_minimum_size = Vector2(170, 170)
+layout_mode = 2
 
 [node name="Die2" parent="." instance=ExtResource("2_ds6xh")]
 unique_name_in_owner = true
-offset_left = 142.6
-offset_top = -6.4
-offset_right = 142.6
-offset_bottom = -6.4
-grow_horizontal = 1
-grow_vertical = 1
+clip_contents = true
+custom_minimum_size = Vector2(170, 170)
+layout_mode = 2
 
 [node name="Die3" parent="." instance=ExtResource("2_ds6xh")]
 unique_name_in_owner = true
-offset_left = 292.6
-offset_top = -6.4
-offset_right = 292.6
-offset_bottom = -6.4
-grow_horizontal = 1
-grow_vertical = 1
+clip_contents = true
+custom_minimum_size = Vector2(170, 170)
+layout_mode = 2
 
 [node name="Die4" parent="." instance=ExtResource("2_ds6xh")]
 unique_name_in_owner = true
-offset_left = 442.6
-offset_top = -6.4
-offset_right = 442.6
-offset_bottom = -6.4
-grow_horizontal = 1
-grow_vertical = 1
+clip_contents = true
+custom_minimum_size = Vector2(170, 170)
+layout_mode = 2
 
 [node name="Die5" parent="." instance=ExtResource("2_ds6xh")]
 unique_name_in_owner = true
-offset_left = 592.6
-offset_top = -6.4
-offset_right = 592.6
-offset_bottom = -6.4
-grow_horizontal = 1
-grow_vertical = 1
+clip_contents = true
+custom_minimum_size = Vector2(170, 170)
+layout_mode = 2

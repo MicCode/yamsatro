@@ -1,4 +1,4 @@
-extends Node2D
+extends HBoxContainer
 
 func _ready() -> void:
 	await Game.game_ready

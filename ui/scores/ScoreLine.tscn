@@ -5,10 +5,10 @@
 
 [node name="Panel" type="Panel"]
 anchors_preset = -1
-anchor_right = 0.523
+anchor_right = 0.978
 anchor_bottom = 0.034
-offset_right = 0.559998
-offset_bottom = -0.200001
+offset_right = -0.200012
+offset_bottom = -0.200005
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_qat7w")
@@ -28,21 +28,24 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 40
 text = "Label"
 vertical_alignment = 1
 
 [node name="ScoreCellA" parent="ScoreLine" instance=ExtResource("2_cc7dw")]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 
 [node name="ScoreCellB" parent="ScoreLine" instance=ExtResource("2_cc7dw")]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 column = 1
 
 [node name="ScoreCellC" parent="ScoreLine" instance=ExtResource("2_cc7dw")]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 column = 2
 
