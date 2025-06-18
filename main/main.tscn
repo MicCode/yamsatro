@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c0kgxj8osawap" path="res://main/main.gd" id="1_53q0u"]
 [ext_resource type="PackedScene" uid="uid://bjejhuy3nuap6" path="res://scenes/DiceTray.tscn" id="2_pjrb6"]
-[ext_resource type="PackedScene" uid="uid://c1pyhqepqvc3p" path="res://ui/game_over/GameOverOverlay.tscn" id="4_3wy1v"]
+[ext_resource type="PackedScene" uid="uid://c1pyhqepqvc3p" path="res://ui/menu/MenuOverlay.tscn" id="4_3wy1v"]
 [ext_resource type="PackedScene" uid="uid://4qurwmwm1hfv" path="res://ui/scores/ScoresUI.tscn" id="4_c651c"]
 
 [node name="Main" type="Node2D"]
@@ -40,16 +40,17 @@ offset_bottom = 170.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="StartNew" type="Button" parent="."]
+[node name="MenuButton" type="Button" parent="."]
+unique_name_in_owner = true
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 388.0
 offset_bottom = 88.0
 mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 35
-text = "Recommencer"
+text = "MENU"
 
-[node name="GameOverOverlay" parent="." instance=ExtResource("4_3wy1v")]
+[node name="MenuOverlay" parent="." instance=ExtResource("4_3wy1v")]
 unique_name_in_owner = true
 visible = false
 anchors_preset = 0
@@ -59,5 +60,6 @@ offset_right = 900.0
 offset_bottom = 2100.0
 
 [connection signal="pressed" from="RollButton" to="." method="_on_roll_button_pressed"]
-[connection signal="pressed" from="StartNew" to="." method="_on_start_new_pressed"]
-[connection signal="new_game_pressed" from="GameOverOverlay" to="." method="_on_game_over_overlay_new_game_pressed"]
+[connection signal="pressed" from="MenuButton" to="." method="_on_menu_button_pressed"]
+[connection signal="hide_menu_pressed" from="MenuOverlay" to="." method="_on_menu_overlay_hide_menu_pressed"]
+[connection signal="new_game_pressed" from="MenuOverlay" to="." method="_on_game_over_overlay_new_game_pressed"]

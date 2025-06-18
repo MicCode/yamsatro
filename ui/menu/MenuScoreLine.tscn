@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cray3v3t8m613"]
 
-[ext_resource type="Script" uid="uid://dmput3g2lwe8w" path="res://ui/game_over/GameOverScoreLine.gd" id="1_kspm4"]
+[ext_resource type="Script" uid="uid://dmput3g2lwe8w" path="res://ui/menu/MenuScoreLine.gd" id="1_kspm4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kx4mh"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
