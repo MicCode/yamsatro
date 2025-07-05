@@ -28,6 +28,7 @@ func update_state():
 		%RollButton.disabled = true
 		
 func _on_roll_button_pressed():
+	Sounds.click()
 	%DiceTray.roll_all()
 
 func _on_score_changed():
@@ -53,4 +54,5 @@ func _on_menu_overlay_hide_menu_pressed() -> void:
 	%MenuOverlay.hide()
 
 func _on_menu_button_pressed() -> void:
+	Sounds.click()
 	show_menu()

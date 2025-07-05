@@ -1,9 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://buvhajfabvs81"]
+[gd_scene load_steps=12 format=3 uid="uid://buvhajfabvs81"]
 
 [ext_resource type="Script" uid="uid://cw0i1yb5cx57s" path="res://scenes/Die.gd" id="1_kw4wr"]
 [ext_resource type="Texture2D" uid="uid://dndgsvqtiibxr" path="res://assets/locked.png" id="2_cew8t"]
-[ext_resource type="AudioStream" uid="uid://diqcin5ypcri1" path="res://assets/hit.wav" id="5_ya8ws"]
-[ext_resource type="AudioStream" uid="uid://cxxugr807tfo" path="res://assets/click.wav" id="6_irgc1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_77e4n"]
 bg_color = Color(1, 1, 1, 1)
@@ -181,17 +179,6 @@ offset_right = 95.0
 offset_bottom = 137.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_cew8t")
-
-[node name="hit" type="AudioStreamPlayer" parent="."]
-unique_name_in_owner = true
-stream = ExtResource("5_ya8ws")
-volume_db = -12.18
-pitch_scale = 1.86
-
-[node name="click" type="AudioStreamPlayer" parent="."]
-unique_name_in_owner = true
-stream = ExtResource("6_irgc1")
-volume_db = -6.0
 
 [connection signal="mouse_entered" from="Background" to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Background" to="." method="_on_mouse_exited"]

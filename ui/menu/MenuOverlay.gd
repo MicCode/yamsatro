@@ -49,9 +49,11 @@ func refresh_ui():
 		%GamesNumberLabel.text = "partie jouée"
 
 func _on_restart_button_pressed() -> void:
+	Sounds.click()
 	new_game_pressed.emit()
 
 func _on_hide_menu_button_pressed() -> void:
+	Sounds.click()
 	hide_menu_pressed.emit()
 
 

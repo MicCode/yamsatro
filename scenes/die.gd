@@ -30,11 +30,10 @@ func roll():
 	rolling = true
 	disabled = true
 	scale = Vector2(0.75, 0.75)
+	Sounds.roll()
 	var roll_count = (randi() % 5) + 5
 	for i in roll_count:
 		set_face(Game.all_dice_faces[randi() % Game.all_dice_faces.size()])
-		%hit.pitch_scale = randf_range(1.5, 1.7)
-		%hit.play()
 		rotation = randf_range(-0.1, 0.1)
 		await get_tree().create_timer(randf() / (10.0 / (i + 1.0))).timeout
 	
@@ -43,13 +42,11 @@ func roll():
 	rolling = false
 	change_visual_state()
 	finished_rolling.emit()
-	%hit.pitch_scale = 1.8
-	%hit.play()
+	Sounds.finish_roll()
 	scale = Vector2(1, 1)
 	
 func toggle_lock():
-	%click.pitch_scale = randf_range(0.9, 1.1)
-	%click.play()
+	Sounds.click()
 	set_lock(!locked)
 
 func set_lock(new_lock: bool):
