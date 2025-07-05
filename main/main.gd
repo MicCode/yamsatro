@@ -15,12 +15,10 @@ func _ready() -> void:
 		if Game.game_finished:
 			show_menu()
 	else:
-		Game.import_user_json_files()
 		Game.init_game(game_variant)
 		Game.change_remaining_rolls(GameRules.MAX_REROLL_NUMBER)
 
 	Game.score_changed.connect(_on_score_changed)
-	Game.export_user_json_files()
 	
 func update_state():
 	%RollButton.text = str("LANCER (%s)" % Game.remaining_rolls)
