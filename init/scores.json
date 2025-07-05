@@ -1,0 +1,191 @@
+{
+	"0": {
+		"has_numbers_bonus": false,
+		"lines": [
+			{
+				"figure": 0,
+				"score": 2
+			},
+			{
+				"figure": 1,
+				"score": 2
+			},
+			{
+				"figure": 2,
+				"score": 6
+			},
+			{
+				"figure": 3,
+				"score": 4
+			},
+			{
+				"figure": 4,
+				"score": 5
+			},
+			{
+				"figure": 5,
+				"score": 0
+			},
+			{
+				"figure": 6,
+				"score": -1
+			},
+			{
+				"figure": 7,
+				"score": -1
+			},
+			{
+				"figure": 8,
+				"score": -1
+			},
+			{
+				"figure": 9,
+				"score": -1
+			},
+			{
+				"figure": 10,
+				"score": -1
+			},
+			{
+				"figure": 11,
+				"score": -1
+			},
+			{
+				"figure": 12,
+				"score": -1
+			}
+		],
+		"totals": {
+			"0": 0,
+			"1": 19,
+			"2": 0,
+			"3": 19
+		}
+	},
+	"1": {
+		"has_numbers_bonus": false,
+		"lines": [
+			{
+				"figure": 0,
+				"score": 3
+			},
+			{
+				"figure": 1,
+				"score": -1
+			},
+			{
+				"figure": 2,
+				"score": -1
+			},
+			{
+				"figure": 3,
+				"score": -1
+			},
+			{
+				"figure": 4,
+				"score": 15
+			},
+			{
+				"figure": 5,
+				"score": -1
+			},
+			{
+				"figure": 6,
+				"score": -1
+			},
+			{
+				"figure": 7,
+				"score": -1
+			},
+			{
+				"figure": 8,
+				"score": -1
+			},
+			{
+				"figure": 9,
+				"score": -1
+			},
+			{
+				"figure": 10,
+				"score": 40
+			},
+			{
+				"figure": 11,
+				"score": -1
+			},
+			{
+				"figure": 12,
+				"score": -1
+			}
+		],
+		"totals": {
+			"0": 0,
+			"1": 18,
+			"2": 40,
+			"3": 58
+		}
+	},
+	"2": {
+		"has_numbers_bonus": false,
+		"lines": [
+			{
+				"figure": 0,
+				"score": -1
+			},
+			{
+				"figure": 1,
+				"score": -1
+			},
+			{
+				"figure": 2,
+				"score": -1
+			},
+			{
+				"figure": 3,
+				"score": -1
+			},
+			{
+				"figure": 4,
+				"score": -1
+			},
+			{
+				"figure": 5,
+				"score": -1
+			},
+			{
+				"figure": 6,
+				"score": -1
+			},
+			{
+				"figure": 7,
+				"score": -1
+			},
+			{
+				"figure": 8,
+				"score": -1
+			},
+			{
+				"figure": 9,
+				"score": -1
+			},
+			{
+				"figure": 10,
+				"score": 40
+			},
+			{
+				"figure": 11,
+				"score": 0
+			},
+			{
+				"figure": 12,
+				"score": 22
+			}
+		],
+		"totals": {
+			"0": 0,
+			"1": 0,
+			"2": 62,
+			"3": 62
+		}
+	}
+}

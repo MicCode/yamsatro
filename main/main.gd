@@ -15,6 +15,7 @@ func _ready() -> void:
 		if Game.game_finished:
 			show_menu()
 	else:
+		Game.import_user_json_files()
 		Game.init_game(game_variant)
 		Game.change_remaining_rolls(GameRules.MAX_REROLL_NUMBER)
 

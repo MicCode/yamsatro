@@ -346,3 +346,49 @@ func export_user_json_files():
 
 	dir.list_dir_end()
 	print("export finished, exported files: ", exported_count)
+
+
+func import_user_json_files():
+	if OS.get_name() != "Android":
+		return
+
+	print("on android, importing game data...")
+
+	var download_path = "res://init/"
+	var file_names = ["game.json", "scores.json", "past-scores.json"]
+	var imported_count = 0
+
+	for file_name in file_names:
+		var dest_path = "user://%s" % file_name
+
+		# Ne pas écraser un fichier déjà existant
+		if FileAccess.file_exists(dest_path):
+			print("skipped (already exists): ", file_name)
+			continue
+
+		var from_path = download_path + file_name
+
+		# Vérifie si le fichier source existe
+		if not FileAccess.file_exists(from_path):
+			print("source file not found: ", from_path)
+			continue
+
+		var source_file := FileAccess.open(from_path, FileAccess.READ)
+		if source_file == null:
+			print("read error: ", from_path)
+			continue
+
+		var content := source_file.get_as_text()
+		source_file.close()
+
+		var dest_file := FileAccess.open(dest_path, FileAccess.WRITE)
+		if dest_file == null:
+			print("write error: ", dest_path)
+			continue
+
+		dest_file.store_string(content)
+		dest_file.close()
+		print("imported: ", file_name)
+		imported_count += 1
+
+	print("import finished, imported files: ", imported_count)
