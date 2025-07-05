@@ -10,10 +10,11 @@ config_version=5
 
 [application]
 
-config/name="Yams X Balatro"
+config/name="Yamsatro"
 config/version="0.2.0"
 run/main_scene="uid://fkvol62t77hi"
 config/features=PackedStringArray("4.4", "GL Compatibility")
+boot_splash/image="uid://c6ns2vurodleo"
 config/icon="uid://bgeaoosxonyn0"
 
 [autoload]
