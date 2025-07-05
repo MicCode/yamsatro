@@ -42,6 +42,11 @@ func refresh_ui():
 		line.print_score()
 	%TopScore.text = str(top_score)
 	%Score.text = str(Scores.get_total())
+	%GamesNumber.text = str(past_scores.size())
+	if past_scores.size() > 1:
+		%GamesNumberLabel.text = "parties jouées"
+	else:
+		%GamesNumberLabel.text = "partie jouée"
 
 func _on_restart_button_pressed() -> void:
 	new_game_pressed.emit()
@@ -71,9 +76,9 @@ func load_scores_from_file() -> Array[PastScore]:
 	scores.sort_custom(
 		func (s1: PastScore, s2: PastScore): 
 			if s1.score > s2.score: 
-				return 1 
+				return true 
 			else: 
-				return -1
+				return false
 	)
 	
 	return scores

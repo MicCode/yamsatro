@@ -19,6 +19,7 @@ func _ready() -> void:
 		Game.change_remaining_rolls(GameRules.MAX_REROLL_NUMBER)
 
 	Game.score_changed.connect(_on_score_changed)
+	Game.export_user_json_files()
 	
 func update_state():
 	%RollButton.text = str("LANCER (%s)" % Game.remaining_rolls)

@@ -179,6 +179,8 @@ func change_game_finished(finished: bool):
 	game_finished = finished
 	game_finished_changed.emit()
 	save_game_state_in_file()
+	if finished:
+		Game.export_user_json_files()
 
 func has_straight(values: Array[int], length: int) -> bool:
 	for start in range(1, 8 - length):
@@ -285,3 +287,62 @@ func load_game_state_from_file():
 		push_error("Fichier d'état de partie non trouvé")
 
 	lock_file_write = false
+
+func export_user_json_files():
+	# print(">>> EXPORT FUNC STARTED <<<")
+	if !OS.get_name() == "Android":
+		# print("not on android: ", OS.get_name())
+		return
+
+	print("on android, exporting game data...")
+
+	# Récupère les fichiers dans user://
+	var dir := DirAccess.open("user://")
+	if dir == null:
+		print("error: unable to open user://")
+		return
+
+	dir.list_dir_begin()
+	var file_name = dir.get_next()
+	var exported_count = 0
+
+	# Chemin cible vers le dossier de téléchargement
+	var download_path = "/storage/emulated/0/Download/export_json/"
+	print("exporting to: " + download_path)
+
+	# Crée le dossier s'il n'existe pas déjà
+	var target_dir := DirAccess.open(download_path)
+	if target_dir == null:
+		DirAccess.make_dir_absolute(download_path)
+
+	while file_name != "":
+		if not dir.current_is_dir() and file_name.ends_with(".json"):
+			var from_path = "user://%s" % file_name
+			var to_path = download_path + file_name
+
+			# Lire contenu du fichier source
+			var source_file := FileAccess.open(from_path, FileAccess.READ)
+			if source_file == null:
+				print("read error: ", from_path)
+				file_name = dir.get_next()
+				continue
+
+			var content := source_file.get_as_text()
+			source_file.close()
+
+			# Écrire vers le fichier destination
+			var dest_file := FileAccess.open(to_path, FileAccess.WRITE)
+			if dest_file == null:
+				print("write error: ", to_path)
+				file_name = dir.get_next()
+				continue
+
+			dest_file.store_string(content)
+			dest_file.close()
+			print("exported: ", file_name)
+			exported_count += 1
+
+		file_name = dir.get_next()
+
+	dir.list_dir_end()
+	print("export finished, exported files: ", exported_count)
