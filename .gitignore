@@ -6,3 +6,4 @@
 *.idsig
 *.aab
 *.*~
+exports/
