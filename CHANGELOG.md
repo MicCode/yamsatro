@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.5.0 - 2025-07-06
+#### Bug Fixes
+- Fixed broken end game conditions - (1876a64) - Mic
+#### Features
+- animated emphasis on scores that change - (6de1088) - Mic
+
+- - -
+
 ## 0.4.0 - 2025-07-06
 #### Build system
 - init changelog - (b553773) - Mic
