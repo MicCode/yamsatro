@@ -97,6 +97,7 @@ func _on_gui_input(event: InputEvent) -> void:
 			clicked.emit()
 		elif !Game.dice_rolling && score == -1:
 			%DeleteButton.show()
+		Sounds.click()
 
 func _on_delete_button_mouse_exited() -> void:
 	%DeleteButton.hide()

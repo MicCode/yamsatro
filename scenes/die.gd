@@ -61,11 +61,13 @@ func change_visual_state():
 			change_border_color(GUITheme.complementary_color)
 			for dot in dots:
 				change_dot_color(dot, GUITheme.complementary_color)
+			inflate()
 		else:
 			%lock.hide()
 			change_border_color(Color(0,0,0))
 			for dot in dots:
 				change_dot_color(dot, Color(0, 0, 0))
+			deflate()
 		if hovered:
 			modulate = Color(0.7, 0.7, 1.0)
 		else:
@@ -74,6 +76,20 @@ func change_visual_state():
 		modulate = Color.WHITE
 		for dot in dots:
 			change_dot_color(dot, Color(0, 0, 0))
+
+func inflate():
+	var tween = get_tree().create_tween()
+	tween.set_trans(Tween.TRANS_BACK)
+	tween.set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "scale", Vector2(1.2, 1.2), 0.15)
+	tween.tween_property(self, "scale", Vector2(1.1, 1.1), 0.35)
+	
+func deflate():
+	var tween = get_tree().create_tween()
+	tween.set_trans(Tween.TRANS_BACK)
+	tween.set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "scale", Vector2(0.9, 0.9), 0.10)
+	tween.tween_property(self, "scale", Vector2(1, 1), 0.20)
 
 func change_dot_color(dot: Panel, color: Color):
 	var stylebox = StyleBoxFlat.new()
