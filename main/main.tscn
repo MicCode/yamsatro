@@ -84,12 +84,14 @@ text = "MENU"
 
 [node name="MenuOverlay" parent="." instance=ExtResource("4_3wy1v")]
 unique_name_in_owner = true
-visible = false
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
+offset_top = -2122.0
 offset_right = 900.0
-offset_bottom = 2100.0
+offset_bottom = -22.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [connection signal="pressed" from="RollButton" to="." method="_on_roll_button_pressed"]
 [connection signal="pressed" from="MenuButton" to="." method="_on_menu_button_pressed"]

@@ -23,7 +23,6 @@ func _ready() -> void:
 	else:
 		Game.init_game(game_variant)
 		Game.change_remaining_rolls(GameRules.MAX_REROLL_NUMBER)
-
 	Game.score_changed.connect(_on_score_changed)
 	
 func update_state():
@@ -49,16 +48,42 @@ func _on_score_changed():
 		show_menu()
 	
 func show_menu():
-	%MenuOverlay.update()
-	%MenuOverlay.show()
+	var menu = %MenuOverlay as Panel
+	menu.show()
+	var screen_size = get_viewport().get_visible_rect().size
+	menu.position = Vector2(0, -screen_size.y)
+	menu.modulate.a = 0.0
+	var tween = get_tree().create_tween()
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.set_ease(Tween.EASE_OUT)
+	tween.tween_property(menu, "position", Vector2(0, 0), 0.4)
+	tween.parallel().tween_property(menu, "modulate:a", 1.0, 0.4)
+	tween.connect("finished", Callable(self, "_on_menu_openned"))
+
+func hide_menu():
+	%Background.show()
+	var menu = %MenuOverlay as Panel
+	var screen_size = get_viewport().get_visible_rect().size
+	var tween = get_tree().create_tween()
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.set_ease(Tween.EASE_IN)
+	tween.tween_property(menu, "position", Vector2(0, -screen_size.y), 0.4)
+	tween.parallel().tween_property(menu, "modulate:a", 0.0, 0.4)
+	tween.connect("finished", Callable(self, "_on_menu_closed"))
 
 func _on_game_over_overlay_new_game_pressed() -> void:
 	%MenuOverlay.hide()
 	Game.reset_game()
 
 func _on_menu_overlay_hide_menu_pressed() -> void:
-	%MenuOverlay.hide()
+	hide_menu()
 
 func _on_menu_button_pressed() -> void:
 	Sounds.click()
 	show_menu()
+
+func _on_menu_openned():
+	%Background.hide()
+
+func _on_menu_closed():
+	%MenuOverlay.hide()
