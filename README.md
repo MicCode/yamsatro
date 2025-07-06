@@ -10,6 +10,10 @@
 - dice alterations (changing faces, adding jokers, more than 6 faces die..)
 - animated background (like in Balatro)
 
+## Bump de la version
+
+dans un shell unix (wsl, git bash...) - pas powershell - lancer: `cog bump --auto`
+
 ## Déployer vers le store:
 
 > **PREREQUIS**
