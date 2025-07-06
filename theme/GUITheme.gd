@@ -1,8 +1,9 @@
 extends Node
 
-var die_width: float = 160.0
+var die_width: float = 180.0
 var die_dot_diameter: float = 35.0
 var tray_space_between_dice: float = 10.0
+var default_padding_px := 10.0
 
 var theme: Theme = load("res://theme/theme.tres")
 
@@ -19,7 +20,7 @@ func _enter_tree() -> void:
 	secondary_color = palette.colors[4]
 	accent_color = palette.colors[0]
 	complementary_color = palette.colors[8]
-	neutral_color = palette.colors[5]
+	neutral_color = palette.colors[6]
 	background_color = palette.colors[7]
 	
 	init_theme()

@@ -3,16 +3,28 @@ extends Node2D
 var game_variant = Enums.GameVariants.FULL
 
 func _ready() -> void:
-	randomize()
+	randomize() # Pour initialiser la randomization (sinon tous les tirages seront prédictibles)
 	Game.dice_rolling_changed.connect(update_state)
 	Game.remaining_rolls_changed.connect(update_state)
 	
+	# Application des couleurs du thème au shader du fonc
 	var background_shader = %Background.material
 	if background_shader is ShaderMaterial:
 		background_shader.set_shader_parameter("colour_1", GUITheme.accent_color)
 		background_shader.set_shader_parameter("colour_2", GUITheme.complementary_color)
 		background_shader.set_shader_parameter("colour_3", GUITheme.background_color)
+	# Centrage du fond
+	var size = get_viewport_rect().size
+	%Background.offset_left = -size.y / 2
+	%Background.offset_right = size.y / 2
+	%Camera.position = size / 2
+	%MainUI.offset_bottom = -GUITheme.default_padding_px
+	%MainUI.offset_top = GUITheme.default_padding_px
+	%MainUI.offset_right = -GUITheme.default_padding_px
+	%MainUI.offset_left = GUITheme.default_padding_px
+	
 
+	# Chargement des fichiers de sauvegarde existants et initialisation de la partie
 	if FileAccess.file_exists(Game.GAME_JSON_FILE):
 		Game.load_game_state_from_file()
 		Scores.load_from_file()

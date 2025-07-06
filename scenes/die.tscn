@@ -71,14 +71,15 @@ texture = ExtResource("2_nu62w")
 modulate_color = Color(0.14902, 0.717647, 0.964706, 1)
 
 [node name="Die" type="TextureButton"]
+custom_minimum_size = Vector2(175, 175)
 anchors_preset = -1
-anchor_right = 0.16
-anchor_bottom = 0.07
-offset_right = 26.0
-offset_bottom = 23.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -925.0
+offset_bottom = -1925.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(74, 74)
+pivot_offset = Vector2(87, 87)
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 1
@@ -87,97 +88,101 @@ script = ExtResource("1_tyyvc")
 
 [node name="Background" type="Panel" parent="."]
 unique_name_in_owner = true
-layout_mode = 0
-offset_right = 147.0
-offset_bottom = 147.0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 mouse_default_cursor_shape = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_tyyvc")
 
-[node name="P0" type="Panel" parent="."]
+[node name="P0" type="Panel" parent="Background"]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 21.0
-offset_top = 21.0
-offset_right = 41.0
-offset_bottom = 41.0
-pivot_offset = Vector2(10, 10)
+layout_mode = 2
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 55.0
+offset_bottom = 55.0
+pivot_offset = Vector2(17, 17)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_cew8t")
 
-[node name="P1" type="Panel" parent="."]
+[node name="P1" type="Panel" parent="Background"]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 21.0
-offset_top = 63.0
-offset_right = 41.0
-offset_bottom = 83.0
-pivot_offset = Vector2(10, 10)
+layout_mode = 2
+offset_left = 20.0
+offset_top = 70.0
+offset_right = 55.0
+offset_bottom = 105.0
+pivot_offset = Vector2(17, 17)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_nt3qx")
 
-[node name="P2" type="Panel" parent="."]
+[node name="P2" type="Panel" parent="Background"]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 21.0
-offset_top = 105.0
-offset_right = 41.0
-offset_bottom = 125.0
-pivot_offset = Vector2(10, 10)
+layout_mode = 2
+offset_left = 20.0
+offset_top = 120.0
+offset_right = 55.0
+offset_bottom = 155.0
+pivot_offset = Vector2(17, 17)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_hpn7c")
 
-[node name="P3" type="Panel" parent="."]
+[node name="P3" type="Panel" parent="Background"]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 105.0
-offset_top = 21.0
-offset_right = 125.0
-offset_bottom = 41.0
-pivot_offset = Vector2(10, 10)
+layout_mode = 2
+offset_left = 120.0
+offset_top = 20.0
+offset_right = 155.0
+offset_bottom = 55.0
+pivot_offset = Vector2(17, 17)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lsqf5")
 
-[node name="P4" type="Panel" parent="."]
+[node name="P4" type="Panel" parent="Background"]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 105.0
-offset_top = 63.0
-offset_right = 125.0
-offset_bottom = 83.0
-pivot_offset = Vector2(10, 10)
+layout_mode = 2
+offset_left = 120.0
+offset_top = 70.0
+offset_right = 155.0
+offset_bottom = 105.0
+pivot_offset = Vector2(17, 17)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_1spab")
 
-[node name="P5" type="Panel" parent="."]
+[node name="P5" type="Panel" parent="Background"]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 105.0
-offset_top = 105.0
-offset_right = 125.0
-offset_bottom = 125.0
-pivot_offset = Vector2(10, 10)
+layout_mode = 2
+offset_left = 120.0
+offset_top = 120.0
+offset_right = 155.0
+offset_bottom = 155.0
+pivot_offset = Vector2(17, 17)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ksvka")
 
-[node name="P6" type="Panel" parent="."]
+[node name="P6" type="Panel" parent="Background"]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 63.0
-offset_top = 63.0
-offset_right = 83.0
-offset_bottom = 83.0
-pivot_offset = Vector2(10, 10)
+layout_mode = 2
+offset_left = 70.0
+offset_top = 70.0
+offset_right = 105.0
+offset_bottom = 105.0
+pivot_offset = Vector2(17, 17)
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_rurc0")
 
-[node name="lock" type="Panel" parent="."]
+[node name="lock" type="Panel" parent="Background"]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 51.0
-offset_top = 93.0
-offset_right = 95.0
-offset_bottom = 137.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_cew8t")
 

@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://fkvol62t77hi"]
+[gd_scene load_steps=9 format=3 uid="uid://fkvol62t77hi"]
 
 [ext_resource type="Script" uid="uid://c0kgxj8osawap" path="res://main/main.gd" id="1_53q0u"]
 [ext_resource type="Shader" uid="uid://boimpg58mcxao" path="res://shaders/balatro.gdshader" id="2_3wy1v"]
 [ext_resource type="PackedScene" uid="uid://bjejhuy3nuap6" path="res://scenes/DiceTray.tscn" id="2_pjrb6"]
 [ext_resource type="PackedScene" uid="uid://c1pyhqepqvc3p" path="res://ui/menu/MenuOverlay.tscn" id="4_3wy1v"]
 [ext_resource type="PackedScene" uid="uid://4qurwmwm1hfv" path="res://ui/scores/ScoresUI.tscn" id="4_c651c"]
+[ext_resource type="Theme" uid="uid://32y1bscp3t30" path="res://theme/theme_secondary.tres" id="5_kfbq2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kfbq2"]
 shader = ExtResource("2_3wy1v")
@@ -25,75 +26,88 @@ shader_parameter/is_rotating = false
 [node name="Main" type="Node2D"]
 script = ExtResource("1_53q0u")
 
-[node name="Background" type="Panel" parent="."]
+[node name="Camera" type="Camera2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(550, 1050)
+
+[node name="Container" type="Control" parent="."]
+custom_minimum_size = Vector2(1100, 2100)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1100.0
+offset_bottom = 2100.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Background" type="Panel" parent="Container"]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_kfbq2")
-anchors_preset = 8
+layout_mode = 1
+anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -625.0
-offset_right = 1475.0
-offset_bottom = 2100.0
+anchor_bottom = 1.0
+offset_left = -1050.0
+offset_right = 1050.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_3wy1v")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-visible = false
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(450, 1050)
-
-[node name="DiceTray" parent="." instance=ExtResource("2_pjrb6")]
+[node name="MainUI" type="VBoxContainer" parent="Container"]
 unique_name_in_owner = true
-offset_left = 10.0
-offset_top = 1680.0
-offset_right = 890.0
-offset_bottom = 1850.0
-
-[node name="RollButton" type="Button" parent="."]
-unique_name_in_owner = true
-offset_left = 10.0
-offset_top = 1920.0
-offset_right = 890.0
-offset_bottom = 2090.0
-mouse_default_cursor_shape = 2
-theme_override_font_sizes/font_size = 50
-text = "ROLL"
-
-[node name="ScoresUi" parent="." instance=ExtResource("4_c651c")]
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 880.0
-offset_bottom = 170.0
-grow_horizontal = 1
-grow_vertical = 1
-
-[node name="MenuButton" type="Button" parent="."]
-unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
 offset_left = 10.0
 offset_top = 10.0
-offset_right = 388.0
-offset_bottom = 88.0
-mouse_default_cursor_shape = 2
-theme_override_font_sizes/font_size = 35
-text = "MENU"
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
 
-[node name="MenuOverlay" parent="." instance=ExtResource("4_3wy1v")]
+[node name="ScoresUi" parent="Container/MainUI" instance=ExtResource("4_c651c")]
+layout_mode = 2
+
+[node name="DiceTray" parent="Container/MainUI" instance=ExtResource("2_pjrb6")]
 unique_name_in_owner = true
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_top = -2122.0
-offset_right = 900.0
-offset_bottom = -22.0
-grow_horizontal = 1
-grow_vertical = 1
+layout_mode = 2
+size_flags_horizontal = 4
 
-[connection signal="pressed" from="RollButton" to="." method="_on_roll_button_pressed"]
-[connection signal="pressed" from="MenuButton" to="." method="_on_menu_button_pressed"]
-[connection signal="hide_menu_pressed" from="MenuOverlay" to="." method="_on_menu_overlay_hide_menu_pressed"]
-[connection signal="new_game_pressed" from="MenuOverlay" to="." method="_on_game_over_overlay_new_game_pressed"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Container/MainUI"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="MenuButton" type="Button" parent="Container/MainUI/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("5_kfbq2")
+theme_override_font_sizes/font_size = 50
+text = "  MENU  "
+
+[node name="RollButton" type="Button" parent="Container/MainUI/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 175)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 50
+text = "LANCER"
+
+[node name="MenuOverlay" parent="Container" instance=ExtResource("4_3wy1v")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+offset_top = -2100.0
+offset_bottom = -2100.0
+
+[connection signal="pressed" from="Container/MainUI/HBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]
+[connection signal="pressed" from="Container/MainUI/HBoxContainer/RollButton" to="." method="_on_roll_button_pressed"]
+[connection signal="hide_menu_pressed" from="Container/MenuOverlay" to="." method="_on_menu_overlay_hide_menu_pressed"]
+[connection signal="new_game_pressed" from="Container/MenuOverlay" to="." method="_on_game_over_overlay_new_game_pressed"]

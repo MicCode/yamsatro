@@ -125,11 +125,11 @@ func change_dimensions():
 	var grid_step_2 = (grid_width * 7) - (dot_diameter / 2) # middle
 	var grid_step_3 = (grid_width * 11) - (dot_diameter / 2) # last
 
-	%Background.size = Vector2(width, width)
-	%lock.size = Vector2(dot_diameter, dot_diameter)
-	%lock.position = Vector2(grid_step_2, grid_step_3)
-	%lock.pivot_offset = Vector2(dot_diameter / 2, dot_diameter / 2)
-	%lock.scale = Vector2(1.5, 1.5)
+	%Background.set_deferred("size", Vector2(width, width))
+	%lock.set_deferred("size", Vector2(dot_diameter, dot_diameter))
+	%lock.set_deferred("position", Vector2(grid_step_2, grid_step_3))
+	%lock.set_deferred("pivot_offset", Vector2(dot_diameter / 2, dot_diameter / 2))
+	%lock.set_deferred("scale", Vector2(1.5, 1.5))
 	
 	for i in dots.size():
 		var x: float

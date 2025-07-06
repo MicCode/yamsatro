@@ -16,6 +16,8 @@ run/main_scene="uid://fkvol62t77hi"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 boot_splash/image="uid://c6ns2vurodleo"
 config/icon="uid://bgeaoosxonyn0"
+config/desktop/disable_screen_saver=false
+config/android/immersive_mode=false
 
 [autoload]
 
@@ -29,12 +31,13 @@ Sounds="*res://globals/Sounds.gd"
 
 [display]
 
-window/size/viewport_width=900
+window/size/viewport_width=1100
 window/size/viewport_height=2100
-window/size/mode=3
-window/size/initial_position_type=3
-window/stretch/mode="viewport"
+window/size/mode=2
+window/stretch/mode="canvas_items"
 window/handheld/orientation=1
+window/ios/hide_home_indicator=false
+window/ios/hide_status_bar=false
 
 [file_customization]
 
