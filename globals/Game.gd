@@ -35,6 +35,7 @@ func init_game(new_game_variant: Enums.GameVariants):
 	change_remaining_rolls(GameRules.MAX_REROLL_NUMBER)
 	game_ready.emit()
 	save_game_state_in_file()
+	change_game_finished(false)
 
 func reset_game():
 	init_game(game_variant)
@@ -156,9 +157,9 @@ func registerScore(column: Enums.ScoreColumns, figure: Enums.Figures, score: int
 		c.setScore(figure, score)
 		active_figures = []
 		active_figures_changed.emit()
-		score_changed.emit()
 		if is_finished():
 			change_game_finished(true)
+		score_changed.emit()
 
 func change_remaining_rolls(count: int):
 	remaining_rolls = count

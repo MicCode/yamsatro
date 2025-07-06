@@ -6,6 +6,22 @@ func _ready() -> void:
 	randomize() # Pour initialiser la randomization (sinon tous les tirages seront prédictibles)
 	Game.dice_rolling_changed.connect(update_state)
 	Game.remaining_rolls_changed.connect(update_state)
+	Game.score_changed.connect(_on_score_changed)
+	Game.game_finished_changed.connect(_on_game_finished)
+
+	# Chargement des fichiers de sauvegarde existants et initialisation de la partie
+	if FileAccess.file_exists(Game.GAME_JSON_FILE):
+		Game.load_game_state_from_file()
+		Scores.load_from_file()
+		Game.score_changed.emit()
+		Game.update_active_figures()
+		if Game.game_finished:
+			Game.change_remaining_rolls(0)
+			print("_ready")
+			show_menu()
+	else:
+		Game.init_game(game_variant)
+		Game.change_remaining_rolls(GameRules.MAX_REROLL_NUMBER)
 	
 	# Application des couleurs du thème au shader du fonc
 	var background_shader = %Background.material
@@ -15,28 +31,15 @@ func _ready() -> void:
 		background_shader.set_shader_parameter("colour_3", GUITheme.background_color)
 	# Centrage du fond
 	var size = get_viewport_rect().size
-	%Background.offset_left = -size.y / 2
+	%Background.offset_left = - size.y / 2
 	%Background.offset_right = size.y / 2
 	%Camera.position = size / 2
-	%MainUI.offset_bottom = -GUITheme.default_padding_px
+	%MainUI.offset_bottom = - GUITheme.default_padding_px
 	%MainUI.offset_top = GUITheme.default_padding_px
-	%MainUI.offset_right = -GUITheme.default_padding_px
+	%MainUI.offset_right = - GUITheme.default_padding_px
 	%MainUI.offset_left = GUITheme.default_padding_px
 	
 
-	# Chargement des fichiers de sauvegarde existants et initialisation de la partie
-	if FileAccess.file_exists(Game.GAME_JSON_FILE):
-		Game.load_game_state_from_file()
-		Scores.load_from_file()
-		Game.score_changed.emit()
-		Game.update_active_figures()
-		if Game.game_finished:
-			show_menu()
-	else:
-		Game.init_game(game_variant)
-		Game.change_remaining_rolls(GameRules.MAX_REROLL_NUMBER)
-	Game.score_changed.connect(_on_score_changed)
-	
 func update_state():
 	%RollButton.text = str("LANCER (%s)" % Game.remaining_rolls)
 	if !Game.dice_rolling && Game.remaining_rolls > 0:
@@ -50,17 +53,15 @@ func _on_roll_button_pressed():
 
 func _on_score_changed():
 	%DiceTray.unlock_all()
-	%DiceTray.roll_all()
-	Game.change_remaining_rolls(GameRules.MAX_REROLL_NUMBER)
 	update_state()
 	Scores.write_to_file()
-	
-	if Game.is_finished():
-		%MenuOverlay.register_new_score(Scores.get_total())
-		show_menu()
+	if !Game.game_finished:
+		%DiceTray.roll_all()
+		Game.change_remaining_rolls(GameRules.MAX_REROLL_NUMBER)
 	
 func show_menu():
 	var menu = %MenuOverlay as Panel
+	menu.update()
 	menu.show()
 	var screen_size = get_viewport().get_visible_rect().size
 	menu.position = Vector2(0, -screen_size.y)
@@ -84,13 +85,14 @@ func hide_menu():
 	tween.connect("finished", Callable(self, "_on_menu_closed"))
 
 func _on_game_over_overlay_new_game_pressed() -> void:
-	%MenuOverlay.hide()
+	hide_menu()
 	Game.reset_game()
 
 func _on_menu_overlay_hide_menu_pressed() -> void:
 	hide_menu()
 
 func _on_menu_button_pressed() -> void:
+	print("_on_menu_button_pressed")
 	Sounds.click()
 	show_menu()
 
@@ -99,3 +101,11 @@ func _on_menu_openned():
 
 func _on_menu_closed():
 	%MenuOverlay.hide()
+	%Background.show()
+
+func _on_game_finished():
+	if Game.game_finished:
+		print("_on_game_finished")
+		Game.change_remaining_rolls(0)
+		%MenuOverlay.register_new_score(Scores.get_total())
+		show_menu()

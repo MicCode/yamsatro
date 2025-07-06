@@ -12,7 +12,7 @@ func _ready() -> void:
 	update()
 	
 func update() -> void:
-	if Game.is_finished():
+	if Game.game_finished:
 		%FinishedGameTitle.show()
 		# %GameFinishedBackground.show()
 	else:
@@ -60,7 +60,8 @@ func refresh_ui():
 		%GamesNumberLabel.text = "parties jouées"
 	else:
 		%GamesNumberLabel.text = "partie jouée"
-	if Game.is_finished() && Scores.get_total() >= top_score:
+		
+	if Game.game_finished && Scores.get_total() >= top_score:
 		#set_background_color(GUITheme.accent_color)
 		%BestScoreBackground.show()
 		Sounds.tada()
@@ -102,10 +103,10 @@ func load_scores_from_file() -> Array[PastScore]:
 			scores.append(past_score)
 	
 	scores.sort_custom(
-		func (s1: PastScore, s2: PastScore): 
-			if s1.score > s2.score: 
-				return true 
-			else: 
+		func(s1: PastScore, s2: PastScore):
+			if s1.score > s2.score:
+				return true
+			else:
 				return false
 	)
 	
