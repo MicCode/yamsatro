@@ -49,7 +49,5 @@ custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 column = 2
 
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="mouse_entered" from="ScoreLine" to="ScoreLine" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ScoreLine" to="ScoreLine" method="_on_mouse_exited"]

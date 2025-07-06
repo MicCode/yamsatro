@@ -1,9 +1,10 @@
 [gd_scene load_steps=12 format=3 uid="uid://buvhajfabvs81"]
 
-[ext_resource type="Script" uid="uid://cw0i1yb5cx57s" path="res://scenes/Die.gd" id="1_kw4wr"]
-[ext_resource type="Texture2D" uid="uid://dndgsvqtiibxr" path="res://assets/locked.png" id="2_cew8t"]
+[ext_resource type="Script" uid="uid://cw0i1yb5cx57s" path="res://scenes/Die.gd" id="1_tyyvc"]
+[ext_resource type="Texture2D" uid="uid://dndgsvqtiibxr" path="res://assets/locked.png" id="2_nu62w"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_77e4n"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tyyvc"]
+resource_local_to_scene = true
 bg_color = Color(1, 1, 1, 1)
 border_width_left = 4
 border_width_top = 4
@@ -65,8 +66,9 @@ corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cew8t"]
-texture = ExtResource("2_cew8t")
-modulate_color = Color(0.588378, 0.954463, 3.85046e-07, 1)
+resource_local_to_scene = true
+texture = ExtResource("2_nu62w")
+modulate_color = Color(0.14902, 0.717647, 0.964706, 1)
 
 [node name="Die" type="TextureButton"]
 anchors_preset = -1
@@ -81,8 +83,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 1
 mouse_default_cursor_shape = 2
-script = ExtResource("1_kw4wr")
-lock_color = Color(0.219608, 0.670588, 0.0705882, 1)
+script = ExtResource("1_tyyvc")
 
 [node name="Background" type="Panel" parent="."]
 unique_name_in_owner = true
@@ -91,7 +92,7 @@ offset_right = 147.0
 offset_bottom = 147.0
 mouse_filter = 2
 mouse_default_cursor_shape = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_77e4n")
+theme_override_styles/panel = SubResource("StyleBoxFlat_tyyvc")
 
 [node name="P0" type="Panel" parent="."]
 unique_name_in_owner = true

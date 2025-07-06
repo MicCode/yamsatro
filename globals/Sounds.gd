@@ -8,6 +8,9 @@ func roll():
 
 func finish_roll():
 	SoundPlayer.play_sfx(_one_of("rolls/roll-stop", 6), { pitch = 0.8, pitch_variation = 0.1 })
+	
+func tada():
+	SoundPlayer.play_sfx("tada.wav")
 
 
 func _one_of(base_name: String, n: int) -> String:

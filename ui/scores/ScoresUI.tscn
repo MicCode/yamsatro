@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://4qurwmwm1hfv"]
+[gd_scene load_steps=7 format=3 uid="uid://4qurwmwm1hfv"]
 
 [ext_resource type="Script" uid="uid://f24uw2ypexxv" path="res://ui/scores/ScoresUI.gd" id="1_13si5"]
 [ext_resource type="PackedScene" uid="uid://b6jtlsv3r0mb3" path="res://ui/scores/ScoreLine.tscn" id="2_5whno"]
 [ext_resource type="PackedScene" uid="uid://bdq6taskmt5de" path="res://ui/scores/SumLine.tscn" id="3_rvl16"]
+
+[sub_resource type="Theme" id="Theme_rvl16"]
 
 [sub_resource type="FontVariation" id="FontVariation_rvl16"]
 variation_embolden = 1.69
@@ -33,6 +35,7 @@ offset_bottom = 1610.0
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = SubResource("Theme_rvl16")
 
 [node name="HeadersLine" type="HBoxContainer" parent="Container/Headers"]
 layout_mode = 1

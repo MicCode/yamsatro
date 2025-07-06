@@ -23,7 +23,7 @@ Enums="*res://types/enums.gd"
 Game="*res://globals/Game.gd"
 Scores="*res://globals/Scores.gd"
 GameRules="*res://globals/GameRules.gd"
-GUITheme="*res://globals/GUITheme.gd"
+GUITheme="*res://theme/GUITheme.gd"
 SoundPlayer="*res://globals/SoundPlayer.gd"
 Sounds="*res://globals/Sounds.gd"
 
@@ -31,7 +31,8 @@ Sounds="*res://globals/Sounds.gd"
 
 window/size/viewport_width=900
 window/size/viewport_height=2100
-window/size/mode=2
+window/size/mode=3
+window/size/initial_position_type=3
 window/stretch/mode="viewport"
 window/handheld/orientation=1
 
@@ -40,6 +41,10 @@ window/handheld/orientation=1
 folder_colors={
 "res://assets/": "gray"
 }
+
+[gui]
+
+theme/custom="uid://dtc0vmfm2a7sc"
 
 [rendering]
 

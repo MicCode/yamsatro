@@ -9,11 +9,12 @@ signal finished_rolling
 var face: DieFace
 var dots: Array[Panel] = []
 
-@export var lock_color = Color(0, 0, 1.0)
-@export var dot_color = Color(0, 0, 0)
-
 func _ready() -> void:
 	dots = [%P0, %P1, %P2, %P3, %P4, %P5, %P6]
+	var lock_stylebox = %lock.get_theme_stylebox("panel") as StyleBoxTexture
+	if lock_stylebox:
+		lock_stylebox.modulate_color = GUITheme.complementary_color
+		
 	change_dimensions()
 	change_visual_state()
 
@@ -57,12 +58,14 @@ func change_visual_state():
 	if !rolling:
 		if locked:
 			%lock.show()
+			change_border_color(GUITheme.complementary_color)
 			for dot in dots:
-				change_dot_color(dot, lock_color)
+				change_dot_color(dot, GUITheme.complementary_color)
 		else:
 			%lock.hide()
+			change_border_color(Color(0,0,0))
 			for dot in dots:
-				change_dot_color(dot, dot_color)
+				change_dot_color(dot, Color(0, 0, 0))
 		if hovered:
 			modulate = Color(0.7, 0.7, 1.0)
 		else:
@@ -70,13 +73,18 @@ func change_visual_state():
 	else:
 		modulate = Color.WHITE
 		for dot in dots:
-			change_dot_color(dot, dot_color)
+			change_dot_color(dot, Color(0, 0, 0))
 
 func change_dot_color(dot: Panel, color: Color):
 	var stylebox = StyleBoxFlat.new()
 	stylebox.bg_color = color
 	stylebox.set_corner_radius_all(100)
 	dot.add_theme_stylebox_override("panel", stylebox)
+
+func change_border_color(color: Color):
+	var style_box = %Background.get_theme_stylebox("panel") as StyleBoxFlat
+	if style_box:
+		style_box.border_color = color
 
 func _on_mouse_entered() -> void:
 	hovered = true

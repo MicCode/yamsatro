@@ -7,19 +7,32 @@ var past_scores: Array[PastScore] = []
 var top_score: int = 0
 
 func _ready() -> void:
+	set_background_color(GUITheme.neutral_color)
+	set_best_score_color(GUITheme.accent_color)
 	update()
 	
 func update() -> void:
-	load_past_scores()
 	if Game.is_finished():
 		%FinishedGameTitle.show()
+		# %GameFinishedBackground.show()
 	else:
 		%FinishedGameTitle.hide()
+		# %GameFinishedBackground.hide()
+	load_past_scores()
+	
+func set_background_color(color: Color):
+	var background_material = %GameFinishedBackground.material as ShaderMaterial
+	if background_material:
+		background_material.set_shader_parameter("circle_color", color)
+
+func set_best_score_color(color: Color):
+	var best_score_material = %BestScoreBackground.material as ShaderMaterial
+	if best_score_material:
+		best_score_material.set_shader_parameter("color", color)
 
 func register_new_score(score_value: int):
 	past_scores.append(PastScore.create_new(score_value))
 	if score_value > top_score:
-		# TODO display nice animation ?
 		top_score = score_value
 	write_scores_file()
 	
@@ -47,6 +60,19 @@ func refresh_ui():
 		%GamesNumberLabel.text = "parties jouées"
 	else:
 		%GamesNumberLabel.text = "partie jouée"
+	if Game.is_finished() && Scores.get_total() >= top_score:
+		#set_background_color(GUITheme.accent_color)
+		%BestScoreBackground.show()
+		Sounds.tada()
+		%TopScoreLabel.text = "Nouveau meilleur score !"
+		%TopScoreLabel.modulate = GUITheme.accent_color
+		%TopScore.hide()
+	else:
+		#set_background_color(GUITheme.neutral_color)
+		%BestScoreBackground.hide()
+		%TopScoreLabel.text = "Meilleur score: "
+		%TopScoreLabel.modulate = Color.WHITE
+		%TopScore.show()
 
 func _on_restart_button_pressed() -> void:
 	Sounds.click()

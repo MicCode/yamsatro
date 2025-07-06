@@ -15,10 +15,11 @@ enum States {
 @export var column: Enums.ScoreColumns
 @export var figure: Enums.Figures
 @export var score = -1
-@export var neutral_bg_color: Color = Color(0.2, 0.2, 0.2)
-@export var neutral_hovered_bg_color: Color = Color(0.3, 0.3, 0.3)
-@export var selectable_bg_color: Color = Color(0.2, 0.5, 0.5)
-@export var selectable_hovered_bg_color: Color = Color(0.6, 0.7, 0.7)
+
+var neutral_bg_color
+var neutral_hovered_bg_color
+var selectable_bg_color: Color
+var selectable_hovered_bg_color: Color
 
 var is_selectable = false
 var is_hovered = false
@@ -31,6 +32,12 @@ func _ready() -> void:
 	Game.score_changed.connect(_on_score_changed)
 	Game.active_figures_changed.connect(update_state)
 	mouse_filter = MOUSE_FILTER_PASS
+	
+	selectable_bg_color = GUITheme.complementary_color
+	selectable_hovered_bg_color = GUITheme.light(GUITheme.complementary_color)
+	neutral_bg_color = GUITheme.background_color
+	neutral_hovered_bg_color = GUITheme.light(GUITheme.background_color)
+	
 	self.add_theme_stylebox_override("panel", stylebox)
 	update_state()
 

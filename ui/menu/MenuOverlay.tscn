@@ -1,20 +1,55 @@
-[gd_scene load_steps=7 format=3 uid="uid://c1pyhqepqvc3p"]
+[gd_scene load_steps=12 format=3 uid="uid://c1pyhqepqvc3p"]
 
 [ext_resource type="Script" uid="uid://dp053l0nd1b0m" path="res://ui/menu/MenuOverlay.gd" id="1_7wiv4"]
 [ext_resource type="PackedScene" uid="uid://cray3v3t8m613" path="res://ui/menu/MenuScoreLine.tscn" id="1_ohhsm"]
+[ext_resource type="Shader" uid="uid://b788psikbqmfe" path="res://shaders/circles_gradient.gdshader" id="2_0iqbr"]
+[ext_resource type="Shader" uid="uid://ckg3yjdxjh0ug" path="res://shaders/god_ray.gdshader" id="3_palon"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ohhsm"]
 bg_color = Color(0, 0, 0, 1)
 
+[sub_resource type="Gradient" id="Gradient_palon"]
+interpolation_color_space = 1
+offsets = PackedFloat32Array(0, 0.54918, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.770492, 0.770492, 0.770492, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_k3kn7"]
+gradient = SubResource("Gradient_palon")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_upjdn"]
+shader = ExtResource("2_0iqbr")
+shader_parameter/gradient = SubResource("GradientTexture2D_k3kn7")
+shader_parameter/circle_color = Color(0.223529, 0.223529, 0.223529, 1)
+shader_parameter/circle_multiplier = 20.0
+shader_parameter/speed = 0.5
+shader_parameter/direction = Vector2(1, 1)
+shader_parameter/rotation = Transform2D(1, -1, 1, 1, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k3kn7"]
+shader = ExtResource("3_palon")
+shader_parameter/angle = 0.0
+shader_parameter/position = 0.0
+shader_parameter/spread = 0.677
+shader_parameter/cutoff = -0.508
+shader_parameter/falloff = 1.0
+shader_parameter/edge_fade = 0.233
+shader_parameter/speed = 5.0
+shader_parameter/ray1_density = 10.0
+shader_parameter/ray2_density = 10.0
+shader_parameter/ray2_intensity = 0.122
+shader_parameter/color = Color(0.964706, 0.803922, 0.14902, 1)
+shader_parameter/hdr = false
+shader_parameter/seed = 5.0
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7wiv4"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7lett"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q1kcf"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[node name="GameOverOverlay" type="Panel"]
+[node name="MenuOverlay" type="Panel"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -24,6 +59,25 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_ohhsm")
 script = ExtResource("1_7wiv4")
+
+[node name="GameFinishedBackground" type="ColorRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_upjdn")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BestScoreBackground" type="Panel" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_k3kn7")
+layout_mode = 0
+offset_left = -85.0
+offset_top = -10.0
+offset_right = 1030.0
+offset_bottom = 950.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -67,7 +121,8 @@ text = "678"
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/TopScoreContainer"]
+[node name="TopScoreLabel" type="Label" parent="VBoxContainer/TopScoreContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 45
 text = "Meilleur score: "
@@ -263,9 +318,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 mouse_default_cursor_shape = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 80
-theme_override_styles/normal = SubResource("StyleBoxFlat_7lett")
 text = "Recommencer"
 
 [node name="Spacer3" type="Panel" parent="VBoxContainer"]

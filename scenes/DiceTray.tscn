@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bjejhuy3nuap6"]
 
 [ext_resource type="Script" uid="uid://bhu7d6pbys4ne" path="res://scenes/DiceTray.gd" id="1_qqici"]
-[ext_resource type="PackedScene" uid="uid://buvhajfabvs81" path="res://scenes/die.tscn" id="2_ds6xh"]
+[ext_resource type="PackedScene" uid="uid://buvhajfabvs81" path="res://scenes/Die.tscn" id="2_ds6xh"]
 
 [node name="DiceTray" type="HBoxContainer"]
 custom_minimum_size = Vector2(880, 170)

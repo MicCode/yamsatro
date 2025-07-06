@@ -6,6 +6,12 @@ func _ready() -> void:
 	randomize()
 	Game.dice_rolling_changed.connect(update_state)
 	Game.remaining_rolls_changed.connect(update_state)
+	
+	var background_shader = %Background.material
+	if background_shader is ShaderMaterial:
+		background_shader.set_shader_parameter("colour_1", GUITheme.accent_color)
+		background_shader.set_shader_parameter("colour_2", GUITheme.complementary_color)
+		background_shader.set_shader_parameter("colour_3", GUITheme.background_color)
 
 	if FileAccess.file_exists(Game.GAME_JSON_FILE):
 		Game.load_game_state_from_file()
