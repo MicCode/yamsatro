@@ -28,9 +28,11 @@ func _ready() -> void:
 	cells[Enums.ScoreColumns.UP].label = %ValueC
 	refresh_display()
 
-func set_value(column: Enums.ScoreColumns, new_value: int):
-	cells[column].value = new_value
-	refresh_display()
+func set_cell_value(column: Enums.ScoreColumns, new_value: int):
+	if cells[column].value != new_value:
+		cells[column].value = new_value
+		GUITheme.emphases(cells[column].label, GUITheme.complementary_color)
+		refresh_display()
 
 func refresh_display():
 	cells[Enums.ScoreColumns.DOWN].label.text = str(cells[Enums.ScoreColumns.DOWN].value)
@@ -47,7 +49,6 @@ func _on_game_variant_changed(new_game_variant: Enums.GameVariants):
 		cells[Enums.ScoreColumns.UP].label.hide()
 
 func _on_score_changed():
-	cells[Enums.ScoreColumns.DOWN].value = Scores.columns[Enums.ScoreColumns.DOWN].totals[category]
-	cells[Enums.ScoreColumns.FREE].value = Scores.columns[Enums.ScoreColumns.FREE].totals[category]
-	cells[Enums.ScoreColumns.UP].value = Scores.columns[Enums.ScoreColumns.UP].totals[category]
-	refresh_display()
+	set_cell_value(Enums.ScoreColumns.DOWN, Scores.columns[Enums.ScoreColumns.DOWN].totals[category])
+	set_cell_value(Enums.ScoreColumns.FREE, Scores.columns[Enums.ScoreColumns.FREE].totals[category])
+	set_cell_value(Enums.ScoreColumns.UP, Scores.columns[Enums.ScoreColumns.UP].totals[category])

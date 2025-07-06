@@ -1,5 +1,7 @@
 extends Control
 
+var actual_total_score: int
+
 func _ready() -> void:
 	Game.game_variant_changed.connect(_on_game_variant_changed)
 	Game.score_changed.connect(_on_score_changed)
@@ -14,4 +16,7 @@ func _on_game_variant_changed(new_game_variant: Enums.GameVariants):
 		%HeaderC.hide()
 
 func _on_score_changed():
-	%TotalScoreLabel.text = str(Scores.get_total())
+	if actual_total_score != Scores.get_total():
+		actual_total_score = Scores.get_total()
+		%TotalScoreLabel.text = str(Scores.get_total())
+		GUITheme.emphases(%TotalScoreLabel, GUITheme.complementary_color)

@@ -39,3 +39,13 @@ func light(color: Color) -> Color:
 
 func transparent(color: Color, opacity: float) -> Color:
 	return Color(color.r, color.g, color.b, opacity)
+
+## Fait rapidement grossir et colore un objet avant de le remettre à son état initial
+func emphases(object: Object, color: Color):
+	var tween = get_tree().create_tween()
+	tween.set_trans(Tween.TRANS_BACK)
+	tween.set_ease(Tween.EASE_OUT)
+	tween.tween_property(object, "scale", Vector2(1.1, 1.1), 0.05)
+	tween.tween_property(object, "modulate", color, 0.05)
+	tween.tween_property(object, "scale", Vector2(1, 1), 0.20)
+	tween.tween_property(object, "modulate", Color.WHITE, 0.20)

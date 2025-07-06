@@ -72,7 +72,7 @@ modulate_color = Color(0.14902, 0.717647, 0.964706, 1)
 
 [node name="Die" type="TextureButton"]
 custom_minimum_size = Vector2(175, 175)
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -925.0
