@@ -3,7 +3,6 @@ class_name ScoreCell
 
 signal clicked
 signal delete_clicked
-signal score_changed
 
 enum States {
 	NEUTRAL,
@@ -45,7 +44,6 @@ func set_score(new_score: int):
 	score = new_score
 	if score >= 0:
 		%ScoreLabel.text = str(score)
-		score_changed.emit()
 	else:
 		%ScoreLabel.text = "-"
 	
@@ -54,6 +52,14 @@ func update_state():
 		is_selectable = Game.is_scorable(figure, column)
 	else:
 		is_selectable = false
+	
+	if is_selectable:
+		%ScoreLabel.add_theme_color_override("font_color", Color(1, 1, 1, 0.7))
+		%ScoreLabel.text = str(Game.compute_score(figure))
+	else:
+		%ScoreLabel.add_theme_color_override("font_color", Color.WHITE)
+		if score == -1:
+			%ScoreLabel.text = str("-")
 	
 	if score == -1:
 		mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
@@ -66,7 +72,7 @@ func update_state():
 		else:
 			state = States.SELECTABLE
 	else:
-		if is_hovered:
+		if is_hovered && score < 0:
 			state = States.NEUTRAL_HOVERED
 		else:
 			state = States.NEUTRAL
@@ -97,7 +103,8 @@ func _on_gui_input(event: InputEvent) -> void:
 			clicked.emit()
 		elif !Game.dice_rolling && score == -1:
 			%DeleteButton.show()
-		Sounds.click()
+		if score < 0:
+			Sounds.click()
 
 func _on_delete_button_mouse_exited() -> void:
 	%DeleteButton.hide()

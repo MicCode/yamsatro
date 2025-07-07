@@ -111,6 +111,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_cew8t")
 
 [node name="P1" type="Panel" parent="Background"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 offset_left = 20.0
 offset_top = 70.0
@@ -144,6 +145,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_lsqf5")
 
 [node name="P4" type="Panel" parent="Background"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 offset_left = 120.0
 offset_top = 70.0
@@ -178,9 +180,15 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_rurc0")
 [node name="lock" type="Panel" parent="Background"]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -60.0
+offset_right = 25.0
+offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
