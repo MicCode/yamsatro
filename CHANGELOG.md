@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.6.1 - 2025-07-07
+#### Bug Fixes
+- keep dice values when quitting game and reloading to prevent cheating - (3fb0ab4) - Mic
+
+- - -
+
 ## 0.6.0 - 2025-07-07
 #### Features
 - display gain potential in selectable score cells - (77350cc) - Mic
