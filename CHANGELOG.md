@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.6.0 - 2025-07-07
+#### Features
+- display gain potential in selectable score cells - (77350cc) - Mic
+
+- - -
+
 ## 0.5.0 - 2025-07-06
 #### Bug Fixes
 - Fixed broken end game conditions - (1876a64) - Mic
