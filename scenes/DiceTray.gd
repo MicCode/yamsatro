@@ -13,7 +13,6 @@ func _ready() -> void:
 		for i in data.size():
 			Game.all_dice[i].set_face(Game.all_dice_faces[int(data[i].get("value", 0)) - 1])
 			Game.all_dice[i].set_lock(bool(data[i].get("locked", false)))
-
 	else:
 		roll_all()
 	

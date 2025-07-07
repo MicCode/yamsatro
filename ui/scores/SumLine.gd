@@ -20,7 +20,7 @@ var cells: Dictionary = {
 
 func _ready() -> void:
 	Game.game_variant_changed.connect(_on_game_variant_changed)
-	Game.score_changed.connect(_on_score_changed)
+	Game.scores_changed.connect(_on_scores_changed)
 
 	%Label.text = label
 	cells[Enums.ScoreColumns.DOWN].label = %ValueA
@@ -48,7 +48,7 @@ func _on_game_variant_changed(new_game_variant: Enums.GameVariants):
 		cells[Enums.ScoreColumns.FREE].label.hide()
 		cells[Enums.ScoreColumns.UP].label.hide()
 
-func _on_score_changed():
+func _on_scores_changed():
 	set_cell_value(Enums.ScoreColumns.DOWN, Scores.columns[Enums.ScoreColumns.DOWN].totals[category])
 	set_cell_value(Enums.ScoreColumns.FREE, Scores.columns[Enums.ScoreColumns.FREE].totals[category])
 	set_cell_value(Enums.ScoreColumns.UP, Scores.columns[Enums.ScoreColumns.UP].totals[category])

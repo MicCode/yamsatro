@@ -28,7 +28,7 @@ var stylebox := StyleBoxFlat.new()
 
 func _ready() -> void:
 	Game.dice_rolling_changed.connect(update_state)
-	Game.score_changed.connect(_on_score_changed)
+	Game.scores_changed.connect(_on_scores_changed)
 	Game.active_figures_changed.connect(update_state)
 	mouse_filter = MOUSE_FILTER_PASS
 	
@@ -113,7 +113,7 @@ func _on_delete_button_pressed() -> void:
 	delete_clicked.emit()
 	%DeleteButton.hide()
 
-func _on_score_changed():
+func _on_scores_changed():
 	var value_in_scores = Scores.get_cell_score(column, figure)
 	if value_in_scores != score:
 		set_score(value_in_scores)

@@ -34,11 +34,11 @@ func register_new_score(score_value: int):
 	past_scores.append(PastScore.create_new(score_value))
 	if score_value > top_score:
 		top_score = score_value
-	write_scores_file()
+	write_past_scores_file()
 	
 
 func load_past_scores():
-	past_scores = load_scores_from_file()
+	past_scores = load_past_scores_from_file()
 	top_score = 0
 	for past_score in past_scores:
 		if past_score.score > top_score:
@@ -84,7 +84,7 @@ func _on_hide_menu_button_pressed() -> void:
 	hide_menu_pressed.emit()
 
 
-func load_scores_from_file() -> Array[PastScore]:
+func load_past_scores_from_file() -> Array[PastScore]:
 	var scores: Array[PastScore] = []
 	var file = FileAccess.open(Game.PAST_SCORES_JSON_FILE, FileAccess.READ)
 	if file:
@@ -112,7 +112,7 @@ func load_scores_from_file() -> Array[PastScore]:
 	
 	return scores
 
-func write_scores_file():
+func write_past_scores_file():
 	var array: Array[Dictionary] = []
 	for past_score in past_scores:
 		array.push_front(past_score.to_dict())

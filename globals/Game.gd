@@ -6,7 +6,8 @@ signal active_figures_changed
 signal remaining_rolls_changed
 signal dice_rolling_changed
 signal game_ready
-signal score_changed
+signal scores_changed
+signal score_selected
 
 const GAME_JSON_FILE = "user://game.json"
 const SCORES_JSON_FILE = "user://scores.json"
@@ -42,7 +43,7 @@ func reset_game():
 	change_remaining_rolls(GameRules.MAX_REROLL_NUMBER)
 	change_game_finished(false)
 	Scores.reset()
-	score_changed.emit()
+	scores_changed.emit()
 	game_ready.emit()
 
 func set_dice_reference(d: Array[Die]):
@@ -159,7 +160,8 @@ func registerScore(column: Enums.ScoreColumns, figure: Enums.Figures, score: int
 		active_figures_changed.emit()
 		if is_finished():
 			change_game_finished(true)
-		score_changed.emit()
+		scores_changed.emit()
+		score_selected.emit()
 
 func change_remaining_rolls(count: int):
 	remaining_rolls = count

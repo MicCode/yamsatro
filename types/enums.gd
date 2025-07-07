@@ -57,3 +57,22 @@ func figure_display_name(figure: Figures) -> String:
 		Figures.YAHTZEE: return "Yam's"
 		Figures.LUCK: return "Chance"
 		_: return "????"
+
+enum GameState {
+	INIT,
+	RESET,
+	ROLLDICE,
+	CHOOSESCORE,
+	NEXTTURN,
+	FINISHED
+}
+
+func game_state_display_name(state: GameState) -> String:
+	match state:
+		GameState.INIT: return "INIT"
+		GameState.RESET: return "RESET"
+		GameState.ROLLDICE: return "ROLLDICE"
+		GameState.CHOOSESCORE: return "CHOOSESCORE"
+		GameState.NEXTTURN: return "NEXTTURN"
+		GameState.FINISHED: return "FINISHED"
+		_: return "????"
