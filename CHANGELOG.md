@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.6.2 - 2025-07-08
+#### Bug Fixes
+- reduced assets size - (99067a4) - Mic
+
+- - -
+
 ## 0.6.1 - 2025-07-07
 #### Bug Fixes
 - keep dice values when quitting game and reloading to prevent cheating - (3fb0ab4) - Mic
