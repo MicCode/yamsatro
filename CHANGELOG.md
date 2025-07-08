@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.6.3 - 2025-07-08
+#### Bug Fixes
+- allow only playable cell to be cancelled - (16c5676) - Mic
+#### Refactoring
+- extracted file accesses in a global service - (2e7b07c) - Mic
+
+- - -
+
 ## 0.6.2 - 2025-07-08
 #### Bug Fixes
 - reduced assets size - (99067a4) - Mic
