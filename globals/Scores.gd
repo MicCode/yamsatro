@@ -41,25 +41,7 @@ func from_dict(data: Dictionary):
 			columns[col] = SColumn.createEmpty()
 
 func write_to_file():
-	var file = FileAccess.open(Game.SCORES_JSON_FILE, FileAccess.WRITE)
-	if file:
-		var json_content = JSON.stringify(to_dict(), "\t")
-		file.store_string(json_content)
-		file.close()
-	else:
-		push_error("Impossible de sauvegarder les scores")
+	Files.write_scores(to_dict())
 
 func load_from_file():
-	var file = FileAccess.open(Game.SCORES_JSON_FILE, FileAccess.READ)
-	if file:
-		var json_content = file.get_as_text()
-		file.close()
-
-		var json := JSON.new()
-		var error := json.parse(json_content)
-
-		if error != OK:
-			push_error("Erreur lors du parsing JSON : %s" % json_content)
-			return {}
-		
-		from_dict(json.data)
+	from_dict(Files.read_scores())

@@ -28,6 +28,7 @@ GameRules="*res://globals/GameRules.gd"
 GUITheme="*res://theme/GUITheme.gd"
 SoundPlayer="*res://globals/SoundPlayer.gd"
 Sounds="*res://globals/Sounds.gd"
+Files="*res://globals/Files.gd"
 
 [display]
 

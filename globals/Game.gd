@@ -9,9 +9,6 @@ signal game_ready
 signal scores_changed
 signal score_selected
 
-const GAME_JSON_FILE = "user://game.json"
-const SCORES_JSON_FILE = "user://scores.json"
-const PAST_SCORES_JSON_FILE = "user://past-scores.json"
 
 var game_variant: Enums.GameVariants
 var game_finished = false
@@ -241,50 +238,28 @@ func is_finished() -> bool:
 	return false
 
 func save_game_state_in_file():
-	if !lock_file_write:
-		var file = FileAccess.open(GAME_JSON_FILE, FileAccess.WRITE)
-		if file:
-			var dice_dict: Array = []
-			if all_dice:
-				dice_dict = all_dice.map(func(die: Die):
-					if die.face:
-						return {"value": die.face.value, "locked": die.locked}
-					else:
-						return {}
-				)
-			var game_dict: Dictionary = {
-				"game_variant": game_variant,
-				"game_finished": game_finished,
-				"remaining_rolls": remaining_rolls,
-				"dice": dice_dict
-			}
-			var json_content = JSON.stringify(game_dict, "\t")
-			file.store_string(json_content)
-			file.close()
-		else:
-			push_error("Impossible de sauvegarder la partie")
+	var dice_dict: Array = []
+	if all_dice:
+		dice_dict = all_dice.map(func(die: Die):
+			if die.face:
+				return {"value": die.face.value, "locked": die.locked}
+			else:
+				return {}
+		)
+	var game_dict: Dictionary = {
+		"game_variant": game_variant,
+		"game_finished": game_finished,
+		"remaining_rolls": remaining_rolls,
+		"dice": dice_dict
+	}
+	Files.write_game_state(game_dict)
 
 func load_game_state_from_file():
-	lock_file_write = true
-	var file = FileAccess.open(GAME_JSON_FILE, FileAccess.READ)
-	if file:
-		var json_content = file.get_as_text()
-		file.close()
+	var json_data := Files.read_game_state()
 
-		var json := JSON.new()
-		var error := json.parse(json_content)
+	change_game_variant(Enums.GameVariants.values()[int(json_data.get("game_variant", 0))])
+	change_game_finished(bool(json_data.get("game_finished", false)))
+	change_remaining_rolls(int(json_data.get("remaining_rolls", GameRules.MAX_REROLL_NUMBER)))
+	initial_dice_values = json_data.get("dice", [])
 
-		if error != OK:
-			push_error("Erreur lors du parsing JSON : %s" % json_content)
-			return {}
-		
-		change_game_variant(Enums.GameVariants.values()[int(json.data.get("game_variant", 0))])
-		change_game_finished(bool(json.data.get("game_finished", false)))
-		change_remaining_rolls(int(json.data.get("remaining_rolls", GameRules.MAX_REROLL_NUMBER)))
-		initial_dice_values = json.data.get("dice", [])
-
-		game_ready.emit()
-	else:
-		push_error("Fichier d'état de partie non trouvé")
-
-	lock_file_write = false
+	game_ready.emit()

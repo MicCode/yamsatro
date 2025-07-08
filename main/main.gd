@@ -19,7 +19,7 @@ func _ready() -> void:
 	Game.game_finished_changed.connect(_on_game_finished)
 
 	# Chargement des fichiers de sauvegarde existants et initialisation de la partie
-	if FileAccess.file_exists(Game.GAME_JSON_FILE):
+	if FileAccess.file_exists(Files.GAME_JSON_FILE):
 		Game.load_game_state_from_file()
 		Scores.load_from_file()
 		Game.scores_changed.emit()

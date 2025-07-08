@@ -86,21 +86,10 @@ func _on_hide_menu_button_pressed() -> void:
 
 func load_past_scores_from_file() -> Array[PastScore]:
 	var scores: Array[PastScore] = []
-	var file = FileAccess.open(Game.PAST_SCORES_JSON_FILE, FileAccess.READ)
-	if file:
-		var json_content = file.get_as_text()
-		file.close()
-
-		var json := JSON.new()
-		var error := json.parse(json_content)
-
-		if error != OK:
-			push_error("Erreur lors du parsing JSON : %s" % json_content)
-			return []
-		
-		for score in json.data:
-			var past_score = PastScore.from_dict(score)
-			scores.append(past_score)
+	var data = Files.read_past_scores()
+	for score in data:
+		var past_score = PastScore.from_dict(score)
+		scores.append(past_score)
 	
 	scores.sort_custom(
 		func(s1: PastScore, s2: PastScore):
@@ -116,10 +105,4 @@ func write_past_scores_file():
 	var array: Array[Dictionary] = []
 	for past_score in past_scores:
 		array.push_front(past_score.to_dict())
-	var file = FileAccess.open(Game.PAST_SCORES_JSON_FILE, FileAccess.WRITE)
-	if file:
-		var json_content = JSON.stringify(array, "\t")
-		file.store_string(json_content)
-		file.close()
-	else:
-		push_error("Impossible de sauvegarder les scores dans l'historique")
+	Files.write_past_scores(array)
