@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://buvhajfabvs81"]
 
-[ext_resource type="Script" uid="uid://cw0i1yb5cx57s" path="res://scenes/Die.gd" id="1_tyyvc"]
+[ext_resource type="Script" uid="uid://cw0i1yb5cx57s" path="res://ui/Die.gd" id="1_tyyvc"]
 [ext_resource type="Texture2D" uid="uid://dndgsvqtiibxr" path="res://assets/locked.png" id="2_nu62w"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tyyvc"]

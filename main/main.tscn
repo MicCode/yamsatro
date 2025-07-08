@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c0kgxj8osawap" path="res://main/main.gd" id="1_53q0u"]
 [ext_resource type="Shader" uid="uid://boimpg58mcxao" path="res://shaders/balatro.gdshader" id="2_3wy1v"]
-[ext_resource type="PackedScene" uid="uid://bjejhuy3nuap6" path="res://scenes/DiceTray.tscn" id="2_pjrb6"]
+[ext_resource type="PackedScene" uid="uid://bjejhuy3nuap6" path="res://ui/DiceTray.tscn" id="2_pjrb6"]
 [ext_resource type="PackedScene" uid="uid://c1pyhqepqvc3p" path="res://ui/menu/MenuOverlay.tscn" id="4_3wy1v"]
 [ext_resource type="PackedScene" uid="uid://4qurwmwm1hfv" path="res://ui/scores/ScoresUI.tscn" id="4_c651c"]
 [ext_resource type="Theme" uid="uid://32y1bscp3t30" path="res://theme/theme_secondary.tres" id="5_kfbq2"]

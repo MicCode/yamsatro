@@ -21,6 +21,7 @@ var selectable_bg_color: Color
 var selectable_hovered_bg_color: Color
 
 var is_selectable = false
+var is_cancellable = false
 var is_hovered = false
 var state: States = States.NEUTRAL
 
@@ -50,32 +51,40 @@ func set_score(new_score: int):
 func update_state():
 	if Game.dice_rolling == false:
 		is_selectable = Game.is_scorable(figure, column)
+		is_cancellable = Game.is_playable(figure, column)
 	else:
 		is_selectable = false
+		is_cancellable = false
 	
 	if is_selectable:
 		%ScoreLabel.add_theme_color_override("font_color", Color(1, 1, 1, 0.7))
 		%ScoreLabel.text = str(Game.compute_score(figure))
 	else:
-		%ScoreLabel.add_theme_color_override("font_color", Color.WHITE)
+		if is_cancellable:
+			%ScoreLabel.add_theme_color_override("font_color", Color.RED)
+		else:
+			%ScoreLabel.add_theme_color_override("font_color", Color.WHITE)
 		if score == -1:
 			%ScoreLabel.text = str("-")
 	
-	if score == -1:
+	if score == -1 && is_cancellable:
 		mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	else:
 		mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
 	
-	if is_selectable:
-		if is_hovered:
-			state = States.SELECTABLE_HOVERED
+	if is_selectable || is_cancellable:
+		if is_selectable:
+			if is_hovered:
+				state = States.SELECTABLE_HOVERED
+			else:
+				state = States.SELECTABLE
 		else:
-			state = States.SELECTABLE
+			if is_hovered && score < 0:
+				state = States.NEUTRAL_HOVERED
+			else:
+				state = States.NEUTRAL
 	else:
-		if is_hovered && score < 0:
-			state = States.NEUTRAL_HOVERED
-		else:
-			state = States.NEUTRAL
+		state = States.NEUTRAL
 	change_visual_state()
 
 func change_visual_state():
@@ -101,9 +110,9 @@ func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if is_selectable:
 			clicked.emit()
-		elif !Game.dice_rolling && score == -1:
+			Sounds.click()
+		elif !Game.dice_rolling && score == -1 && is_cancellable:
 			%DeleteButton.show()
-		if score < 0:
 			Sounds.click()
 
 func _on_delete_button_mouse_exited() -> void:
