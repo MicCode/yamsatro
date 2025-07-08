@@ -1,10 +1,23 @@
-# TODO
+# Yams'atro
 
-## Jeu de base
+![](./assets/header.png)
 
-- musique de fond
+<br>
 
-## Idées
+Un jeu de Yams (Yahtzee) fabriqué avec [Godot](https://godotengine.org/fr)
+<br>
+<br>
+<br>
+
+<div style="display: flex;">
+<img src="./assets/screenshots/screen1.png" height="500">
+<div style="width: 25px;"></div>
+<img src="./assets/screenshots/screen2.png" height="500">
+<div style="width: 25px;"></div>
+<img src="./assets/screenshots/screen3.png" height="500">
+</div>
+
+## Boite à idées
 
 - power ups that change rules (reroll number, score calculations..)
 - dice alterations (changing faces, adding jokers, more than 6 faces die..)
