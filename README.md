@@ -21,6 +21,6 @@ dans un shell unix (wsl, git bash...) - pas powershell - lancer: `cog bump --aut
 > Avoir le fichier `miccode-release.keystore` à la racine du projet et une version de Java SDK 17 installée
 
 - faire export android depuis godot (utiliser l'option `Export All...` sinon ça génère une version debug)
-- signer l'aab: `jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 -keystore miccode-release.keystore exports\yamsatro.aab MicCode`
-- vérifier la signature: `jarsigner -verify -verbose -certs exports\yamsatro.aab`
+- signer l'aab: `jarsigner -verbose -sigalg SHA256withRSA -digestalg SHA-256 -keystore miccode-release.keystore exports/yamsatro.aab MicCode`
+- vérifier la signature: `jarsigner -verify -verbose -certs exports/yamsatro.aab`
 - uploader sur [la console Google Play](https://play.google.com/console/u/0/developers)
