@@ -50,8 +50,8 @@ func set_score(new_score: int):
 	
 func update_state():
 	if Game.dice_rolling == false:
-		is_selectable = Game.is_scorable(figure, column)
-		is_cancellable = Game.is_playable(figure, column)
+		is_selectable = Game.is_cell_scorable(figure, column)
+		is_cancellable = Game.is_cell_playable(figure, column)
 	else:
 		is_selectable = false
 		is_cancellable = false

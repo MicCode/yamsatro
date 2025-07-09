@@ -208,7 +208,7 @@ func registerScore(column: Enums.ScoreColumns, figure: Enums.Figures, score: int
 		score_selected.emit()
 
 ## Détermine si une case peut être scorée
-func is_scorable(figure: Enums.Figures, column: Enums.ScoreColumns):
+func is_cell_scorable(figure: Enums.Figures, column: Enums.ScoreColumns):
 	return active_figures.has(figure) && is_cell_playable(figure, column)
 
 ## Détermine si une case peut être jouée (soit scorée soit sacrifiée)
