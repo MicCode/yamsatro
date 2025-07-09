@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.6.4 - 2025-07-09
+#### Bug Fixes
+- fixed bad function name in Game - (f8ab760) - Mic
+#### Documentation
+- updated readme - (d621888) - Mic
+
+- - -
+
 ## 0.6.3 - 2025-07-08
 #### Bug Fixes
 - allow only playable cell to be cancelled - (16c5676) - Mic
