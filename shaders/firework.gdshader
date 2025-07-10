@@ -1,5 +1,5 @@
 // Fireworks shader
-// Based on shadertoy shader by Martijn Steinrucken aka BigWings - 2015 
+// Based on shadertoy shader by Martijn Steinrucken aka BigWings - 2015
 // (https://www.shadertoy.com/view/lscGRl)
 
 shader_type canvas_item;
@@ -26,7 +26,7 @@ float hash12(vec2 p) // attention changement vec2 p en vec3
 
 float circ(vec2 uv, vec2 pos, float size) {
                 uv -= pos;
-    
+
     size *= size;
     return smoothstep(size*1.1, size, dot(uv, uv));
 }
@@ -38,31 +38,31 @@ float lighter(vec2 uv, vec2 pos, float size) {
 }
 
 vec3 explosion(vec2 uv, vec2 p, float seed, float t) {
-                
+
     vec3 col = vec3(0.);
-    
+
     vec3 en = hash31(seed);
     vec3 baseCol = en;
     for(float i=0.; i<NUM_PARTICLES; i++) {
                vec3 n = hash31(i)-.5;
-       
-                               vec2 startP = p-vec2(0., t*t*.1);        
+
+                               vec2 startP = p-vec2(0., t*t*.1);
         vec2 endP = startP+normalize(n.xy)*n.z;
-        
-        
+
+
         float pt = 1.-pow(t-1., 2.);
-        vec2 pos = mix(p, endP, pt);    
+        vec2 pos = mix(p, endP, pt);
         float size = mix(.01, .005, smoothstep(0., .1, pt));
         size *= smoothstep(1., .1, pt);
-        
+
         float sparkle = (sin((pt+n.z)*100.)*.5+.5);
         sparkle = pow(sparkle, pow(en.x, 3.)*50.)*mix(0.01, .01, en.y*n.y);
 		float B = smoothstep(en.x-en.z, en.x+en.z, t)*smoothstep(en.y+en.z, en.y-en.z, t);
         size += sparkle*B;
-        
+
         col += baseCol*lighter(uv, pos, size);
     }
-    
+
     return col;
 }
 
@@ -72,23 +72,23 @@ void fragment() {
 	vec2 uv = FRAGCOORD.xy / iResolution.xy;
                 uv.x -= .5;
     uv.x *= iResolution.x/iResolution.y;
-    
+
     float n = hash12(uv+10.0);
     float t = TIME*.5;
-    
+
     vec3 c = vec3(0.);
-    
+
     for(float i=0.; i<NUM_EXPLOSIONS; i++) {
                float et = t+i*1234.45235;
         float id = floor(et);
         et -= id;
-        
+
         vec2 p = hash31(id).xy;
         p.x -= .5;
         p.x *= 1.6;
         c += explosion(uv, p, id, et);
 		}
-    
+
 	float brightness = dot(c, vec3(0.299, 0.587, 0.114)); // Perception humaine
 	float alpha = clamp(brightness * 2.0, 0.0, 1.0); // ou un autre facteur de gain
 	COLOR = vec4(c, alpha);

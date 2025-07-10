@@ -16,9 +16,9 @@ class_name DieFace
 #
 
 static func build(_name: String, _value: int, _pattern: String, _special: bool = false):
-	var die = DieFace.new()
-	die.name = _name
-	die.value = _value
-	die.special = _special
-	die.pattern = _pattern
-	return die
+    var die = DieFace.new()
+    die.name = _name
+    die.value = _value
+    die.special = _special
+    die.pattern = _pattern
+    return die

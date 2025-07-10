@@ -9,6 +9,7 @@ func read_scores() -> Dictionary:
 
 func write_scores(data: Dictionary):
     _write_file(SCORES_JSON_FILE, data)
+    _write_file(SCORES_JSON_FILE, data)
 
 func read_past_scores() -> Array:
     return _read_file(PAST_SCORES_JSON_FILE, true)
@@ -36,7 +37,7 @@ func _read_file(file_path: String, as_array: bool = false):
             push_error("Impossible de lire les données du fichier [" + file_path + "], data: " + json_content)
     else:
         push_error("Impossible de lire les données du fichier [" + file_path + "]")
-        
+
     if as_array:
         return []
     else:

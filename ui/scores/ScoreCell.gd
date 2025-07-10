@@ -5,10 +5,10 @@ signal clicked
 signal delete_clicked
 
 enum States {
-	NEUTRAL,
-	NEUTRAL_HOVERED,
-	SELECTABLE,
-	SELECTABLE_HOVERED,
+    NEUTRAL,
+    NEUTRAL_HOVERED,
+    SELECTABLE,
+    SELECTABLE_HOVERED,
 }
 
 @export var column: Enums.ScoreColumns
@@ -28,101 +28,101 @@ var state: States = States.NEUTRAL
 var stylebox := StyleBoxFlat.new()
 
 func _ready() -> void:
-	Game.dice_rolling_changed.connect(update_state)
-	Game.scores_changed.connect(_on_scores_changed)
-	Game.active_figures_changed.connect(update_state)
-	mouse_filter = MOUSE_FILTER_PASS
-	
-	selectable_bg_color = GUITheme.complementary_color
-	selectable_hovered_bg_color = GUITheme.light(GUITheme.complementary_color)
-	neutral_bg_color = GUITheme.background_color
-	neutral_hovered_bg_color = GUITheme.light(GUITheme.background_color)
-	
-	self.add_theme_stylebox_override("panel", stylebox)
-	update_state()
+    Game.dice_rolling_changed.connect(update_state)
+    Game.scores_changed.connect(_on_scores_changed)
+    Game.active_figures_changed.connect(update_state)
+    mouse_filter = MOUSE_FILTER_PASS
+    
+    selectable_bg_color = GUITheme.complementary_color
+    selectable_hovered_bg_color = GUITheme.light(GUITheme.complementary_color)
+    neutral_bg_color = GUITheme.background_color
+    neutral_hovered_bg_color = GUITheme.light(GUITheme.background_color)
+    
+    self.add_theme_stylebox_override("panel", stylebox)
+    update_state()
 
 func set_score(new_score: int):
-	score = new_score
-	if score >= 0:
-		%ScoreLabel.text = str(score)
-	else:
-		%ScoreLabel.text = "-"
-	
+    score = new_score
+    if score >= 0:
+        %ScoreLabel.text = str(score)
+    else:
+        %ScoreLabel.text = "-"
+    
 func update_state():
-	if Game.dice_rolling == false:
-		is_selectable = Game.is_cell_scorable(figure, column)
-		is_cancellable = Game.is_cell_playable(figure, column)
-	else:
-		is_selectable = false
-		is_cancellable = false
-	
-	if is_selectable:
-		%ScoreLabel.add_theme_color_override("font_color", Color(1, 1, 1, 0.7))
-		%ScoreLabel.text = str(Game.compute_score(figure))
-	else:
-		if is_cancellable:
-			%ScoreLabel.add_theme_color_override("font_color", Color.RED)
-		else:
-			%ScoreLabel.add_theme_color_override("font_color", Color.WHITE)
-		if score == -1:
-			%ScoreLabel.text = str("-")
-	
-	if score == -1 && is_cancellable:
-		mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	else:
-		mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
-	
-	if is_selectable || is_cancellable:
-		if is_selectable:
-			if is_hovered:
-				state = States.SELECTABLE_HOVERED
-			else:
-				state = States.SELECTABLE
-		else:
-			if is_hovered && score < 0:
-				state = States.NEUTRAL_HOVERED
-			else:
-				state = States.NEUTRAL
-	else:
-		state = States.NEUTRAL
-	change_visual_state()
+    if Game.dice_rolling == false:
+        is_selectable = Game.is_cell_scorable(figure, column)
+        is_cancellable = Game.is_cell_playable(figure, column)
+    else:
+        is_selectable = false
+        is_cancellable = false
+    
+    if is_selectable:
+        %ScoreLabel.add_theme_color_override("font_color", Color(1, 1, 1, 0.7))
+        %ScoreLabel.text = str(Game.compute_score(figure))
+    else:
+        if is_cancellable:
+            %ScoreLabel.add_theme_color_override("font_color", Color.RED)
+        else:
+            %ScoreLabel.add_theme_color_override("font_color", Color.WHITE)
+        if score == -1:
+            %ScoreLabel.text = str("-")
+    
+    if score == -1 && is_cancellable:
+        mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+    else:
+        mouse_default_cursor_shape = Control.CURSOR_FORBIDDEN
+    
+    if is_selectable || is_cancellable:
+        if is_selectable:
+            if is_hovered:
+                state = States.SELECTABLE_HOVERED
+            else:
+                state = States.SELECTABLE
+        else:
+            if is_hovered && score < 0:
+                state = States.NEUTRAL_HOVERED
+            else:
+                state = States.NEUTRAL
+    else:
+        state = States.NEUTRAL
+    change_visual_state()
 
 func change_visual_state():
-	match state:
-		States.NEUTRAL:
-			stylebox.bg_color = neutral_bg_color
-		States.NEUTRAL_HOVERED:
-			stylebox.bg_color = neutral_hovered_bg_color
-		States.SELECTABLE:
-			stylebox.bg_color = selectable_bg_color
-		States.SELECTABLE_HOVERED:
-			stylebox.bg_color = selectable_hovered_bg_color
-			
+    match state:
+        States.NEUTRAL:
+            stylebox.bg_color = neutral_bg_color
+        States.NEUTRAL_HOVERED:
+            stylebox.bg_color = neutral_hovered_bg_color
+        States.SELECTABLE:
+            stylebox.bg_color = selectable_bg_color
+        States.SELECTABLE_HOVERED:
+            stylebox.bg_color = selectable_hovered_bg_color
+            
 func _on_mouse_entered() -> void:
-	is_hovered = true
-	update_state()
+    is_hovered = true
+    update_state()
 
 func _on_mouse_exited() -> void:
-	is_hovered = false
-	update_state()
+    is_hovered = false
+    update_state()
 
 func _on_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		if is_selectable:
-			clicked.emit()
-			Sounds.click()
-		elif !Game.dice_rolling && score == -1 && is_cancellable:
-			%DeleteButton.show()
-			Sounds.click()
+    if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+        if is_selectable:
+            clicked.emit()
+            Sounds.click()
+        elif !Game.dice_rolling && score == -1 && is_cancellable:
+            %DeleteButton.show()
+            Sounds.click()
 
 func _on_delete_button_mouse_exited() -> void:
-	%DeleteButton.hide()
+    %DeleteButton.hide()
 
 func _on_delete_button_pressed() -> void:
-	delete_clicked.emit()
-	%DeleteButton.hide()
+    delete_clicked.emit()
+    %DeleteButton.hide()
 
 func _on_scores_changed():
-	var value_in_scores = Scores.get_cell_score(column, figure)
-	if value_in_scores != score:
-		set_score(value_in_scores)
+    var value_in_scores = Scores.get_cell_score(column, figure)
+    if value_in_scores != score:
+        set_score(value_in_scores)
