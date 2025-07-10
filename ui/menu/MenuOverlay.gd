@@ -7,102 +7,103 @@ var past_scores: Array[PastScore] = []
 var top_score: int = 0
 
 func _ready() -> void:
-	set_background_color(GUITheme.neutral_color)
-	set_best_score_color(GUITheme.accent_color)
-	update()
-	
+    set_background_color(GUITheme.neutral_color)
+    set_best_score_color(GUITheme.accent_color)
+    update()
+
 func update() -> void:
-	if Game.game_finished:
-		%FinishedGameTitle.show()
-		# %GameFinishedBackground.show()
-	else:
-		%FinishedGameTitle.hide()
-		# %GameFinishedBackground.hide()
-	load_past_scores()
-	
+    if Game.game_finished:
+        %FinishedGameTitle.show()
+        # %GameFinishedBackground.show()
+    else:
+        %FinishedGameTitle.hide()
+        # %GameFinishedBackground.hide()
+    load_past_scores()
+
 func set_background_color(color: Color):
-	var background_material = %GameFinishedBackground.material as ShaderMaterial
-	if background_material:
-		background_material.set_shader_parameter("circle_color", color)
+    var background_material = %GameFinishedBackground.material as ShaderMaterial
+    if background_material:
+        background_material.set_shader_parameter("circle_color", color)
 
 func set_best_score_color(color: Color):
-	var best_score_material = %BestScoreBackground.material as ShaderMaterial
-	if best_score_material:
-		best_score_material.set_shader_parameter("color", color)
+    var best_score_material = %BestScoreBackground.material as ShaderMaterial
+    if best_score_material:
+        best_score_material.set_shader_parameter("color", color)
 
 func register_new_score(score_value: int):
-	past_scores.append(PastScore.create_new(score_value))
-	if score_value > top_score:
-		top_score = score_value
-	write_past_scores_file()
-	
+    past_scores.append(PastScore.create_new(score_value))
+    if score_value > top_score:
+        top_score = score_value
+    write_past_scores_file()
+
 
 func load_past_scores():
-	past_scores = load_past_scores_from_file()
-	top_score = 0
-	for past_score in past_scores:
-		if past_score.score > top_score:
-			top_score = past_score.score
-			
-	refresh_ui()
+    past_scores = load_past_scores_from_file()
+    top_score = 0
+    for past_score in past_scores:
+        if past_score.score > top_score:
+            top_score = past_score.score
+
+    refresh_ui()
 
 func refresh_ui():
-	for child in %ScoresList.get_children():
-		child.queue_free()
-	for past_score in past_scores:
-		var line = MenuScoreLine.create(past_score)
-		%ScoresList.add_child(line)
-		line.print_score()
-	%TopScore.text = str(top_score)
-	%Score.text = str(Scores.get_total())
-	%GamesNumber.text = str(past_scores.size())
-	if past_scores.size() > 1:
-		%GamesNumberLabel.text = "parties jouées"
-	else:
-		%GamesNumberLabel.text = "partie jouée"
-		
-	if Game.game_finished && Scores.get_total() >= top_score:
-		#set_background_color(GUITheme.accent_color)
-		%BestScoreBackground.show()
-		Sounds.tada()
-		%TopScoreLabel.text = "Nouveau meilleur score !"
-		%TopScoreLabel.modulate = GUITheme.accent_color
-		%TopScore.hide()
-	else:
-		#set_background_color(GUITheme.neutral_color)
-		%BestScoreBackground.hide()
-		%TopScoreLabel.text = "Meilleur score: "
-		%TopScoreLabel.modulate = Color.WHITE
-		%TopScore.show()
+    for child in %ScoresList.get_children():
+        child.queue_free()
+    for past_score in past_scores:
+        var line = MenuScoreLine.create(past_score)
+        %ScoresList.add_child(line)
+        line.print_score()
+    %TopScore.text = str(top_score)
+    %Score.text = str(Scores.get_total())
+    %GamesNumber.text = str(past_scores.size())
+    if past_scores.size() > 1:
+        %GamesNumberLabel.text = "parties jouées"
+    else:
+        %GamesNumberLabel.text = "partie jouée"
+
+    if Game.game_finished && Scores.get_total() >= top_score:
+        #set_background_color(GUITheme.accent_color)
+        %BestScoreBackground.show()
+        Sounds.tada()
+        %TopScoreLabel.text = "Nouveau meilleur score !"
+        %TopScoreLabel.modulate = GUITheme.accent_color
+        %TopScore.hide()
+    else:
+        #set_background_color(GUITheme.neutral_color)
+        %BestScoreBackground.hide()
+        %TopScoreLabel.text = "Meilleur score: "
+        %TopScoreLabel.modulate = Color.WHITE
+        %TopScore.show()
 
 func _on_restart_button_pressed() -> void:
-	Sounds.click()
-	new_game_pressed.emit()
+    Sounds.click()
+    new_game_pressed.emit()
 
 func _on_hide_menu_button_pressed() -> void:
-	Sounds.click()
-	hide_menu_pressed.emit()
+    Sounds.click()
+    hide_menu_pressed.emit()
 
 
 func load_past_scores_from_file() -> Array[PastScore]:
-	var scores: Array[PastScore] = []
-	var data = Files.read_past_scores()
-	for score in data:
-		var past_score = PastScore.from_dict(score)
-		scores.append(past_score)
-	
-	scores.sort_custom(
-		func(s1: PastScore, s2: PastScore):
-			if s1.score > s2.score:
-				return true
-			else:
-				return false
-	)
-	
-	return scores
+    var scores: Array[PastScore] = []
+    if FileAccess.file_exists(Files.PAST_SCORES_JSON_FILE):
+        var data = Files.read_past_scores()
+        for score in data:
+            var past_score = PastScore.from_dict(score)
+            scores.append(past_score)
+
+        scores.sort_custom(
+            func(s1: PastScore, s2: PastScore):
+                if s1.score > s2.score:
+                    return true
+                else:
+                    return false
+        )
+
+    return scores
 
 func write_past_scores_file():
-	var array: Array[Dictionary] = []
-	for past_score in past_scores:
-		array.push_front(past_score.to_dict())
-	Files.write_past_scores(array)
+    var array: Array[Dictionary] = []
+    for past_score in past_scores:
+        array.push_front(past_score.to_dict())
+    Files.write_past_scores(array)
