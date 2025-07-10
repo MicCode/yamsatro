@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://fkvol62t77hi"]
+[gd_scene load_steps=8 format=3 uid="uid://fkvol62t77hi"]
 
 [ext_resource type="Script" uid="uid://c0kgxj8osawap" path="res://main/main.gd" id="1_53q0u"]
 [ext_resource type="Shader" uid="uid://boimpg58mcxao" path="res://shaders/balatro.gdshader" id="2_3wy1v"]
+[ext_resource type="PackedScene" uid="uid://ca460h3pttrlp" path="res://ui/menu/HomeMenu.tscn" id="3_3wy1v"]
 [ext_resource type="PackedScene" uid="uid://bpdfkdilgr0dt" path="res://ui/GameUI.tscn" id="3_c651c"]
 [ext_resource type="PackedScene" uid="uid://c1pyhqepqvc3p" path="res://ui/menu/ScoresMenuOverlay.tscn" id="4_3wy1v"]
 
@@ -55,9 +56,15 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_3wy1v")
 
+[node name="HomeMenu" parent="Container" instance=ExtResource("3_3wy1v")]
+unique_name_in_owner = true
+layout_mode = 1
+
 [node name="GameUI" parent="Container" instance=ExtResource("3_c651c")]
 unique_name_in_owner = true
 layout_mode = 1
+offset_top = 2118.0
+offset_bottom = 2118.0
 
 [node name="ScoresMenuOverlay" parent="Container" instance=ExtResource("4_3wy1v")]
 unique_name_in_owner = true
@@ -66,6 +73,7 @@ anchors_preset = -1
 offset_top = -2100.0
 offset_bottom = -2100.0
 
+[connection signal="start_button_pressed" from="Container/HomeMenu" to="." method="_on_home_menu_start_button_pressed"]
 [connection signal="show_menu" from="Container/GameUI" to="." method="_on_main_ui_show_menu"]
 [connection signal="hide_menu_pressed" from="Container/ScoresMenuOverlay" to="." method="_on_menu_overlay_hide_menu_pressed"]
 [connection signal="new_game_pressed" from="Container/ScoresMenuOverlay" to="." method="_on_game_over_overlay_new_game_pressed"]

@@ -49,7 +49,7 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 theme = ExtResource("3_55grj")
 theme_override_font_sizes/font_size = 50
-text = "  MENU  "
+text = "  SCORES  "
 
 [node name="RollButton" type="Button" parent="VContainer/HBoxContainer"]
 unique_name_in_owner = true
