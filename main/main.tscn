@@ -1,11 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://fkvol62t77hi"]
+[gd_scene load_steps=7 format=3 uid="uid://fkvol62t77hi"]
 
 [ext_resource type="Script" uid="uid://c0kgxj8osawap" path="res://main/main.gd" id="1_53q0u"]
 [ext_resource type="Shader" uid="uid://boimpg58mcxao" path="res://shaders/balatro.gdshader" id="2_3wy1v"]
-[ext_resource type="PackedScene" uid="uid://bjejhuy3nuap6" path="res://ui/DiceTray.tscn" id="2_pjrb6"]
-[ext_resource type="PackedScene" uid="uid://c1pyhqepqvc3p" path="res://ui/menu/MenuOverlay.tscn" id="4_3wy1v"]
-[ext_resource type="PackedScene" uid="uid://4qurwmwm1hfv" path="res://ui/scores/ScoresUI.tscn" id="4_c651c"]
-[ext_resource type="Theme" uid="uid://32y1bscp3t30" path="res://theme/theme_secondary.tres" id="5_kfbq2"]
+[ext_resource type="PackedScene" uid="uid://bpdfkdilgr0dt" path="res://ui/GameUI.tscn" id="3_c651c"]
+[ext_resource type="PackedScene" uid="uid://c1pyhqepqvc3p" path="res://ui/menu/ScoresMenuOverlay.tscn" id="4_3wy1v"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kfbq2"]
 shader = ExtResource("2_3wy1v")
@@ -57,57 +55,17 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_3wy1v")
 
-[node name="MainUI" type="VBoxContainer" parent="Container"]
+[node name="GameUI" parent="Container" instance=ExtResource("3_c651c")]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = -10.0
-offset_bottom = -10.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 50
 
-[node name="ScoresUi" parent="Container/MainUI" instance=ExtResource("4_c651c")]
-layout_mode = 2
-
-[node name="DiceTray" parent="Container/MainUI" instance=ExtResource("2_pjrb6")]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Container/MainUI"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="MenuButton" type="Button" parent="Container/MainUI/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-mouse_default_cursor_shape = 2
-theme = ExtResource("5_kfbq2")
-theme_override_font_sizes/font_size = 50
-text = "  MENU  "
-
-[node name="RollButton" type="Button" parent="Container/MainUI/HBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 175)
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_default_cursor_shape = 2
-theme_override_font_sizes/font_size = 50
-text = "LANCER"
-
-[node name="MenuOverlay" parent="Container" instance=ExtResource("4_3wy1v")]
+[node name="ScoresMenuOverlay" parent="Container" instance=ExtResource("4_3wy1v")]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 offset_top = -2100.0
 offset_bottom = -2100.0
 
-[connection signal="pressed" from="Container/MainUI/HBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]
-[connection signal="pressed" from="Container/MainUI/HBoxContainer/RollButton" to="." method="_on_roll_button_pressed"]
-[connection signal="hide_menu_pressed" from="Container/MenuOverlay" to="." method="_on_menu_overlay_hide_menu_pressed"]
-[connection signal="new_game_pressed" from="Container/MenuOverlay" to="." method="_on_game_over_overlay_new_game_pressed"]
+[connection signal="show_menu" from="Container/GameUI" to="." method="_on_main_ui_show_menu"]
+[connection signal="hide_menu_pressed" from="Container/ScoresMenuOverlay" to="." method="_on_menu_overlay_hide_menu_pressed"]
+[connection signal="new_game_pressed" from="Container/ScoresMenuOverlay" to="." method="_on_game_over_overlay_new_game_pressed"]

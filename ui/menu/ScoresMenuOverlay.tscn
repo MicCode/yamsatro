@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://c1pyhqepqvc3p"]
 
-[ext_resource type="Script" uid="uid://dp053l0nd1b0m" path="res://ui/menu/MenuOverlay.gd" id="1_7wiv4"]
+[ext_resource type="Script" uid="uid://dp053l0nd1b0m" path="res://ui/menu/ScoresMenuOverlay.gd" id="1_7wiv4"]
 [ext_resource type="PackedScene" uid="uid://cray3v3t8m613" path="res://ui/menu/MenuScoreLine.tscn" id="1_ohhsm"]
 [ext_resource type="Shader" uid="uid://b788psikbqmfe" path="res://shaders/circles_gradient.gdshader" id="2_0iqbr"]
 [ext_resource type="Shader" uid="uid://ckg3yjdxjh0ug" path="res://shaders/god_ray.gdshader" id="3_palon"]
@@ -44,7 +44,7 @@ shader_parameter/color = Color(0.964706, 0.803922, 0.14902, 1)
 shader_parameter/hdr = false
 shader_parameter/seed = 5.0
 
-[node name="MenuOverlay" type="Panel"]
+[node name="ScoresMenuOverlay" type="Panel"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

@@ -29,6 +29,7 @@ GUITheme="*res://theme/GUITheme.gd"
 SoundPlayer="*res://globals/SoundPlayer.gd"
 Sounds="*res://globals/Sounds.gd"
 Files="*res://globals/Files.gd"
+PanelManager="*res://globals/PanelManager.gd"
 
 [display]
 
