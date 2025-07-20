@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.6.6 - 2025-07-20
+#### Bug Fixes
+- fixed new game on fresh install was still buggy - (8492ec6) - Mic
+
+- - -
+
 ## 0.6.5 - 2025-07-10
 #### Bug Fixes
 - fixed issue preventing game start when starting with no save files - (5c3611e) - Mic
