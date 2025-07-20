@@ -34,7 +34,7 @@ var initial_dice_values: Array = []
 ## Initialisation d'une partie (en partant de 0)
 func init_game(new_game_variant: Enums.GameVariants):
     change_game_variant(new_game_variant)
-    change_remaining_rolls(GameRules.MAX_REROLL_NUMBER)
+    change_remaining_rolls(GameRules.MAX_REROLL_NUMBER + 1)
     game_ready.emit()
     save_game_state_in_file()
     change_game_finished(false)

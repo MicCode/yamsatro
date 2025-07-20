@@ -30,7 +30,8 @@ func _ready() -> void:
         elif Game.initial_dice_values && Game.initial_dice_values.size() > 0:
             change_state(Enums.GameState.CHOOSESCORE)
     else:
-        change_state(Enums.GameState.ROLLDICE)
+        Game.init_game(Enums.GameVariants.FULL)
+        #change_state(Enums.GameState.INIT)
 
     # Application des couleurs du thème au shader du fonc
     var background_shader = %Background.material
